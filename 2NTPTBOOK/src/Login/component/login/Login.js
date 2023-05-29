@@ -39,7 +39,7 @@ const Login = () => {
           <Text style={styles.textBTN}>Sign in with Apple</Text>
         </View>
         <View style={styles.viewBTNFacebook}>
-          <Text style={styles.textBTN}>FACEBOOK lOGIN</Text>
+          <Text style={styles.textBTN}>FACEBOOK lOGIN asdasd</Text>
         </View>
         <View style={styles.viewBTNSMS}>
           <Text style={styles.textBTN}>SMS LOGIN</Text>
