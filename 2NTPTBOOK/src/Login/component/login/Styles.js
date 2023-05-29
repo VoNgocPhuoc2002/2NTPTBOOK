@@ -70,7 +70,6 @@ const Styles = StyleSheet.create({
         paddingStart:20,
         borderColor:Constants.COLOR.LINE,
         height:60,
-
     },
     iconImage:{
         marginEnd:10,
