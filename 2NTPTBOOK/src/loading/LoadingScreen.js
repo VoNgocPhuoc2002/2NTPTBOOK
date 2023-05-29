@@ -21,7 +21,7 @@ const LoadingScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView  style={styles.container}>
       <View style={styles.body}>
         <Image source={require('../assets/Logo.png')} />
         <View style={styles.loading}>
@@ -29,7 +29,7 @@ const LoadingScreen = () => {
           <Text style={styles.textLoading}>Loading</Text>
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
