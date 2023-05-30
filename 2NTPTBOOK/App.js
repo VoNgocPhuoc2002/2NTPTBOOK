@@ -1,37 +1,14 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import LoadingScreen from './src/loading/LoadingScreen';
-import LoginScreen from './src/Login/LoginScreen';
-import HomeScreen from './src/home/HomeScreen';
-import Catelogcreen from './src/catelog/Catelogcreen';
-const Stack = createNativeStackNavigator(
-  
-);
+
+import { SafeAreaView } from 'react-native-safe-area-context';
+import RootStack from './src/navigation/RootStack';
+
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="LoadingScreen" component={LoadingScreen}  options={{headerShown: false}} />
-        <Stack.Screen
-          name="LoginScreen"
-          component={LoginScreen}
-          options={{ headerShown: false }}
-        />
-         <Stack.Screen
-          name="HomeScreen"
-          component={HomeScreen}
-          options={{ headerShown: false }}
-        />
-           <Stack.Screen
-          name="Catelogcreen"
-          component={Catelogcreen}
-          options={{ headerShown: false }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+      <RootStack/>
+   
   )
 }
 
