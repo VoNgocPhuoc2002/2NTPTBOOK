@@ -4,17 +4,11 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "../screen/home/HomeScreen";
 import Catelogcreen from "../screen/catelog/Catelogcreen";
 import ProductDetail from "../screen/catelog/ProductDetail";
-import TabNavigation from "./TabNavigation";
 const Stack = createNativeStackNavigator();
 
 const HomeStack = () => {
   return (
     <Stack.Navigator>
-         <Stack.Screen
-        name="TabNavigation"
-        component={TabNavigation}
-        options={{ headerShown: false }}
-      />
       <Stack.Screen
         name="HomeScreen"
         component={HomeScreen}
