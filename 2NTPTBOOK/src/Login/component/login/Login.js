@@ -41,6 +41,9 @@ const Login = () => {
         <View style={styles.viewBTNFacebook}>
           <Text style={styles.textBTN}>FACEBOOK lOGIN</Text>
           <Text>1234545</Text>
+
+          <Text style={styles.textBTN}>FACEBOOK lOGIN asdasd</Text>
+
         </View>
         <View style={styles.viewBTNSMS}>
           <Text style={styles.textBTN}>SMS LOGIN</Text>
