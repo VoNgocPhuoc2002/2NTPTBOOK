@@ -31,7 +31,7 @@ const Signup = () => {
             onChangeText={setTextEmail}
           />
           <TouchableOpacity onPress={handleClearTextEmail}>
-          <Image style={styles.iconImage} source={require("../../../assets/IconDelete.png")}/>
+          <Image style={styles.iconImage} source={require("../../../../assets/IconDelete.png")}/>
           </TouchableOpacity>
         </View>
         <View style={styles.viewInput}>
@@ -40,7 +40,7 @@ const Signup = () => {
             onChangeText={setTextName}
           />
           <TouchableOpacity onPress={handleClearTextName}>
-          <Image style={styles.iconImage} source={require("../../../assets/IconDelete.png")}/>
+          <Image style={styles.iconImage} source={require("../../../../assets/IconDelete.png")}/>
           </TouchableOpacity>
         </View>
         
@@ -51,7 +51,7 @@ const Signup = () => {
             value={password}
             onChangeText={setPassword}/>
             <TouchableOpacity onPress={handleShowPassword}>
-          <Image style={styles.iconImage} source={require("../../../assets/IconEye.png")}/>
+          <Image style={styles.iconImage} source={require("../../../../assets/IconEye.png")}/>
           </TouchableOpacity>
         </View>
         <View style={styles.viewInput}>
@@ -61,7 +61,7 @@ const Signup = () => {
             value={rePassword}
             onChangeText={setRePassword}/>
             <TouchableOpacity onPress={handleShowRePassword}>
-          <Image style={styles.iconImage} source={require("../../../assets/IconEye.png")}/>
+          <Image style={styles.iconImage} source={require("../../../../assets/IconEye.png")}/>
           </TouchableOpacity>
 
         </View>

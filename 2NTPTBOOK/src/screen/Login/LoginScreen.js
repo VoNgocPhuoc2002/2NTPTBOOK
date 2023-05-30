@@ -13,7 +13,7 @@ const LoginScreen = () => {
   return (
     <SafeAreaView  style={styles.container}>
         <View style={styles.header}>
-          <Image source={require('../assets/Logo.png')} />
+          <Image source={require('../../assets/Logo.png')} />
           <View style={styles.groupMoveScreen}>
             <View style={styles.viewLogin}>
             <TouchableOpacity

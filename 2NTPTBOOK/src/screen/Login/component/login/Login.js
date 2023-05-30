@@ -10,23 +10,27 @@ const Login = () => {
     navigation.navigate('HomeScreen');
   };
 
+
   return (
     <View style={styles.container}>
       <View style={styles.groupInput}>
         <View style={styles.viewInput}>
-          <Image style={styles.iconImage} source={require("../../../assets/IconEmail.png")}/>
+          <Image style={styles.iconImage} source={require("../../../../assets/IconEmail.png")}/>
           <TextInput placeholder='Your Email'/>
         </View>
         <View style={styles.viewInput}>
-          <Image style={styles.iconImage} source={require("../../../assets/IconPass.png")}/>
+          <Image style={styles.iconImage} source={require("../../../../assets/IconPass.png")}/>
           <TextInput placeholder='Your Email'/>
         </View>
       </View>
-      <TouchableOpacity onPress={moveToHome}>
       <View style={styles.groupBTN}>
+      <TouchableOpacity onPress={moveToHome}>
+
         <View style={styles.viewBTNLogin}>
           <Text style={styles.textBTN}>LOGIN</Text>
         </View>
+      </TouchableOpacity>
+
         <View style={styles.viewOR}>
           <View style={styles.line}></View>
           <Text>
@@ -47,7 +51,6 @@ const Login = () => {
         
 
       </View>
-      </TouchableOpacity>
       <View style={styles.viewForgotPass}>
         <Text style={styles.forgotPass}>Forgot your password</Text>
       </View>

@@ -1,7 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native'
-import { Constants } from '../../../Constant'
-Constants
-
+import { Constants } from '../../../../Constant'
 
 
 

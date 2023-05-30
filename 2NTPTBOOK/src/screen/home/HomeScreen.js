@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View,Image, TouchableOpacity } from 'react-native'
+ import { StyleSheet, Text, View,Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import styles from './Styles'
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -10,10 +10,10 @@ const HomeScreen = ({navigation}) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <View style={styles.groupHeader}>
-          <Image source={require("../assets/IconMenu.png")}/>
-          <Image source={require("../assets/IconLogo.png")}/>
+          <Image source={require("../../assets/IconMenu.png")}/>
+          <Image source={require("../../assets/IconLogo.png")}/>
           <View style={styles.groupRight}>
-            <Image source={require("../assets/IconBell.png")}/>
+            <Image source={require("../../assets/IconBell.png")}/>
             <View style={styles.viewImage}>
             </View>
            
@@ -32,7 +32,7 @@ const HomeScreen = ({navigation}) => {
         </View>
         <TouchableOpacity onPress={move}>
         <View>
-          <Text>Detail moveToScreen</Text>
+          <Text>Catelog moveToScreen</Text>
         </View>
         </TouchableOpacity>
     </View>
