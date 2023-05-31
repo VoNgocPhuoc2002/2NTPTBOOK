@@ -1,10 +1,10 @@
 import { Text, View, Image, FlatList, TouchableOpacity } from "react-native";
 import React from "react";
 import styles from "./Styles";
-import { SafeAreaView, useNavigation } from "react-native-safe-area-context";
+import { SafeAreaView} from "react-native-safe-area-context";
 
 const Catelogcreen = () => {
-  const navigation = useNavigation();
+  // const navigation = useNavigation();
 
   const categories = [
     { id: 1, name: 'Electronics' ,source: require("../../assets/Catelog.png")},
@@ -21,12 +21,12 @@ const Catelogcreen = () => {
     { id: 6, name: 'tshirt', source: require("../../assets/Catelog.png"), categoryId: 2 },
   ];
 
-  const handleProductPress = (product) => {
-    navigation.navigate("ProductDetail", { product });
-  };
+  // const handleProductPress = (product) => {
+  //   navigation.navigate("ProductDetail", { product });
+  // };
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity onPress={() => handleProductPress(item)}>
+    <TouchableOpacity>
       <View style={styles.viewCatelog}>
         <Image style={styles.imageCatelog} source={item.source} />
       </View>

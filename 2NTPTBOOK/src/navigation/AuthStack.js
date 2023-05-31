@@ -7,7 +7,7 @@ import Login from "../screen/Login/component/login/Login";
 
 const Stack = createNativeStackNavigator();
 
-const AuthStack = ({handleLogin}) => {
+const AuthStack = () => {
    
     return (
         <Stack.Navigator>
