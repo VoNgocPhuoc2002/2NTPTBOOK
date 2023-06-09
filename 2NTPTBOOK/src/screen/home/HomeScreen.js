@@ -1,4 +1,4 @@
- import { StyleSheet, Text, View,Image, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View,Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import styles from './Styles'
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -16,7 +16,6 @@ const HomeScreen = ({navigation}) => {
             <Image source={require("../../assets/IconBell.png")}/>
             <View style={styles.viewImage}>
             </View>
-           
           </View>
         </View>
 
