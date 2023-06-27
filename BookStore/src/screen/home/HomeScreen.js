@@ -51,6 +51,7 @@ const HomeScreen = ({navigation}) => {
         </View>
       </View>
       <View style={styles.body}>
+        <ScrollView>
         <View style={{flex:1,marginBottom:10,}}>
          <Panner/>
         </View>
@@ -60,6 +61,7 @@ const HomeScreen = ({navigation}) => {
         <View style={{flex:1,marginBottom:10,width:"100%", backgroundColor:"green"}}>
           <FlashSale/>
         </View>
+        </ScrollView>
       </View>
     </SafeAreaView>
   );
