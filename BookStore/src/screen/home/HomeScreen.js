@@ -1,45 +1,68 @@
- import { StyleSheet, Text, View,Image, TouchableOpacity } from 'react-native'
-import React from 'react'
-import styles from './Styles'
-import { SafeAreaView } from 'react-native-safe-area-context';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  TextInput,
+  ScrollView
+} from 'react-native';
+import React from 'react';
+import styles from './Styles';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import IconFeather from 'react-native-vector-icons/Feather';
+import IconMaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Panner from './Panner';
+import Menu from './Menu';
+import FlashSale from './FlashSale';
+
 const HomeScreen = ({navigation}) => {
-  const move =()=>{
-    navigation.navigate("Catelogcreen")
-  }
+  const move = () => {
+    navigation.navigate('Catelogcreen');
+  };
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <View style={styles.groupHeader}>
-          <Image source={require("../../assets/IconMenu.png")}/>
-          <Image source={require("../../assets/IconLogo.png")}/>
-          <View style={styles.groupRight}>
-            <Image source={require("../../assets/IconBell.png")}/>
-            <View style={styles.viewImage}>
-            </View>
-           
-          </View>
+        <View
+          style={{
+            width: '100%',
+            backgroundColor: 'green',
+            alignItems: 'center',
+          }}>
+          <Image
+            style={{height: 30, width: 180}}
+            source={require('../../assets/IconFahasa.png')}
+          />
         </View>
+        <View style={styles.groupSearch}>
+          <View>
+            <IconFeather name="grid" size={25} color="white" />
 
-      </View>
-      <View style={styles.body}>
-        <View style={styles.groupTextHello}>
-          <View style={styles.viewTextAbove}>
-            <Text style={styles.textAbove}>Hello, Tricia</Text>
+            
+          </View>
+          <View style={styles.inputSearch}>
+            <IconFeather name="search" size={25} color="black" />
+
+            <TextInput placeholder="Sản phẩm cần tìm " />
           </View>
           <View>
-            <Text style={styles.textBelow}>What do you want to read today?</Text>
+            <IconMaterialCommunityIcons name="barcode-scan" size={25} color="white" />
           </View>
         </View>
-        <TouchableOpacity onPress={move}>
-        <View>
-          <Text>Catelog moveToScreen</Text>
+      </View>
+      <View style={styles.body}>
+        <View style={{flex:1,marginBottom:10,}}>
+         <Panner/>
         </View>
-        </TouchableOpacity>
-    </View>
-
-      
+        <View style={{flex:1,marginBottom:10,}}>
+          <Menu/>
+        </View>
+        <View style={{flex:1,marginBottom:10,width:"100%", backgroundColor:"green"}}>
+          <FlashSale/>
+        </View>
+      </View>
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default HomeScreen
+export default HomeScreen;
