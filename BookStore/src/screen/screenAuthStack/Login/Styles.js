@@ -1,6 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native'
-import { Constants } from '../../Constant'
-
+import { Constants } from '../../../Constant'
 
 const Styles = StyleSheet.create({
     container: {
@@ -8,12 +7,24 @@ const Styles = StyleSheet.create({
         backgroundColor:Constants.COLOR.WHITE,
     },
     header:{
-        flex:3,
+        flex:1.5,
         backgroundColor:Constants.COLOR.HEADER,
         justifyContent:"space-between",
         borderBottomStartRadius:30,
         borderBottomEndRadius:30,
 
+    },
+    titleScreen:{
+        backgroundColor:Constants.COLOR.DARKRED,
+        width:"100%",
+        height:"50%",
+        alignItems: "center",
+        justifyContent:"center",
+    },
+    textTitleScreen:{
+        fontSize:20,
+        fontWeight:"bold",
+        color:Constants.COLOR.WHITE,
     },
     line:{
         width:100,
@@ -22,7 +33,7 @@ const Styles = StyleSheet.create({
 
     },
     body:{
-        flex:7,
+        flex:8.5,
         alignContent: 'center',
         marginEnd:20,
         marginStart:20,
@@ -53,7 +64,7 @@ const Styles = StyleSheet.create({
     isTextLogin:{
         fontSize:18,
         fontWeight:"bold",
-        color:Constants.COLOR.BLACK,
+        color:Constants.COLOR.LINEBTN,
     },
     
 })

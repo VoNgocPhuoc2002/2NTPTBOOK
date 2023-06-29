@@ -13,8 +13,14 @@ const LoginScreen = () => {
   return (
     <SafeAreaView  style={styles.container}>
         <View style={styles.header}>
-          <Image source={require('../../assets/Logo.png')} />
+          <View style={styles.titleScreen}>
+          <Text style={styles.textTitleScreen}>
+              Đăng nhập
+            </Text>
+          </View>
+           
           <View style={styles.groupMoveScreen}>
+           
             <View style={styles.viewLogin}>
             <TouchableOpacity
               style={[
@@ -40,11 +46,11 @@ const LoginScreen = () => {
         </View>
         <View style={styles.body}>
         {activeTab === 'Tab 1' ? (
-          <View>
-              <Login/>
+          <View style={{flex:1}}>
+              <Login />
             </View>
           ) : activeTab === 'Tab 2' ? (
-            <View >
+            <View style={{flex:1}} >
               <Signup/>
             </View>
           ) :null}

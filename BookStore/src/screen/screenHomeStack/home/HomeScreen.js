@@ -15,6 +15,7 @@ import IconMaterialCommunityIcons from 'react-native-vector-icons/MaterialCommun
 import Panner from './Panner';
 import Menu from './Menu';
 import FlashSale from './FlashSale';
+import ListProducts from './ListProducts';
 
 const HomeScreen = ({navigation}) => {
   const move = () => {
@@ -31,7 +32,7 @@ const HomeScreen = ({navigation}) => {
           }}>
           <Image
             style={{height: 30, width: 180}}
-            source={require('../../assets/IconFahasa.png')}
+            source={require('../../../assets/IconFahasa.png')}
           />
         </View>
         <View style={styles.groupSearch}>
@@ -60,6 +61,9 @@ const HomeScreen = ({navigation}) => {
         </View>
         <View style={{flex:1,marginBottom:10,width:"100%", backgroundColor:"green"}}>
           <FlashSale/>
+        </View>
+        <View style={{flex:1,marginBottom:10,width:"100%", backgroundColor:"green"}}>
+          <ListProducts/>
         </View>
         </ScrollView>
       </View>

@@ -1,27 +1,26 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import HomeScreen from "../screen/home/HomeScreen";
-import Catelogcreen from "../screen/catelog/Catelogcreen";
-import CartNoItem from "../screen/cart/CartNoItem";
-import ProfileScreen from "../screen/profile/ProfileScreen";
 import { Constants } from "../Constant";
-import SearchNoItem from "../screen/search/SearchNoItem";
-
+import HomeScreen from "../screen/screenHomeStack/home/HomeScreen";
+import CartNoItem from "../screen/screenHomeStack/cart/CartNoItem";
+import Catelogcreen from "../screen/screenHomeStack/catelog/Catelogcreen";
+import SearchNoItem from "../screen/screenHomeStack/search/SearchNoItem";
+import AuthStack from "./AuthStack";
 const Tab = createBottomTabNavigator();
 const TabNavigation = () => {
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarShowLabel: false,
+        tabBarShowLabel:false,
         tabBarLabelStyle: {
-          fontSize: 10,
+          fontSize: 12,
           fontWeight: "bold",
         },
       }}
     >
       <Tab.Screen
-        name="HomeScreen"
+        name="Trang chủ"
         component={HomeScreen}
         options={{
           headerShown: false,
@@ -34,7 +33,29 @@ const TabNavigation = () => {
                   width: 20,
                   height: 20,
                   tintColor: focused
-                    ? Constants.COLOR.FILLBTN
+                    ? Constants.COLOR.DARKRED
+                    : Constants.COLOR.BLACK,
+                }}
+              />
+            </View>
+          ),
+        }}
+      />
+        <Tab.Screen
+        name="Tài khoản"
+        component={AuthStack}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ focused }) => (
+            <View style={{ alignItems: "center", justifyContent: "center" }}>
+              <Image
+                source={require("../assets/IconProFile.png")}
+                resizeMode="contain"
+                style={{
+                  width: 20,
+                  height: 20,
+                  tintColor: focused
+                    ? Constants.COLOR.DARKRED
                     : Constants.COLOR.BLACK,
                 }}
               />
@@ -43,7 +64,7 @@ const TabNavigation = () => {
         }}
       />
       <Tab.Screen
-        name="Catelogcreen"
+        name="Gợi ý"
         component={Catelogcreen}
         options={{
           headerShown: false,
@@ -56,7 +77,7 @@ const TabNavigation = () => {
                   width: 20,
                   height: 20,
                   tintColor: focused
-                    ? Constants.COLOR.FILLBTN
+                    ? Constants.COLOR.DARKRED
                     : Constants.COLOR.BLACK,
                 }}
               />
@@ -65,7 +86,7 @@ const TabNavigation = () => {
         }}
       />
       <Tab.Screen
-        name="SearchNoItem"
+        name="Thông báo"
         component={SearchNoItem}
         options={{
           headerShown: false,
@@ -78,7 +99,7 @@ const TabNavigation = () => {
                   width: 20,
                   height: 20,
                   tintColor: focused
-                    ? Constants.COLOR.FILLBTN
+                    ? Constants.COLOR.DARKRED
                     : Constants.COLOR.BLACK,
                 }}
               />
@@ -87,7 +108,7 @@ const TabNavigation = () => {
         }}
       />
       <Tab.Screen
-        name="CartNoItem"
+        name="Giỏ hàng"
         component={CartNoItem}
         options={{
           headerShown: false,
@@ -100,7 +121,7 @@ const TabNavigation = () => {
                   width: 20,
                   height: 20,
                   tintColor: focused
-                    ? Constants.COLOR.FILLBTN
+                    ? Constants.COLOR.DARKRED
                     : Constants.COLOR.BLACK,
                 }}
               />
@@ -108,28 +129,7 @@ const TabNavigation = () => {
           ),
         }}
       />
-      <Tab.Screen
-        name="ProfileScreen"
-        component={ProfileScreen}
-        options={{
-          headerShown: false,
-          tabBarIcon: ({ focused }) => (
-            <View style={{ alignItems: "center", justifyContent: "center" }}>
-              <Image
-                source={require("../assets/IconProFile.png")}
-                resizeMode="contain"
-                style={{
-                  width: 20,
-                  height: 20,
-                  tintColor: focused
-                    ? Constants.COLOR.FILLBTN
-                    : Constants.COLOR.BLACK,
-                }}
-              />
-            </View>
-          ),
-        }}
-      />
+    
     </Tab.Navigator>
   );
 };

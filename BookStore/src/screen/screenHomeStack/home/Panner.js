@@ -4,7 +4,7 @@ import styles from './Styles';
 
 const Panner = () => {
   const [imageIndex, setImageIndex] = useState(0);
-  const images = [require('../../assets/Catelog.png'),require('../../assets/Card1.png')];
+  const images = [require('../../../assets/Catelog.png'),require('../../../assets/Card1.png')];
 
   useEffect(() => {
     const interval = setInterval(() => {

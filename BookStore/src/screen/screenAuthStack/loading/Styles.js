@@ -1,10 +1,9 @@
 import { StyleSheet, Text, View } from 'react-native'
-
- 
-
+import { Constants } from '../../../Constant'
 const Styles = StyleSheet.create({
     container:{
         flex: 1,
+        backgroundColor:Constants.COLOR.WHITE,
     },
     body:{
         flex: 1,
@@ -23,3 +22,5 @@ const Styles = StyleSheet.create({
 
 })
 export default Styles
+
+

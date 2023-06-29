@@ -8,7 +8,8 @@ export const Constants = {
        BOTTOMTAB:"#43c1be",
        LINE:"#EBF0FF",
        HEADER:"#E2E2E2",
-       LINEBTN:"#FA4A0C"
+       LINEBTN:"#FA4A0C",
+       DARKRED:"red"
 
     },
     

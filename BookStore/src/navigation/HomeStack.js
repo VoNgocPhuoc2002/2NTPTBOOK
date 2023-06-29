@@ -1,11 +1,11 @@
 import React from "react";
 import { Constants } from "../Constant";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import HomeScreen from "../screen/home/HomeScreen";
-import Catelogcreen from "../screen/catelog/Catelogcreen";
-import ProductDetail from "../screen/catelog/ProductDetail";
-
 import TabNavigation from "./TabNavigation";
+import HomeScreen from "../screen/screenHomeStack/home/HomeScreen";
+import ProductDetail from "../screen/screenHomeStack/catelog/ProductDetail";
+import Catelogcreen from "../screen/screenHomeStack/catelog/Catelogcreen";
+import AuthStack from "./AuthStack";
 const Stack = createNativeStackNavigator();
 
 const HomeStack = () => {

@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { Constants } from '../../../../Constant'
-
+import { Constants } from '../../../../../Constant'
 
 
 const Styles = StyleSheet.create({
@@ -9,37 +8,30 @@ const Styles = StyleSheet.create({
         flex: 1,
     },
     viewBTNLogin:{
-        width: '100%',
+        width: '80%',
         backgroundColor:Constants.COLOR.FILLBTN,
-        height:50,
         borderRadius:5,
         alignItems: 'center',
         justifyContent: 'center',
+        height:45,
+        borderRadius:20
     },
-    viewBTNApple:{
-        width: '100%',
-        backgroundColor:Constants.COLOR.BLACK,
-        height:50,
-        borderRadius:5,
-        alignItems: 'center',
-        justifyContent: 'center',
+    textForgotPass:{
+        fontSize:16,
+        fontWeight:"bold",
+        color:Constants.COLOR.LINEBTN
     },
+  
     viewBTNFacebook:{
-        width: '100%',
+        width: '80%',
         backgroundColor:Constants.COLOR.FACEBOOK,
-        height:50,
         borderRadius:5,
         alignItems: 'center',
         justifyContent: 'center',
+        height:45,
+        borderRadius:20
     },
-    viewBTNSMS:{
-        width: '100%',
-        backgroundColor:Constants.COLOR.SMS,
-        height:50,
-        borderRadius:5,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
+
     viewOR:{
         flexDirection:"row",
         alignItems: 'center',
@@ -58,24 +50,31 @@ const Styles = StyleSheet.create({
     },
     groupInput:{
         marginBottom:20,
-        height:150,
-        justifyContent:"space-around"
-
+        flex:3,
+        justifyContent:'space-evenly'
+    },
+    titleInput:{
+        fontSize:16,
+        fontWeight:"600",
+        color:Constants.COLOR.BLACK,
     },
     viewInput:{
         flexDirection: 'row',
         alignItems: 'center',
-        borderWidth:3,
+        borderWidth:1,
         paddingStart:20,
-        borderColor:Constants.COLOR.LINE,
-        height:60,
-    },
-    iconImage:{
-        marginEnd:10,
-    },
-    groupBTN:{
-        height:280,
+        paddingEnd:20,
+        borderColor:Constants.COLOR.BLACK,
+        height:40,
+        marginTop:10,
+        borderRadius:5,
         justifyContent:"space-between"
+    },
+   
+    groupBTN:{
+        flex:3,
+        backgroundColor:"blue",
+        paddingTop:30,
     },
     viewForgotPass:{
         alignItems: 'center',

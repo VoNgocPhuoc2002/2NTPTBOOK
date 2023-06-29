@@ -1,8 +1,8 @@
-import {StyleSheet, Text, View,Image} from 'react-native';
+import {StyleSheet, Text, View, Image} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import styles from './Styles';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
-import { FlashList } from '@shopify/flash-list';
+import {FlashList} from '@shopify/flash-list';
 
 const FlashSale = () => {
   const [countdown, setCountdown] = useState(3600); // Đếm ngược từ 6 phút (360 giây)
@@ -34,35 +34,59 @@ const FlashSale = () => {
   const data = [
     {
       id: 1,
-      img: require('../../assets/Catelog.png'),
+      img: require('../../../assets/Catelog.png'),
       name: 'Developer',
-      description: '21 suggested item',
+      newPrice: '36.000',
+      oldPrice: '90.000',
+      discount: '-60',
     },
-     {
+    {
       id: 2,
-      img: require('../../assets/Catelog.png'),
+      img: require('../../../assets/Catelog.png'),
       name: 'Developer',
-      description: '21 suggested item',
+      newPrice: '36.000',
+      oldPrice: '90.000',
+      discount: '-60',
     },
-     {
+    {
       id: 3,
-      img: require('../../assets/Catelog.png'),
+      img: require('../../../assets/Catelog.png'),
       name: 'Developer',
-      description: '21 suggested item',
+      newPrice: '36.000',
+      oldPrice: '90.000',
+      discount: '-60',
     },
-     {
+    {
       id: 4,
-      img: require('../../assets/Catelog.png'),
+      img: require('../../../assets/Catelog.png'),
       name: 'Developer',
-      description: '21 suggested item',
+      newPrice: '36.000',
+      oldPrice: '90.000',
+      discount: '-60',
     },
   ];
 
-  const RenderItem = ({ item }) => (
+  const RenderItem = ({item}) => (
     <View style={styles.viewItem}>
-      <Image style={{width:110,height:120,borderRadius:10,}} source={item.img} />
-      <Text style={styles.nameItem}>{item.name}</Text>
-      <Text style={styles.descriptionItem}>{item.description}</Text>
+      <Image
+        style={{width: 110, height: 120, borderRadius: 10}}
+        source={item.img}
+      />
+      <View style={styles.viewItemName}>
+        <Text style={styles.nameItem}>{item.name}</Text>
+      </View>
+      <View style={styles.viewItemNewPrice}>
+        <Text style={styles.newPriceItem}>{item.newPrice}</Text>
+        <View style={styles.viewDiscountItem}>
+          <Text style={styles.discountItem}>{item.discount} %</Text>
+
+        </View>
+      </View>
+      <View style={styles.viewItemOldPrice}>
+        <Text>{item.oldPrice}</Text>
+        <View style={styles.line}></View>
+      </View>
+     
     </View>
   );
 
