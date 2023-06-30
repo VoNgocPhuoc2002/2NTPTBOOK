@@ -6,7 +6,7 @@ var Product = require('./../model/ProductModel');
 //ket noi mongoose
 mongoose.connect('mongodb+srv://nghia:nghia@cluster0.aa5ws9e.mongodb.net/Node-API?retryWrites=true&w=majority')
 .then(()=>{ 
-  console.log('ket noi mongoDB xong')
+  console.log('ket noi mongoDB thanh cong')
 }).catch(()=>{
    console.log(error)
 })
@@ -22,8 +22,8 @@ router.get('/', function(req, res, next) {
 
 
 
-router.get('/123', function(req, res, next) {
-  res.render('index', { title: 'nghia dep trai so 1' });
+router.get('/login', function(req, res, next) {
+  res.render('login', { title: 'nghia dep trai so 1' });
 });
 
 // router.post('/product', function(req, res, next) {
