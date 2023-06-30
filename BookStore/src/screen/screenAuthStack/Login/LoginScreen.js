@@ -28,7 +28,7 @@ const LoginScreen = () => {
                 activeTab === 'Tab 1' ? styles.activeTab : null,
               ]}
               onPress={() => handleTabPress('Tab 1')}>
-              <Text style={ activeTab === 'Tab 1' ?styles.isTextLogin:styles.textLogin}>Login</Text>
+              <Text style={ activeTab === 'Tab 1' ?styles.isTextLogin:styles.textLogin}>Đăng nhập</Text>
               </TouchableOpacity>
               {activeTab === 'Tab 1' ? (
                 <View style={styles.line}></View>
@@ -36,7 +36,7 @@ const LoginScreen = () => {
             </View>
             <View style={styles.viewSignup}>
               <TouchableOpacity onPress={() => handleTabPress('Tab 2')}>
-                  <Text style={ activeTab === 'Tab 2' ?styles.isTextLogin:styles.textLogin}>Sign-up</Text>
+                  <Text style={ activeTab === 'Tab 2' ?styles.isTextLogin:styles.textLogin}>Đăng ký</Text>
               </TouchableOpacity>
               {activeTab === 'Tab 2' ? (
                 <View style={styles.line}></View>

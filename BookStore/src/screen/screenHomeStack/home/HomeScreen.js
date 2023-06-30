@@ -16,6 +16,7 @@ import Panner from './Panner';
 import Menu from './Menu';
 import FlashSale from './FlashSale';
 import ListProducts from './ListProducts';
+import { Constants } from '../../../Constant';
 
 const HomeScreen = ({navigation}) => {
   const move = () => {
@@ -27,7 +28,6 @@ const HomeScreen = ({navigation}) => {
         <View
           style={{
             width: '100%',
-            backgroundColor: 'green',
             alignItems: 'center',
           }}>
           <Image
@@ -59,7 +59,7 @@ const HomeScreen = ({navigation}) => {
         <View style={{flex:1,marginBottom:10,}}>
           <Menu/>
         </View>
-        <View style={{flex:1,marginBottom:10,width:"100%", backgroundColor:"green"}}>
+        <View style={{flex:1,marginBottom:10,width:"100%", backgroundColor:Constants.COLOR.PINKRED}}>
           <FlashSale/>
         </View>
         <View style={{flex:1,marginBottom:10,width:"100%", backgroundColor:"green"}}>

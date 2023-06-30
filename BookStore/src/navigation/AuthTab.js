@@ -4,11 +4,11 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Constants } from "../Constant";
 import HomeScreen from "../screen/screenHomeStack/home/HomeScreen";
 import CartNoItem from "../screen/screenHomeStack/cart/CartNoItem";
-import Catelogcreen from "../screen/screenHomeStack/catelog/Catelogcreen";
-import SearchNoItem from "../screen/screenHomeStack/search/SearchNoItem";
-import AuthStack from "./AuthStack";
+import SuggestScreen from "../screen/screenAuthStack/suggest/SuggestScreen";
+import Notification from "../screen/screenAuthStack/notification/Notification";
+import LoginScreen from "../screen/screenAuthStack/Login/LoginScreen";
 const Tab = createBottomTabNavigator();
-const TabNavigation = () => {
+const AuthTab = () => {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -43,7 +43,7 @@ const TabNavigation = () => {
       />
         <Tab.Screen
         name="Tài khoản"
-        component={AuthStack}
+        component={LoginScreen}
         options={{
           headerShown: false,
           tabBarIcon: ({ focused }) => (
@@ -65,7 +65,7 @@ const TabNavigation = () => {
       />
       <Tab.Screen
         name="Gợi ý"
-        component={Catelogcreen}
+        component={SuggestScreen}
         options={{
           headerShown: false,
           tabBarIcon: ({ focused }) => (
@@ -87,7 +87,7 @@ const TabNavigation = () => {
       />
       <Tab.Screen
         name="Thông báo"
-        component={SearchNoItem}
+        component={Notification}
         options={{
           headerShown: false,
           tabBarIcon: ({ focused }) => (
@@ -134,4 +134,4 @@ const TabNavigation = () => {
   );
 };
 
-export default TabNavigation;
+export default AuthTab;

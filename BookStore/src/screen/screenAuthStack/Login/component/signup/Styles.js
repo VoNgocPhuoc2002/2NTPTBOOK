@@ -9,7 +9,7 @@ const Styles = StyleSheet.create({
     },
     viewBTNLogin:{
         width: '80%',
-        backgroundColor:Constants.COLOR.FILLBTN,
+        backgroundColor:Constants.COLOR.ORANGE,
         borderRadius:5,
         alignItems: 'center',
         justifyContent: 'center',
@@ -73,7 +73,6 @@ const Styles = StyleSheet.create({
    
     groupBTN:{
         flex:3,
-        backgroundColor:"blue",
         paddingTop:30,
     },
     viewForgotPass:{

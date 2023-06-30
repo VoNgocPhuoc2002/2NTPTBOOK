@@ -43,7 +43,7 @@ const Login = () => {
        
         <TouchableOpacity style={{alignItems:"center"}} onPress={Next}>
           <View style={styles.viewBTNLogin}>
-            <Text style={styles.textBTN}>Đăbg Nhập</Text>
+            <Text style={styles.textBTN}>Đăng Nhập</Text>
           </View>
         </TouchableOpacity>
         <View style={styles.viewOR}>

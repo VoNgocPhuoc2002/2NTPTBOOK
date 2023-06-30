@@ -9,7 +9,7 @@ const Styles = StyleSheet.create({
     },
     viewBTNLogin:{
         width: '80%',
-        backgroundColor:Constants.COLOR.FILLBTN,
+        backgroundColor:Constants.COLOR.ORANGE,
         borderRadius:5,
         alignItems: 'center',
         justifyContent: 'center',
@@ -19,12 +19,12 @@ const Styles = StyleSheet.create({
     textForgotPass:{
         fontSize:16,
         fontWeight:"bold",
-        color:Constants.COLOR.LINEBTN
+        color:Constants.COLOR.ORANGE
     },
   
     viewBTNFacebook:{
         width: '80%',
-        backgroundColor:Constants.COLOR.FACEBOOK,
+        backgroundColor:Constants.COLOR.BLUE,
         borderRadius:5,
         alignItems: 'center',
         justifyContent: 'center',
@@ -74,7 +74,6 @@ const Styles = StyleSheet.create({
    
     groupBTN:{
         flex:3,
-        backgroundColor:"blue",
         justifyContent:"space-around",
     },
     viewForgotPass:{

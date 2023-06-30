@@ -8,10 +8,8 @@ const Styles = StyleSheet.create({
     },
     header:{
         flex:1.5,
-        backgroundColor:Constants.COLOR.HEADER,
+        backgroundColor:Constants.COLOR.WHITE,
         justifyContent:"space-between",
-        borderBottomStartRadius:30,
-        borderBottomEndRadius:30,
 
     },
     titleScreen:{
@@ -29,7 +27,7 @@ const Styles = StyleSheet.create({
     line:{
         width:100,
         height:3,
-        backgroundColor:Constants.COLOR.LINEBTN,
+        backgroundColor:Constants.COLOR.ORANGE,
 
     },
     body:{
@@ -64,7 +62,7 @@ const Styles = StyleSheet.create({
     isTextLogin:{
         fontSize:18,
         fontWeight:"bold",
-        color:Constants.COLOR.LINEBTN,
+        color:Constants.COLOR.ORANGE,
     },
     
 })

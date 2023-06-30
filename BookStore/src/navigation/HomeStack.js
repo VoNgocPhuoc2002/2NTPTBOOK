@@ -1,19 +1,18 @@
 import React from "react";
 import { Constants } from "../Constant";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import TabNavigation from "./TabNavigation";
+import AuthTab from "./AuthTab";
 import HomeScreen from "../screen/screenHomeStack/home/HomeScreen";
-import ProductDetail from "../screen/screenHomeStack/catelog/ProductDetail";
-import Catelogcreen from "../screen/screenHomeStack/catelog/Catelogcreen";
-import AuthStack from "./AuthStack";
+import Catelogcreen from "../screen/screenHomeStack/suggest/SuggestScreen";
+import HomeTab from "./HomeTab";
 const Stack = createNativeStackNavigator();
 
 const HomeStack = () => {
   return (
     <Stack.Navigator>
          <Stack.Screen
-        name="TabNavigation"
-        component={TabNavigation}
+        name="HomeTab"
+        component={HomeTab}
         options={{ headerShown: false }}
       />
       <Stack.Screen
@@ -27,11 +26,7 @@ const HomeStack = () => {
         component={Catelogcreen}
         options={{ headerShown: false }}
       />
-      <Stack.Screen
-        name="ProductDetail"
-        component={ProductDetail}
-        options={{ headerShown: false }}
-      />
+    
    
     </Stack.Navigator>
   );

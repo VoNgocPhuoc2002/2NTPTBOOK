@@ -7,15 +7,15 @@ const Styles = StyleSheet.create({
     },
     header:{
         flex:1,
-        backgroundColor:"blue",
-        marginStart:20,
-        marginEnd:20,
+        backgroundColor:Constants.COLOR.DARKRED,
         justifyContent: 'space-around',
     },
     groupSearch:{
         flexDirection:"row",
         alignItems:"center",
         justifyContent:"space-between",
+        marginStart:20,
+        marginEnd:20,
     },
     inputSearch:{
         width:"80%",

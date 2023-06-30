@@ -23,7 +23,7 @@ const LoadingScreen = () => {
   return (
     <SafeAreaView  style={styles.container}>
       <View style={styles.body}>
-        <Image source={require('../../../assets/IconLogo.png')} />
+        {/* <Image source={require('../../../assets/IconLogo.png')} /> */}
         <View style={styles.loading}>
           <ActivityIndicator animating={true} color="black" size={'large'} />
           <Text style={styles.textLoading}>Loading</Text>
