@@ -11,8 +11,5 @@ export const Constants = {
        BLUE:"#2980e9",
 
     },
-    
- 
-   
    };
    
