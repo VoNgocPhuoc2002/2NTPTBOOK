@@ -14,21 +14,21 @@ const getOne = async (id) => {
     return product;
 }
 
-const create = async(code, name, description, countryside, processingplace, size, weight, image, price,discount, quantity, favorite,isFutured,dateCreated,categoryId) => {
+const create = async(code, name,author, titledescription,description, countryside, processingplace, size, weight, image, price,discount, quantity, favorite,isFutured,dateCreated,categoryId) => {
     //insert into products (name, price, image, description, category_id) 
     //values (name, price, image, description, category_id)
-    const model = new productModel({code, name, description, countryside, processingplace, size, weight, image, price,discount, quantity, favorite,isFutured,dateCreated,categoryId});
+    const model = new productModel({code, name,author,titledescription, description, countryside, processingplace, size, weight, image, price,discount, quantity, favorite,isFutured,dateCreated,categoryId});
   
     await model.save();
     return model;
 }
 
-const update = async (id,code, name, description, countryside, processingplace, size, weight, image, price, quantity, favorite,isFutured,dateCreated,categoryId) => {
+const update = async (id,code, name,author,titledescription, description, countryside, processingplace, size, weight, image, price, quantity, favorite,isFutured,dateCreated,categoryId) => {
     //update products set name = name, price = price, image = image, description = description categoryId
     //where id = id
     const product = await productModel.findById(id);
     const model = await productModel.findByIdAndUpdate(id,
-        {code, name, description, countryside, processingplace, size, weight, image: image ? image : product.image, price, quantity, favorite,isFutured,dateCreated,categoryId });
+        {code, name,author,titledescription, description, countryside, processingplace, size, weight, image: image ? image : product.image, price, quantity, favorite,isFutured,dateCreated,categoryId });
     return model;
 }
 const generateTransactionId = () => {

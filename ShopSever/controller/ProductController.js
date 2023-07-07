@@ -11,10 +11,10 @@ const get = async () => {
     }
 }
 
-const create = async (code, name, description, countryside, processingplace, size, weight, image, price,discount, quantity, favorite,isFutured,dateCreated,categoryId) => {
+const create = async (code, name, author,titledescription,description, countryside, processingplace, size, weight, image, price,discount, quantity, favorite,isFutured,dateCreated,categoryId) => {
     try {
         const generate =  productService.generateTransactionId(code)
-        const product = await productService.create(generate, name, description, countryside, processingplace, size, weight, image, price,discount, quantity, favorite,isFutured,dateCreated,categoryId);
+        const product = await productService.create(generate, name,author,titledescription, description, countryside, processingplace, size, weight, image, price,discount, quantity, favorite,isFutured,dateCreated,categoryId);
 
         return product;
     } catch (error) {
@@ -42,9 +42,9 @@ const getOne = async (id) => {
     }
 }
 
-const update = async(id,code, name, description, countryside, processingplace, size, weight, image, price, quantity, favorite,isFutured,dateCreated,categoryId) => {
+const update = async(id,code, name,author,titledescription, description, countryside, processingplace, size, weight, image, price, quantity, favorite,isFutured,dateCreated,categoryId) => {
     try {
-        const product = await productService.update(id,code, name, description, countryside, processingplace, size, weight, image, price, quantity, favorite,isFutured,dateCreated,categoryId);
+        const product = await productService.update(id,code, name, author,titledescription,description, countryside, processingplace, size, weight, image, price, quantity, favorite,isFutured,dateCreated,categoryId);
         return product;
     } catch (error) {
         console.log(error);

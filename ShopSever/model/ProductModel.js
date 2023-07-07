@@ -5,6 +5,8 @@ const ObjectId = Schema.ObjectId;
 const ProductSchema = new Schema({
     code : { type: String, required: true },
     name: { type: String, required: true },
+    author: { type: String, required: true },
+    titledescription: { type: String, required: true },
     description: { type: String, required: true },
     countryside: { type: String, required: true },
     processingplace: { type: String, required: true },

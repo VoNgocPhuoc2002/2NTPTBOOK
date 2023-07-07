@@ -70,7 +70,7 @@ const HomeScreen = ({navigation}) => {
           <Menu/>
         </View>
         <View style={{flex:1,marginBottom:10,width:"100%", backgroundColor:Constants.COLOR.PINKRED}}>
-          <FlashSale/>
+          <FlashSale productData={productData}/>
         </View>
         <View style={{flex:1,marginBottom:10,width:"100%", backgroundColor:"green",}}>
           <ListProducts navigation={navigation} productData={productData}/>

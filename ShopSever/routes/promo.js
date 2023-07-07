@@ -14,4 +14,5 @@ router.get('/getallpromo', promoController.getAllPromo);
 //http://localhost:3000/promo/apply
 router.post('/apply', promoController.applyPromoController);
 
+
 module.exports = router;

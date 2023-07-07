@@ -4,10 +4,8 @@ import styles from './Styles';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import {FlashList} from '@shopify/flash-list';
 
-const FlashSale = () => {
+const FlashSale = ({productData}) => {
   const [countdown, setCountdown] = useState(3600); // Đếm ngược từ 6 phút (360 giây)
-
-
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -69,27 +67,39 @@ const FlashSale = () => {
   ];
 
   const RenderItem = ({item}) => (
-    
     <View style={styles.viewItem}>
       <Image
         style={{width: 110, height: 120, borderRadius: 10}}
-        source={item.img}
+        source={{uri: item.image}}
       />
       <View style={styles.viewItemName}>
-        <Text style={styles.nameItem}></Text>
+        <Text style={styles.nameItem}>
+          {item.name.length > 30
+            ? item.name.substring(0, 35) + '...'
+            : item.name}
+        </Text>
       </View>
       <View style={styles.viewItemNewPrice}>
-        <Text style={styles.newPriceItem}>{item.newPrice}</Text>
+        <Text style={styles.newPriceItem}>{item.price}</Text>
         <View style={styles.viewDiscountItem}>
           <Text style={styles.discountItem}>{item.discount} %</Text>
-
         </View>
       </View>
       <View style={styles.viewItemOldPrice}>
-        <Text>{item.oldPrice}</Text>
+        <Text>
+          <Text>
+            {item.discount == 1
+              ? item.price
+              : (item.oldPrice = (
+                  Math.round(
+                    ((parseFloat(item.price) * 100) / item.discount) * 10,
+                  ) / 10
+                ).toFixed(3))}
+          </Text>
+        </Text>
+
         <View style={styles.line}></View>
       </View>
-     
     </View>
   );
 
@@ -117,9 +127,10 @@ const FlashSale = () => {
       <View style={styles.groupWorkspaces}>
         <View style={styles.groupItem}>
           <FlashList
-            data={data}
+            data={productData.filter(
+              item => item.categoryId.name === 'TrendByDay',
+            )}
             renderItem={({item}) => <RenderItem item={item} />}
-            keyExtractor={item => item.id.toString()}
             horizontal
             initialNumToRender={3}
             estimatedItemSize={15}

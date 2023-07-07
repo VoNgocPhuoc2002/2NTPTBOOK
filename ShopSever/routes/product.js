@@ -18,6 +18,8 @@ router.get('/', async function (req, res, next) {
             _id: p._id,
             code: p.code,
             name: p.name,
+            author: p.author,
+            titledescription: p.titledescription,
             description: p.description,
             countryside: p.countryside,
             processingplace: p.processingplace,
@@ -151,14 +153,14 @@ router.get('/:id/detail', async function (req, res, next) {
 router.post('/:id/detail', upload.single('image'), async function (req, res, next) {
     try {
         let { file } = req;
-        let { code, name, description, countryside, processingplace, size, weight, image, price, quantity, favorite,isFutured,dateCreated,categoryId } = req.body;
+        let { code, name,author,titledescription, description, countryside, processingplace, size, weight, image, price, quantity, favorite,isFutured,dateCreated,categoryId } = req.body;
         let { id } = req.params;
         if (file) {
             const imageUrl = await uploadToCloudinary(file);
             // Lưu đường dẫn imageUrl vào cơ sở dữ liệu
             image = imageUrl;
         }
-        await ProductController.update(id,code, name, description, countryside, processingplace, size, weight, image, price, quantity, favorite,isFutured,dateCreated,categoryId);
+        await ProductController.update(id,code, name, author,titledescription,description, countryside, processingplace, size, weight, image, price, quantity, favorite,isFutured,dateCreated,categoryId);
         res.redirect('/product');
         console.log(req.body);
         // res.status(200).json(products);
@@ -197,13 +199,13 @@ router.get('/tao-moi', async function (req, res, next) {
 router.post('/tao-moi', upload.single('image'), async function (req, res, next) {
     try {
         let { file } = req;
-        let {id,code, name, description, countryside, processingplace, size, weight, image, price,discount, quantity, favorite,isFutured,dateCreated,categoryId} = req.body;
+        let {id,code, name,author,titledescription, description, countryside, processingplace, size, weight, image, price,discount, quantity, favorite,isFutured,dateCreated,categoryId} = req.body;
         if (file) {
             const imageUrl = await uploadToCloudinary(file);
             // Lưu đường dẫn imageUrl vào cơ sở dữ liệu
             image = imageUrl;
         }
-        await ProductController.create(code, name, description, countryside, processingplace, size, weight, image, price,discount, quantity, favorite,isFutured,dateCreated,categoryId);
+        await ProductController.create(code, name,author,titledescription, description, countryside, processingplace, size, weight, image, price,discount, quantity, favorite,isFutured,dateCreated,categoryId);
         res.redirect('/product');
         console.log(req.body);
     } catch (error) {

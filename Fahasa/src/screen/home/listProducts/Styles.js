@@ -4,6 +4,7 @@ const Styles = StyleSheet.create({
     groupWorkspaces: {
       marginStart: 20,
       height:300,
+      width:"100%"
     },
       viewItemName:{
         width:"80%",
