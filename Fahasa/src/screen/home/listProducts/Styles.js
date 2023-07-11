@@ -70,7 +70,7 @@ const Styles = StyleSheet.create({
         justifyContent: "center",
         borderWidth:2,
         borderColor:Constants.COLOR.DARKRED,
-        marginTop:40,
+        marginTop:30,
       },
       textShow:{
         color:Constants.COLOR.DARKRED,

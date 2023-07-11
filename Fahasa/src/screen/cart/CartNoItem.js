@@ -6,7 +6,8 @@ import { Constants } from '../../Constant';
 const CartNoItem = ({navigation}) => {
  
     const MoveToHome = ()=>{
-      navigation.navigate("HomeScreen")
+        navigation.navigate("ScreenCart")
+
     }
   return (
     <SafeAreaView style={styles.container}>

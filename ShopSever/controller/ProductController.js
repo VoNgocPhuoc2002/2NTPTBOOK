@@ -50,7 +50,14 @@ const update = async(id,code, name,author,titledescription, description, country
         console.log(error);
     }
 }
-
+const searchProducts = async (keyword) => {
+    try {
+      const products = await productService.search(keyword);
+      return products;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 const favourite = async (id) => {
     try {
         const product = await productService.favourite(id);
@@ -61,4 +68,4 @@ const favourite = async (id) => {
 }
 
 
-module.exports = { get, create, remove, getOne, update, favourite };
+module.exports = { get, create, remove, getOne, update, favourite,searchProducts };

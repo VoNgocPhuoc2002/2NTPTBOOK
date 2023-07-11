@@ -6,15 +6,17 @@ import HomeScreen from "../screen/home/HomeScreen";
 import AuthStack from "./AuthStack";
 import SuggestScreen from "../screen/suggest/SuggestScreen";
 import Notification from "../screen/notification/Notification";
-import CartNoItem from "../screen/cart/CartNoItem";
+import ScreenCart from "../screen/cart/screenCart/ScreenCart";
 
 
 const Tab = createBottomTabNavigator();
 const TabNavigation = () => {
   return (
     <Tab.Navigator
-     
-    >
+      screenOptions={{
+        tabBarShowLabel: false,
+      }}
+     >
       <Tab.Screen
         name="Trang chủ"
         component={HomeScreen}
@@ -105,7 +107,7 @@ const TabNavigation = () => {
       />
       <Tab.Screen
         name="Giỏ hàng"
-        component={CartNoItem}
+        component={ScreenCart}
         options={{
           headerShown: false,
           tabBarIcon: ({ focused }) => (

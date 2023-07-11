@@ -10,21 +10,27 @@ const Styles = StyleSheet.create({
   header:{
     flex:1,
     backgroundColor:Constants.COLOR.DARKRED,
+    flexDirection:"row",
     justifyContent:"space-between",
+    alignItems:"center",
+},
+viewHeaderRight:{
+  flexDirection:"row",
+  width:"35%",
+  justifyContent:"space-between",
+  marginEnd:10,
 
 },
-
-
 // body
 
 body:{
   flex:12,
-  backgroundColor:Constants.COLOR.WHITE,
+  backgroundColor:Constants.COLOR.HEADER,
 },
 viewImageProducts:{
   width:"100%",
   height:450,
-  backgroundColor:"red",
+  backgroundColor:Constants.COLOR.WHITE,
   alignItems:"center",
   justifyContent:"center",
 },
@@ -33,9 +39,10 @@ imageProducts:{
   height:"90%"
 },
 viewNameProducts:{
+  paddingStart:20,
   width:"100%",
-  marginStart:20,
-  marginEnd:20
+  marginEnd:20,
+  backgroundColor:Constants.COLOR.WHITE
 },
 nameProducts:{
   fontSize:16,
@@ -44,14 +51,15 @@ nameProducts:{
 viewHeart:{
   width:"100%",
   alignItems:"flex-end",
-  backgroundColor:"blue",
+  backgroundColor:Constants.COLOR.WHITE,
   paddingEnd:20,
 },
 groupPrice:{
   width:"100%",
   flexDirection:"row",
   alignItems:"center",
-  backgroundColor:"green",
+  backgroundColor:Constants.COLOR.WHITE,
+  marginBottom:5,
 },
 viewItemName:{
   width:"20%",
@@ -73,6 +81,7 @@ viewOldPrice:{
   width:"20%",
   flexDirection:"row",
   marginStart:20,
+  marginEnd:20,
 },
 oldPriceItem:{
   fontSize:16,
@@ -91,10 +100,15 @@ discountItem:{
   fontWeight:"bold",
 },
 information:{
+  backgroundColor:Constants.COLOR.WHITE,
+  paddingTop:10,
+  marginBottom:5,
+  paddingBottom:10,
 
 },
 viewInformation:{
   marginStart:20,
+  marginBottom:10,
 },
 textInfomation:{
   color:Constants.COLOR.BLACK,
@@ -104,6 +118,7 @@ textInfomation:{
 infoProducts:{
   flexDirection:"row",
   width:"100%",
+  marginBottom:10,
 
 },
 viewName:{
@@ -112,20 +127,60 @@ viewName:{
 
 },
 viewInfo:{
-  width:"70%"
+  width:"60%",
+},
+textname:{
+  fontSize:14
+  
+  
+  
+  ,
+  color:Constants.COLOR.BLACK
 },
 groupBTN:{
   flexDirection:"row",
-  height:60,
-  backgroundColor:"red"
+  height:50,
+  backgroundColor:Constants.COLOR.HEADER,
 },
 viewQuantity:{
   flexDirection:"row",
-  backgroundColor:"green",
+  width:"24.5%",
+  justifyContent:"space-around",
+  marginEnd:3,
+  backgroundColor:Constants.COLOR.WHITE
+},
+btnQuantity:{
+  alignItems:"center",
+  justifyContent:"center",
+},
+viewInputQuantity:{
+  alignItems:"center",
+  justifyContent:"center",
+},
+viewbtnAddCart:{
+  width:"50%",
+  alignItems:"center",
+  justifyContent:"center",
+  backgroundColor:Constants.COLOR.WHITE,
+},
+textbtnAddCart:{
+  fontSize:16,
+  color:Constants.COLOR.DARKRED,
+  fontWeight:"bold",
+},
+viewbtnBuy:{
+  backgroundColor:Constants.COLOR.DARKRED,
   width:"25%",
   alignItems:"center",
-  justifyContent:"center"
+  justifyContent:"center",
 },
-     
+textbtnBuy:{
+  color:Constants.COLOR.WHITE,
+  fontSize:16,
+  fontWeight:"bold",
+},
+groupDescription:{
+  marginStart:20,
+},
 })
 export default Styles

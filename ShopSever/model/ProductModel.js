@@ -15,7 +15,6 @@ const ProductSchema = new Schema({
     image: { type: String, required: true },
     price: { type: Number, required: true, default: 0 },
     discount: { type: Number, required: true, default: 1 },
-
     quantity: { type: Number, required: true, default: 0 },
     favorite: { type: String, default: false },
     isFutured: { type: String, default: false },

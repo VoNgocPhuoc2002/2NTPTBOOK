@@ -27,6 +27,8 @@ const Styles = StyleSheet.create({
     },
     body:{
         flex:7.5,
+        backgroundColor:"white",
+
     },
 
     // panel
@@ -34,6 +36,7 @@ const Styles = StyleSheet.create({
         marginTop:15,
         marginStart: 20,
         marginEnd: 20,
+        backgroundColor:"white",
       },
       viewImagePanel: {
         width: '100%',

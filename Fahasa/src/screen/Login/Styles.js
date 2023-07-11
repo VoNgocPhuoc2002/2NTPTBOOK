@@ -13,7 +13,7 @@ const Styles = StyleSheet.create({
 
     },
     titleScreen:{
-        backgroundColor:Constants.COLOR.BLACK,
+        backgroundColor:Constants.COLOR.DARKRED,
         width:"100%",
         height:"50%",
         alignItems: "center",

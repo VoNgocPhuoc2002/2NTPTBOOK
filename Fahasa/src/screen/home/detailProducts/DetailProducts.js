@@ -1,46 +1,80 @@
-import {StyleSheet, Text, View, Image,TextInput,TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TextInput,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import AxiosIntance from '../../../ultil/AxiosIntance';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
-
+import IconEntypo from 'react-native-vector-icons/Entypo';
 import styles from './Styles';
+import { Constants } from '../../../Constant';
+import { getUserId } from '../../../ultil/GetUserId';
 const DetailProducts = ({route}) => {
   const {id} = route.params;
   const [data, setdata] = useState('');
   const [quantity, setQuantity] = useState(1);
+  const [productId, setProductId] = useState('');
   console.log('====================================');
   console.log('itesmId**s****ssssss****', id);
   console.log('====================================');
-  const Plus = () => {
+  const handlePlus = () => {
     setQuantity(quantity + 1);
   };
-  
-  const Minus = () => {
+
+  const handleMinus = () => {
     if (quantity > 1) {
       setQuantity(quantity - 1);
     }
   };
+
   const fetchProductsData = async () => {
     try {
       const response = await AxiosIntance().get(`product/${id}/detail`);
       console.log('Produsssct Response:', response.product);
       setdata(response.product);
+      setProductId(response.product._id)
     } catch (error) {
       console.error('Error:', error);
     }
   };
-
   useEffect(() => {
     fetchProductsData();
   }, []);
+
+  const fetchAddToCart = async () => {
+    const userId = await getUserId();
+    if (userId) {
+      const response = await AxiosIntance().post(`cart/${userId}/addtocart`,{productId:productId,quantity: quantity,userId:userId})
+      // const response = await AxiosIntance().get(`cart/:userId/addtocart`);
+      console.log('User Respossnse:', response);
+    }
+  };
+
+  
 
   console.log('====================================', data);
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text>sadsada</Text>
+        <View style={{marginStart:20,}}>
+        <IconAntDesign name="left" size={25} color="white" />
+        </View>
+        <View style={styles.viewHeaderRight}>
+        <IconAntDesign name="search1" size={25} color="white" />
+        <IconAntDesign name="home" size={25} color="white" />
+        <IconAntDesign name="shoppingcart" size={25} color="white" />
+        <IconEntypo name="dots-three-horizontal" size={25} color="white" />
+
+        </View>
       </View>
       <View style={styles.body}>
+        <ScrollView>
+
         <View style={styles.viewImageProducts}>
           <Image style={styles.imageProducts} source={{uri: data.image}} />
         </View>
@@ -48,7 +82,7 @@ const DetailProducts = ({route}) => {
           <Text style={styles.nameProducts}>{data.name}</Text>
         </View>
         <View style={styles.viewHeart}>
-          <IconAntDesign name="hearto" size={25} color="black" />
+          <IconAntDesign name="hearto" size={25} color="#f19f31" />
         </View>
         <View style={styles.groupPrice}>
           <View style={styles.viewNewPrice}>
@@ -56,18 +90,13 @@ const DetailProducts = ({route}) => {
           </View>
           <View style={styles.viewOldPrice}>
             <Text style={styles.oldPriceItem}>
-              {' '}
-              {data.discount == 1
-                ? data.price
-                : (data.oldPrice = (
-                    Math.round(
-                      ((parseFloat(data.price) * 100) / data.discount) * 10,
-                    ) / 10
-                  ).toFixed(3))}
+              
+            {data.oldPrice = data.discount === 0 ? data.price : data.price + parseFloat(data.price * (data.discount / 100))}
+
             </Text>
           </View>
           <View style={styles.viewDiscountItem}>
-            <Text style={styles.discountItem}>{data.discount}</Text>
+            <Text style={styles.discountItem}>{data.discount}%</Text>
           </View>
         </View>
         <View style={styles.information}>
@@ -76,69 +105,83 @@ const DetailProducts = ({route}) => {
           </View>
           <View style={styles.infoProducts}>
             <View style={styles.viewName}>
-              <Text>Mã hàng</Text>
+              <Text style={styles.textname}>Mã hàng</Text>
             </View>
             <View style={styles.viewInfo}>
-              <Text>{data.code}</Text>
+              <Text style={styles.textname}>{data.code}</Text>
             </View>
           </View>
           <View style={styles.infoProducts}>
             <View style={styles.viewName}>
-              <Text>Tác giả</Text>
+              <Text style={styles.textname}>Tác giả</Text>
             </View>
             <View style={styles.viewInfo}>
-              <Text>{data.description}</Text>
+              <Text style={styles.textname}>{data.author}</Text>
             </View>
           </View>
           <View style={styles.infoProducts}>
             <View style={styles.viewName}>
-              <Text>Nhà sản xuất</Text>
+              <Text style={styles.textname}>Nhà sản xuất</Text>
             </View>
             <View style={styles.viewInfo}>
-              <Text>{data.processingplace}</Text>
+              <Text style={styles.textname}>{data.processingplace}</Text>
             </View>
           </View>
           <View style={styles.infoProducts}>
             <View style={styles.viewName}>
-              <Text>Trọng lượng</Text>
+              <Text style={styles.textname}>Trọng lượng</Text>
             </View>
             <View style={styles.viewInfo}>
-              <Text>{data.weight}</Text>
+              <Text style={styles.textname}>{data.weight}</Text>
             </View>
           </View>
           <View style={styles.infoProducts}>
             <View style={styles.viewName}>
-              <Text>Kích thước</Text>
+              <Text style={styles.textname}>Kích thước</Text>
             </View>
             <View style={styles.viewInfo}>
-              <Text>{data.size}</Text>
+              <Text style={styles.textname}>{data.size}</Text>
+            </View>
+          </View>
+          <View style={styles.groupDescription}>
+            <View >
+              <Text style={styles.textInfomation}>{data.titledescription}</Text>
+            </View>
+            <View>
+              <Text style={styles.textname}>{data.description}</Text>
             </View>
           </View>
         </View>
         <View style={styles.groupBTN}>
           <View style={styles.viewQuantity}>
-            <View>
-          <TouchableOpacity onPress={Plus}>
+            <View style={styles.btnQuantity}>
+              <TouchableOpacity
+                onPress={handleMinus}>
+                <IconAntDesign name="minus" size={20} color="black" />
+              </TouchableOpacity>
+            </View>
 
-              <IconAntDesign name="minus" size={20} color="black" />
+            <View style={styles.viewInputQuantity}>
+              <TextInput  value={quantity.toString()} />
+            </View>
+            <View  style={styles.btnQuantity}>
+              <TouchableOpacity
+                onPress={handlePlus}>
+                <IconAntDesign name="plus" size={20} color="black" />
+              </TouchableOpacity>
+            </View>
+          </View>
+          <TouchableOpacity onPress={fetchAddToCart}>
+            <View style={styles.viewbtnAddCart}>
+              <Text style={styles.textbtnAddCart}>Thêm vào giỏ hàng</Text>
+            </View>
           </TouchableOpacity>
-
-              </View>
-            
-            <View>
-              <TextInput value={quantity.toString()} onChangeText={(value) => setQuantity(parseInt(value))} />
-            </View>
-            <View>
-            <IconAntDesign name="plus" size={20} color="black" />
-            </View>
-          </View>
-          <View>
-            <Text>Thêm vào giỏ hàng</Text>
-          </View>
-          <View>
-            <Text>Mua ngay</Text>
+          <View style={styles.viewbtnBuy}>
+            <Text style={styles.textbtnBuy}>Mua ngay</Text>
           </View>
         </View>
+        </ScrollView>
+
       </View>
     </View>
   );

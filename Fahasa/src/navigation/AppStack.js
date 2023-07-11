@@ -7,7 +7,8 @@ import EditProfile from "../screen/profile/editProfile/EditProfile";
 import ProfileScreen from "../screen/profile/ProfileScreen";
 import ListProducts from "../screen/home/listProducts/ListProducts";
 import DetailProducts from "../screen/home/detailProducts/DetailProducts";
-
+import SearchScreen from "../screen/home/search/SearchScreen";
+import ScreenCart from "../screen/cart/screenCart/ScreenCart";
 const Stack = createNativeStackNavigator();
 
 const AppStack = () => {
@@ -42,6 +43,16 @@ const AppStack = () => {
       <Stack.Screen
         name="DetailProducts"
         component={DetailProducts}
+        options={{ headerShown: false }}
+      />
+        <Stack.Screen
+        name="SearchScreen"
+        component={SearchScreen}
+        options={{ headerShown: false }}
+      />
+          <Stack.Screen
+        name="ScreenCart"
+        component={ScreenCart}
         options={{ headerShown: false }}
       />
      

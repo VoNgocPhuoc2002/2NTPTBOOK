@@ -50,7 +50,17 @@ const favourite = async (id) => {
     return model;
 }
 
+const search = async (keyword) => {
+    if (keyword) {
+      const regex = new RegExp(keyword, 'i');
+      const products = await productModel.find({ $or: [{ name: regex }, { description: regex }] }).populate('categoryId', '_id name');
+      return products;
+    } else {
+      const products = await productModel.find({}).populate('categoryId', '_id name');
+      return products;
+    }
+  };
 
 
 
-module.exports = { get, create, remove, getOne, update, favourite,generateTransactionId };
+module.exports = { get, create, remove, getOne, update, favourite,generateTransactionId,search};

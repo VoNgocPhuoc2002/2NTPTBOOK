@@ -56,6 +56,17 @@ router.post(':id/favorite/', async function (req, res, next) {
         console.log("🚀 ~ file: product.js:79 ~ error", error);
     }
 });
+//search sản phẩm
+//http://localhost:3000/product/search
+
+router.get('/search', async (req, res) => {
+    const keyword = req.query.keyword;
+  
+    // Gọi hàm xử lý tìm kiếm từ service hoặc controller
+    const results = await ProductController.searchProducts(keyword);
+  
+    res.json(results);
+});
 
 
 //hiển thị sản phẩm yêu thích vừa thêm

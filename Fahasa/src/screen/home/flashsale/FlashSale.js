@@ -1,10 +1,10 @@
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View, Image,TouchableOpacity} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import styles from './Styles';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import {FlashList} from '@shopify/flash-list';
 
-const FlashSale = ({productData}) => {
+const FlashSale = ({productData,navigation}) => {
   const [countdown, setCountdown] = useState(3600); // Đếm ngược từ 6 phút (360 giây)
 
   useEffect(() => {
@@ -31,42 +31,15 @@ const FlashSale = ({productData}) => {
     const seconds = timeInSeconds % 60;
     return seconds.toString().padStart(2, '0');
   };
-  const data = [
-    {
-      id: 1,
-      img: require('../../../assets/Catelog.png'),
-      name: 'Develo Developer ajshdjash sajdhkajh aksjhdauh ahskdhkahper',
-      newPrice: '36.000',
-      oldPrice: '90.000',
-      discount: '-60',
-    },
-    {
-      id: 2,
-      img: require('../../../assets/Catelog.png'),
-      name: 'Developer ajshdjash sajdhkajh aksjhdauh ahskdhkah adshk adakjsah d ah',
-      newPrice: '36.000',
-      oldPrice: '90.000',
-      discount: '-60',
-    },
-    {
-      id: 3,
-      img: require('../../../assets/Catelog.png'),
-      name: 'Developer',
-      newPrice: '36.000',
-      oldPrice: '90.000',
-      discount: '-60',
-    },
-    {
-      id: 4,
-      img: require('../../../assets/Catelog.png'),
-      name: 'Developer',
-      newPrice: '36.000',
-      oldPrice: '90.000',
-      discount: '-60',
-    },
-  ];
+
+  const handleItemPress = id => {
+    // Navigate to the detail screen with the item ID
+    navigation.navigate('DetailProducts', {id: id});
+  };
 
   const RenderItem = ({item}) => (
+    <TouchableOpacity onPress={() => handleItemPress(item._id)}>
+      
     <View style={styles.viewItem}>
       <Image
         style={{width: 110, height: 120, borderRadius: 10}}
@@ -101,6 +74,8 @@ const FlashSale = ({productData}) => {
         <View style={styles.line}></View>
       </View>
     </View>
+    
+    </TouchableOpacity>
   );
 
   return (

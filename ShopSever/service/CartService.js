@@ -97,6 +97,7 @@ const getCartItems = async (userId) => {
   }
 };
 
+
 const removeAllCartItems = async (userId) => {
   try {
     const cart = await cartModel.findOne({ userId });
