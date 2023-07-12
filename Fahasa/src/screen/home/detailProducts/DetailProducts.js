@@ -32,6 +32,8 @@ const DetailProducts = ({route}) => {
     }
   };
 
+  
+
   const fetchProductsData = async () => {
     try {
       const response = await AxiosIntance().get(`product/${id}/detail`);
