@@ -19,6 +19,7 @@ const DetailProducts = ({route}) => {
   const [data, setdata] = useState('');
   const [quantity, setQuantity] = useState(1);
   const [productId, setProductId] = useState('');
+  const [cartId, setCartId] = useState('');
   console.log('====================================');
   console.log('itesmId**s****ssssss****', id);
   console.log('====================================');
@@ -40,6 +41,7 @@ const DetailProducts = ({route}) => {
       console.log('Produsssct Response:', response.product);
       setdata(response.product);
       setProductId(response.product._id)
+      setCartId(response.product._id)
     } catch (error) {
       console.error('Error:', error);
     }
@@ -51,7 +53,7 @@ const DetailProducts = ({route}) => {
   const fetchAddToCart = async () => {
     const userId = await getUserId();
     if (userId) {
-      const response = await AxiosIntance().post(`cart/${userId}/addtocart`,{productId:productId,quantity: quantity,userId:userId})
+      const response = await AxiosIntance().post(`cart/${userId}/addtocart`,{productId:productId,quantity: quantity,cartId:cartId})
       // const response = await AxiosIntance().get(`cart/:userId/addtocart`);
       console.log('User Respossnse:', response);
     }

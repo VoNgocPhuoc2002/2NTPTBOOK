@@ -7,6 +7,7 @@ import styles from './Styles';
 import {CheckBox, Image} from 'react-native-elements';
 import { FlashList } from '@shopify/flash-list';
 
+
 const ScreenCart = () => {
   const [data, setData] = useState();
   const [checked, setChecked] = useState(false);
@@ -18,7 +19,7 @@ const ScreenCart = () => {
     if (userId) {
       const response = await AxiosIntance().get(`cart/${userId}/getcartitems`);
       setData(response.productId);
-      console.log('cartttttttttaatttttttttaattttttttt', response);
+      console.log('cartttttttttaatttttttttaattttttttt', response.productId);
     }
   };
 
