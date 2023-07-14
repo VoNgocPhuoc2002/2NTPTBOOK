@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import axios from 'axios';
 import styles from './Styles';
+import { FlashList } from '@shopify/flash-list';
 
 const SearchScreen = () => {
   const [keyword, setKeyword] = useState('');
@@ -18,7 +19,7 @@ const SearchScreen = () => {
   const searchProducts = async () => {
     try {
       const response = await axios.get(
-        `http://192.168.102.7:3000/product/search?keyword=${keyword}`,
+        `http://192.168.0.116:3000/product/search?keyword=${keyword}`,
       );
       const products = response.data;
       setResults(products);
@@ -100,9 +101,12 @@ const SearchScreen = () => {
             <Button title="Search" onPress={searchProducts} />
           </View>
         </View>
-        <FlatList
+        <FlashList
           data={results}
           keyExtractor={item => item._id}
+          initialNumToRender={3}
+          estimatedItemSize={200}
+          numColumns={2}
           renderItem={({ item }) => (
             <View style={styles.viewItem}>
               <Image

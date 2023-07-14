@@ -26,12 +26,13 @@ const Styles = StyleSheet.create({
     },
     groupRight: {
         backgroundColor: "green",
-        width: "7`0%",
+        width: "70%",
     },
     viewItem: {
-        backgroundColor: "#F4F5F7",
+        backgroundColor: "blue",
         borderRadius: 10,
         flexDirection: "row",
+
     },
     imageItem: {
         width: 80,
@@ -89,17 +90,10 @@ const Styles = StyleSheet.create({
    viewItem: {
     width: "100%",
     alignItems: 'center',
-    
     backgroundColor:"#F4F5F7",
-    
-    
-    borderWidth:2,
+    borderWidth:1,
     height:240,
     justifyContent: 'center',
-    
-    
-    
-    
   },
   viewItemName:{
     width:"80%",
