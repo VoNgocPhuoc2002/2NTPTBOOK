@@ -83,18 +83,18 @@ const SearchScreen = () => {
               <View style={styles.Btn_sapxep}>
 
                 
-                <TouchableOpacity style={styles.button} onPress={sortByNameZ}>
-                  <Text>Sắp xếp   </Text>
+                <TouchableOpacity style={styles.button} onPress={sortByPriceAscending}>
+                  <Text>Giá tăng dần  </Text>
                 </TouchableOpacity>
                 <Image style={{ width: 20, height: 20 }}
-                  source={require('../../../assets/IconArrange.png')} />
+                  source={require('../../../assets/IconUp.png')} />
               </View>
               <View style={styles.Btn_loc}>
-              <TouchableOpacity style={styles.button} onPress={searchProducts}>
-                  <Text>Lọc  </Text>
+              <TouchableOpacity style={styles.button} onPress={sortByPriceDescending}>
+                  <Text>Giá giảm dần  </Text>
                 </TouchableOpacity>
                 <Image style={{ width: 20, height: 20 }}
-                  source={require('../../../assets/IconFilter.png')} />
+                  source={require('../../../assets/IconDown.png')} />
               </View>
             </View>
             <Button title="Search" onPress={searchProducts} />
