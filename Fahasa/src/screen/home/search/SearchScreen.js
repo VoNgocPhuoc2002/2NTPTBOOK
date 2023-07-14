@@ -82,8 +82,6 @@ const SearchScreen = () => {
           <View style={styles.ButtonBox}>
             <View style={styles.ButtonBox1}>
               <View style={styles.Btn_sapxep}>
-
-                
                 <TouchableOpacity style={styles.button} onPress={sortByPriceAscending}>
                   <Text>Giá tăng dần  </Text>
                 </TouchableOpacity>
@@ -92,7 +90,7 @@ const SearchScreen = () => {
               </View>
               <View style={styles.Btn_loc}>
               <TouchableOpacity style={styles.button} onPress={sortByPriceDescending}>
-                  <Text>Giá giảm dần  </Text>
+                  <Text>Giá giảm dần</Text>
                 </TouchableOpacity>
                 <Image style={{ width: 20, height: 20 }}
                   source={require('../../../assets/IconDown.png')} />
