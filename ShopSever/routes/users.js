@@ -150,7 +150,7 @@ router.post("/users/:id/updateEditProfile", async function (req, res, next) {
     const { name, dateofbirth, country, mobile, gender } = req.body;
     const { id } = req.params;
     const user = await UserController.update(id, name, dateofbirth, country, mobile, gender);
-    console.log(user);
+    console.log(user);update
     res.status(200).json({ user });
   } catch (error) {
     res.status(414).json({ error: error.message });

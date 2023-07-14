@@ -3,23 +3,22 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
 const CartSchema = new Schema(
-    {
-        userId: { type: ObjectId, ref: 'User', required: true },
-        products: [
-          {
-            productId: { type: ObjectId, ref: 'Product', required: true },
-            quantity: { type: Number, default: 1 },
-            name: { type: String },
-            price: { type: Number },
-            image: { type: String },
-          },
-        ],
-      },
+  {
+    userId: { type: ObjectId, required: true },
+    products: [
       {
-        timestamps: true,
-      }
-  );
+        productId: { type: ObjectId, ref: 'Product', required: true },
+        quantity: { type: Number, default: 1 },
+        name: { type: String },
+        price: { type: Number },
+        image: { type: String },
+      },
+    ],
+  },
+  {
+    timestamps: true,
+  }
+);
 
+module.exports = mongoose.model('Cart', CartSchema);
 
-
-module.exports = mongoose.model('cart', CartSchema);
