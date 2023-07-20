@@ -14,12 +14,14 @@ import IconEntypo from 'react-native-vector-icons/Entypo';
 import styles from './Styles';
 import { Constants } from '../../../Constant';
 import { getUserId } from '../../../ultil/GetUserId';
-const DetailProducts = ({route}) => {
+
+
+const DetailProducts = ({route,navigation}) => {
   const {id} = route.params;
   const [data, setdata] = useState('');
   const [quantity, setQuantity] = useState(1);
   const [productId, setProductId] = useState('');
-  const [cartId, setCartId] = useState('');
+  // const [cartId, setCartId] = useState('');
   console.log('====================================');
   console.log('itesmId**s****ssssss****', id);
   console.log('====================================');
@@ -32,6 +34,9 @@ const DetailProducts = ({route}) => {
       setQuantity(quantity - 1);
     }
   };
+  const moveToCart = () => {
+    navigation.navigate("ScreenCart")
+  }
 
   
 
@@ -41,7 +46,7 @@ const DetailProducts = ({route}) => {
       console.log('Produsssct Response:', response.product);
       setdata(response.product);
       setProductId(response.product._id)
-      setCartId(response.product._id)
+      // setCartId(response.product._id)
     } catch (error) {
       console.error('Error:', error);
     }
@@ -53,7 +58,7 @@ const DetailProducts = ({route}) => {
   const fetchAddToCart = async () => {
     const userId = await getUserId();
     if (userId) {
-      const response = await AxiosIntance().post(`cart/${userId}/addtocart`,{productId:productId,quantity: quantity,cartId:cartId})
+      const response = await AxiosIntance().post(`cart/${userId}/addtocart`,{userId:userId,productId:productId,quantity: quantity})
       // const response = await AxiosIntance().get(`cart/:userId/addtocart`);
       console.log('User Respossnse:', response);
     }
@@ -71,7 +76,10 @@ const DetailProducts = ({route}) => {
         <View style={styles.viewHeaderRight}>
         <IconAntDesign name="search1" size={25} color="white" />
         <IconAntDesign name="home" size={25} color="white" />
+        <TouchableOpacity onPress={moveToCart}>
         <IconAntDesign name="shoppingcart" size={25} color="white" />
+
+        </TouchableOpacity>
         <IconEntypo name="dots-three-horizontal" size={25} color="white" />
 
         </View>
@@ -175,8 +183,8 @@ const DetailProducts = ({route}) => {
               </TouchableOpacity>
             </View>
           </View>
-          <TouchableOpacity onPress={fetchAddToCart}>
-            <View style={styles.viewbtnAddCart}>
+          <TouchableOpacity style={styles.viewbtnAddCart} onPress={fetchAddToCart}>
+            <View >
               <Text style={styles.textbtnAddCart}>Thêm vào giỏ hàng</Text>
             </View>
           </TouchableOpacity>

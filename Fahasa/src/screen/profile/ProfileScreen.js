@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, Image, TouchableOpacity, ScrollView} from 'react-native';
+import {StyleSheet, Text, View, Image, TouchableOpacity, ScrollView,RefreshControl} from 'react-native';
 
 import React,{useCallback, useEffect,useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -16,6 +16,19 @@ const ProfileScreen = ({navigation}) => {
   const[dateofbirth,setDateofBirth] =useState("")
   const [email, setEmail] = useState('');
 
+  const [refreshing, setRefreshing] = useState(false);
+
+  // Hàm xử lý khi kéo xuống để refresh
+  const onRefresh = () => {
+    setRefreshing(true);
+    // Thực hiện các tác vụ refresh cần thiết ở đây
+    // Ví dụ: tải dữ liệu mới, đặt lại trạng thái, vv.
+    
+    // Giả lập tác vụ refresh trong 2 giây
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  };
 
   useFocusEffect(
     useCallback(()=>{
@@ -55,7 +68,14 @@ const ProfileScreen = ({navigation}) => {
       </View>
       
       <View style={styles.body}>
-        <ScrollView>
+        <ScrollView  
+        contentContainerStyle={styles.scrollViewContainer}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+          />
+        }>
         <View style={styles.viewGroupIconProfile}>
           <Image
             style={styles.iconProfile}

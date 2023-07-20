@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   TextInput,
   ScrollView,
+  RefreshControl
 } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import styles from './Styles';
@@ -21,8 +22,21 @@ import ListProducts from './listProducts/ListProducts';
 
 const HomeScreen = ({ navigation }) => {
   const [productData, setProductData] = useState([]);
+  const [refreshing, setRefreshing] = useState(false);
 
-  const fetchProductsData = async () => {
+  // Hàm xử lý khi kéo xuống để refresh
+  const onRefresh = () => {
+    setRefreshing(true);
+
+    // Thực hiện các tác vụ refresh cần thiết ở đây
+    // Ví dụ: tải dữ liệu mới, đặt lại trạng thái, vv.
+
+    // Giả lập tác vụ refresh trong 2 giây
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  };
+  fetchProductsData = async () => {
     try {
       const response = await AxiosIntance().get(`product`);
       console.log('Product Response:', response);
@@ -72,7 +86,15 @@ const HomeScreen = ({ navigation }) => {
         </View>
       </View>
       <View style={styles.body}>
-        <ScrollView>
+      <ScrollView
+        contentContainerStyle={styles.scrollViewContainer}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+          />
+        }
+      >
           <View style={{ flex: 1, marginBottom: 10 }}>
             <Panner />
           </View>

@@ -19,32 +19,35 @@ const SearchScreen = () => {
   const searchProducts = async () => {
     try {
       const response = await axios.get(
-        `http://192.168.0.116:3000/product/search?keyword=${keyword}`,
-      );
+        `http://192.168.1.39:3000/product/search?keyword=${keyword}`,      );
       const products = response.data;
       setResults(products);
     } catch (error) {
       console.error(error);
     }
   };
-  const sortByName = () => {
-    const sortedData = [...results];
 
-    sortedData.sort((a, b) => {
-      return a.name.localeCompare(b.name);
-    });
+  
+  // const sortByName = () => {
+  //   const sortedData = [...results];
 
-    setResults(sortedData);
-  };
-  const sortByNameZ = () => {
-    const sortedData = [...results];
+  //   sortedData.sort((a, b) => {
+  //     return a.name.localeCompare(b.name);
+  //   });
+
+  //   setResults(sortedData);
+  // };
+  // const sortByNameZ = () => {
+  //   const sortedData = [...results];
   
-    sortedData.sort((a, b) => {
-      return b.name.localeCompare(a.name); // Thay đổi thứ tự so sánh để sắp xếp giảm dần từ Z đến A
-    });
+  //   sortedData.sort((a, b) => {
+  //     return b.name.localeCompare(a.name); // Thay đổi thứ tự so sánh để sắp xếp giảm dần từ Z đến A
+  //   });
   
-    setResults(sortedData);
-  };
+  //   setResults(sortedData);
+  // };
+
+
   const sortByPriceAscending = () => {
     const sortedData = [...results];
 
@@ -98,6 +101,9 @@ const SearchScreen = () => {
             </View>
             <Button title="Search" onPress={searchProducts} />
           </View>
+
+
+           
         </View>
         <FlashList
           data={results}

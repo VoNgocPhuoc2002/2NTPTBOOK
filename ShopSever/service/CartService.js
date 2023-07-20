@@ -3,6 +3,52 @@ const productModel = require('../model/ProductModel');
 const mongoose = require('mongoose');
 const { Types } = mongoose;
 
+// const addToCart = async (userId, productId, quantity) => {
+//   try {
+//     const product = await productModel.findById(productId);
+//     console.log('productId:', productId);
+//     console.log('product:', product);
+//     if (!product) {
+//       throw new Error('Product not found');
+//     }
+
+//     const cart = await cartModel.findOne({ userId });
+//     if (cart) {
+//       const existingProduct = cart.products.find(p => p.productId.toString() === productId);
+//       if (existingProduct) {
+//         existingProduct.quantity += quantity;
+//       } else {
+//         cart.products.push({
+//           productId: productId,
+//           quantity: quantity,
+//           name: product.name,
+//           price: product.price,
+//           image: product.image,
+//         });
+//       }
+//       await cart.save();
+//       return cart;
+//     } else {
+//       const newCart = new cartModel({
+//         userId: userId,
+//         products: [
+//           {
+//             productId: productId,
+//             quantity: quantity,
+//             name: product.name,
+//             price: product.price,
+//             image: product.image,
+//           },
+//         ],
+//       });
+//       await newCart.save();
+//       return newCart;
+//     }
+//   } catch (error) {
+//     console.log(error); // Log the error for debugging purposes
+//     throw new Error('Error adding to cart: ' + error.message); // Throw a more detailed error message
+//   }
+// };
 const addToCart = async (userId, productId, quantity) => {
   try {
     const product = await productModel.findById(productId);
@@ -11,8 +57,12 @@ const addToCart = async (userId, productId, quantity) => {
     }
 
     const cart = await cartModel.findOne({ userId });
+
     if (cart) {
-      const existingProduct = cart.products.find(p => p.productId.toString() === productId);
+      const existingProduct = cart.products.find(
+        (p) => p.productId.toString() === productId
+      );
+
       if (existingProduct) {
         existingProduct.quantity += quantity;
       } else {
@@ -24,6 +74,7 @@ const addToCart = async (userId, productId, quantity) => {
           image: product.image,
         });
       }
+
       await cart.save();
       return cart;
     } else {
@@ -39,14 +90,17 @@ const addToCart = async (userId, productId, quantity) => {
           },
         ],
       });
+
       await newCart.save();
       return newCart;
     }
   } catch (error) {
     console.log(error);
-    throw new Error('Error adding to cart');
+    throw new Error('Error adding to cart: ');
   }
 };
+
+
 
 
 const updateCartItem = async (userId, productId, quantity) => {
@@ -59,7 +113,7 @@ const updateCartItem = async (userId, productId, quantity) => {
     if (!product) {
       throw new Error('Product not found in cart');
     }
-    product.quantity = quantity;
+    product.quantity += quantity;
     await cart.save();
     return cart;
   } catch (error) {
