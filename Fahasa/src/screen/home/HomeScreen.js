@@ -7,19 +7,19 @@ import {
   TextInput,
   ScrollView,
 } from 'react-native';
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './Styles';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import IconFeather from 'react-native-vector-icons/Feather';
 import IconMaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Panner from './Panner';
 import Menu from './Menu';
-import {Constants} from '../../Constant';
+import { Constants } from '../../Constant';
 import AxiosIntance from '../../ultil/AxiosIntance';
 import FlashSale from './flashsale/FlashSale';
 import ListProducts from './listProducts/ListProducts';
 
-const HomeScreen = ({navigation}) => {
+const HomeScreen = ({ navigation }) => {
   const [productData, setProductData] = useState([]);
 
   const fetchProductsData = async () => {
@@ -34,7 +34,7 @@ const HomeScreen = ({navigation}) => {
   useEffect(() => {
     fetchProductsData(); // Call the fetchUserData function
   }, []);
-  const search = ()=>{
+  const search = () => {
     navigation.navigate("SearchScreen")
   }
   return (
@@ -46,19 +46,19 @@ const HomeScreen = ({navigation}) => {
             alignItems: 'center',
           }}>
           <Image
-            style={{height: 30, width: 180}}
+            style={{ height: 30, width: 180 }}
             source={require('../../assets/IconFahasa.png')}
           />
         </View>
         <View style={styles.groupSearch}>
-        <View>
+          <View>
             <IconFeather name="grid" size={25} color="white" />
           </View>
-          <TouchableOpacity style={styles.inputSearch} onPress={search}>          
+          <TouchableOpacity style={styles.inputSearch} onPress={search}>
 
-              <IconFeather name="search" size={25} color="black" />
+            <IconFeather name="search" size={25} color="black" />
 
-              <TextInput onPressIn={search} placeholder="Sản phẩm cần tìm " />
+            <TextInput onPressIn={search} placeholder="Sản phẩm cần tìm " />
           </TouchableOpacity>
 
 
@@ -73,10 +73,10 @@ const HomeScreen = ({navigation}) => {
       </View>
       <View style={styles.body}>
         <ScrollView>
-          <View style={{flex: 1, marginBottom: 10}}>
+          <View style={{ flex: 1, marginBottom: 10 }}>
             <Panner />
           </View>
-          <View style={{flex: 1, marginBottom: 10}}>
+          <View style={{ flex: 1, marginBottom: 10 }}>
             <Menu />
           </View>
           <View
