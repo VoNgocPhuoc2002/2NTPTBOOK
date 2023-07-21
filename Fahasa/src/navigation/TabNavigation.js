@@ -7,6 +7,8 @@ import AuthStack from "./AuthStack";
 import SuggestScreen from "../screen/suggest/SuggestScreen";
 import Notification from "../screen/notification/Notification";
 import ScreenCart from "../screen/cart/screenCart/ScreenCart";
+import ScreenOrder2 from"../screen/order/order2/ScreenOrder2";
+import ScreenOrder3 from"../screen/order/order3/ScreenOrder3";
 
 
 const Tab = createBottomTabNavigator();
@@ -105,7 +107,9 @@ const TabNavigation = () => {
           ),
         }}
       />
-      <Tab.Screen
+      
+
+<Tab.Screen
         name="Giỏ hàng"
         component={ScreenCart}
         options={{

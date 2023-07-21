@@ -19,7 +19,7 @@ const SearchScreen = () => {
   const searchProducts = async () => {
     try {
       const response = await axios.get(
-        `http://192.168.0.116:3000/product/search?keyword=${keyword}`,
+        `http://192.168.102.7:3000/product/search?keyword=${keyword}`,
       );
       const products = response.data;
       setResults(products);
