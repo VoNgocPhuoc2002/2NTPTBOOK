@@ -27,6 +27,12 @@ const Styles = StyleSheet.create({
   groupBody: {
     backgroundColor: '#DDDDDD',
   },
+  viewGroupCheckBox:{
+    flexDirection:"row",
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginEnd:10,
+  },
   viewCheckBox: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -45,8 +51,12 @@ const Styles = StyleSheet.create({
     justifyContent: 'space-between',
 
   },
+  btnRemove:{
+    backgroundColor:"blue"
+  },
   viewText: {
-    width:"75%"
+    width:"75%",
+    paddingStart:10,
   },
   imgItem: {
     width: 110,
@@ -69,13 +79,22 @@ const Styles = StyleSheet.create({
     color: '#FF9900',
     fontWeight: 'bold',
   },
+  viewGroupQuantity:{
+    flexDirection:"row",
+    backgroundColor:"green",
+    justifyContent:"space-between",
+    paddingEnd:75,
+    paddingStart:10,
+  },
   viewQuantity: {
     flexDirection: 'row',
   },
-  btnTru: {
+  btnMinus: {
     backgroundColor: '#DDDDDD',
     alignItems: 'center',
     justifyContent: 'center',
+    width:40,
+    height:40
   },
   imgTru: {
     width: 20,
@@ -89,10 +108,12 @@ const Styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  btnCong: {
+  btnPlus: {
     backgroundColor: '#DDDDDD',
     alignItems: 'center',
     justifyContent: 'center',
+    width:40,
+    height:40
   },
   imgCong: {
     width: 20,

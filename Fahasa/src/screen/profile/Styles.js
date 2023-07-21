@@ -5,6 +5,9 @@ const Styles = StyleSheet.create({
       flex: 1,
   
   },
+  scrollViewContainer:{
+    flexGrow:1,
+  },
   header:{
       flex:1,
       backgroundColor:"blue"

@@ -9,6 +9,9 @@ const Styles = StyleSheet.create({
         backgroundColor:Constants.COLOR.DARKRED,
         justifyContent: 'space-around',
     },
+    scrollViewContainer:{
+        flexGrow:1,
+    },
     groupSearch:{
         flexDirection:"row",
         alignItems:"center",

@@ -31,7 +31,8 @@ const updateCartItem = async (req, res) => {
 //xóa 1 sản phẩm trong giỏ hàng
 const removeCartItem = async (req, res) => {
   try {
-    const { userId, productId } = req.body;
+    const { userId } = req.params;
+    const { productId } = req.body;
     const updatedCart = await cartService.removeCartItem(userId, productId);
     res.json(updatedCart);
     console.log(updatedCart);
