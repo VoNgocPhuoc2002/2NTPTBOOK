@@ -113,25 +113,25 @@ const ProfileScreen = ({navigation}) => {
           </View>
           <View style={styles.viewProfile}>
             <View style={{marginEnd: 20}}>
-              <Text style={styles.textProfile}>Email</Text>
+              <Text style={styles.textProfile}>Năm sinh</Text>
             </View>
             <Text style={styles.textProfile}>{dateofbirth}</Text>
           </View>
           <View style={styles.viewProfile}>
             <View style={{marginEnd: 20}}>
-              <Text style={styles.textProfile}>Email</Text>
+              <Text style={styles.textProfile}>Giới tính</Text>
             </View>
             <Text style={styles.textProfile}>{gender}</Text>
           </View>
           <View style={styles.viewProfile}>
             <View style={{marginEnd: 20}}>
-              <Text style={styles.textProfile}>Email</Text>
+              <Text style={styles.textProfile}>Ngày tháng sinh</Text>
             </View>
             <Text style={styles.textProfile}>{country}</Text>
           </View>
           <View style={styles.viewProfile}>
             <View style={{marginEnd: 20}}>
-              <Text style={styles.textProfile}>Email</Text>
+              <Text style={styles.textProfile}>Sô điện thoại</Text>
             </View>
             <Text style={styles.textProfile}>{mobile}</Text>
           </View>
