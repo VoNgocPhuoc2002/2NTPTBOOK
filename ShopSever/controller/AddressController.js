@@ -2,7 +2,7 @@ const addressService = require('../service/addressService');
 
 // Thêm địa chỉ mới cho người dùng
 const addOrUpdateUserAddress = async (req, res) => {
-    const { addressId, addressLine1, addressLine2, isDefault } = req.body;
+    const { addressId, addressLine1, addressLine2,addressLine3,addressLine4, isDefault } = req.body;
     const { userId } = req.params;
     try {
         const address = await addressService.addOrUpdateUserAddress(
@@ -10,6 +10,8 @@ const addOrUpdateUserAddress = async (req, res) => {
             addressId,
             addressLine1,
             addressLine2,
+            addressLine3,
+            addressLine4,
             isDefault
         );
         res.status(200).json({ message: 'Address added or updated successfully', address });
@@ -35,7 +37,7 @@ const getUserAddresses = async (req, res) => {
 
 // Cập nhật địa chỉ mặc định của người dùng
 const updateDefaultAddress = async (req, res) => {
-    const { addressId, addressLine1, addressLine2, isDefault } = req.body;
+    const { addressId, addressLine1, addressLine2,addressLine3, addressLine4, isDefault } = req.body;
     const { userId } = req.params;
     try {
         const address = await addressService.updateDefaultAddress(
@@ -43,6 +45,8 @@ const updateDefaultAddress = async (req, res) => {
             addressId,
             addressLine1,
             addressLine2,
+            addressLine3,
+            addressLine4,
             isDefault
         );
         res.status(200).json({ message: 'Default address updated successfully', address });

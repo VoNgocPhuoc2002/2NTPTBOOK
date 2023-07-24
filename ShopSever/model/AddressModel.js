@@ -8,6 +8,8 @@ const AddressSchema = new Schema(
         addressId: { type: ObjectId, ref: 'address' },
         addressLine1: { type: String, required: true },
         addressLine2: { type: String, required: true },
+        addressLine3: { type: String, required: true },
+        addressLine4: { type: String, required: true },
         isDefault: { type: Boolean, default: false },
     },
     {

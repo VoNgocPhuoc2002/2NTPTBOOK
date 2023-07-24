@@ -2,7 +2,7 @@ const AddressModel = require('../model/AddressModel');
 const mongoose = require('mongoose');
 
 // Thêm địa chỉ mới cho người dùng
-const addOrUpdateUserAddress = async (userId, addressId, addressLine1, addressLine2, isDefault) => {
+const addOrUpdateUserAddress = async (userId, addressId, addressLine1, addressLine2,addressLine3,addressLine4, isDefault) => {
   try {
     // Bước 1: Cập nhật các địa chỉ hiện có có isDefault: true thành isDefault: false
     await AddressModel.updateMany({ userId, isDefault: true }, { isDefault: false });
@@ -12,6 +12,8 @@ const addOrUpdateUserAddress = async (userId, addressId, addressLine1, addressLi
       addressId: new mongoose.Types.ObjectId(),
       addressLine1,
       addressLine2,
+      addressLine3,
+      addressLine4,
       isDefault,
     });
     return address;
@@ -33,9 +35,9 @@ const getUserAddresses = async (userId) => {
 };
 
 // Cập nhật địa chỉ mặc định của người dùng
-const updateDefaultAddress = async (userId, addressId, addressLine1, addressLine2, isDefault) => {
+const updateDefaultAddress = async (userId, addressId, addressLine1, addressLine2,addressLine3,addressLine4, isDefault) => {
   try {
-    const updateFields = { addressLine1, addressLine2 };
+    const updateFields = { addressLine1, addressLine2,addressLine3,addressLine4 };
     if (isDefault !== undefined) {
       updateFields.isDefault = isDefault;
       if (isDefault) {
