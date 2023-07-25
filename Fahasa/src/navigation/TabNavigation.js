@@ -9,6 +9,8 @@ import Notification from "../screen/notification/Notification";
 import ScreenCart from "../screen/cart/screenCart/ScreenCart";
 import ScreenOrder2 from"../screen/order/order2/ScreenOrder2";
 import ScreenOrder3 from"../screen/order/order3/ScreenOrder3";
+import HistoryScreen from "../screen/profile/History/HistoryScreen";
+import DetailOrder from "../screen/profile/History/detailOrders/DetailOrder";
 
 
 const Tab = createBottomTabNavigator();
@@ -107,6 +109,51 @@ const TabNavigation = () => {
           ),
         }}
       />
+
+<Tab.Screen
+        name="lịch sử"
+        component={HistoryScreen}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ focused }) => (
+            <View style={{ alignItems: "center", justifyContent: "center" }}>
+              <Image
+                source={require("../assets/IconSearch.png")}
+                resizeMode="contain"
+                style={{
+                  width: 20,
+                  height: 20,
+                  tintColor: focused
+                    ? Constants.COLOR.DARKRED
+                    : Constants.COLOR.BLACK,
+                }}
+              />
+            </View>
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="ádasd"
+        component={DetailOrder}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ focused }) => (
+            <View style={{ alignItems: "center", justifyContent: "center" }}>
+              <Image
+                source={require("../assets/IconSearch.png")}
+                resizeMode="contain"
+                style={{
+                  width: 20,
+                  height: 20,
+                  tintColor: focused
+                    ? Constants.COLOR.DARKRED
+                    : Constants.COLOR.BLACK,
+                }}
+              />
+            </View>
+          ),
+        }}
+      />
       
 
 <Tab.Screen
@@ -131,6 +178,7 @@ const TabNavigation = () => {
           ),
         }}
       />
+      
     
     </Tab.Navigator>
   );
