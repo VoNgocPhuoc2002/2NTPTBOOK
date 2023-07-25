@@ -12,7 +12,7 @@ import ScreenCart from "../screen/cart/screenCart/ScreenCart";
 import ScreenOrder1 from "../screen/order/order1/ScreenOrder1";
 import ScreenOrder2 from "../screen/order/order2/ScreenOrder2";
 import ScreenOrder3 from "../screen/order/order3/ScreenOrder3";
-
+import ScreenOrderDetail from "../screen/order/orderDetails/ScreenOrderDetail";
 const Stack = createNativeStackNavigator();
 
 const AppStack = () => {
@@ -74,7 +74,11 @@ const AppStack = () => {
         component={ScreenOrder3}
         options={{ headerShown: false }}
       />
-     
+      <Stack.Screen
+        name="ScreenOrderDetail"
+        component={ScreenOrderDetail}
+        options={{ headerShown: false }}
+      />
     
     
    
