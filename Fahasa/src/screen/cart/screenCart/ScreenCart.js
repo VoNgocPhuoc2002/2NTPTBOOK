@@ -7,7 +7,7 @@ import {
   TextInput,
   ScrollView,
   FlatList,
-  RefreshControl
+  RefreshControl,
 } from 'react-native';
 import AxiosIntance from '../../../ultil/AxiosIntance';
 import {getUserId} from '../../../ultil/GetUserId';
@@ -27,7 +27,9 @@ const ScreenCart = ({navigation}) => {
   const fetchShowCart = async () => {
     const fetchedUserId = await getUserId();
     if (fetchedUserId) {
-      const response = await AxiosIntance().get(`cart/${fetchedUserId}/getcartitems`);
+      const response = await AxiosIntance().get(
+        `cart/${fetchedUserId}/getcartitems`,
+      );
       setData(response.products);
     }
   };
@@ -71,7 +73,7 @@ const ScreenCart = ({navigation}) => {
       setSelectedItems({});
     }
   };
-  const removeCartItem = async (productId) => {
+  const removeCartItem = async productId => {
     const userId = await getUserId();
     try {
       await AxiosIntance().delete(`cart/${userId}/removecartitem`, {
@@ -98,35 +100,40 @@ const ScreenCart = ({navigation}) => {
     }
   };
 
-  // tăng giảm số lượng sản phẩm 
-  const increaseQuantity = async (productId) => {
+  // tăng giảm số lượng sản phẩm
+  const increaseQuantity = async productId => {
     try {
       const userId = await getUserId();
-      const response = await AxiosIntance().post(`cart/${userId}/updatecartitem`, {
-        productId: productId,
-        quantity: 1 , // You can adjust the quantity increment as needed (e.g., 1, 5, etc.)
-      });
+      const response = await AxiosIntance().post(
+        `cart/${userId}/updatecartitem`,
+        {
+          productId: productId,
+          quantity: 1, // You can adjust the quantity increment as needed (e.g., 1, 5, etc.)
+        },
+      );
       // Refresh the cart after updating the quantity
       fetchShowCart();
     } catch (error) {
       console.error('Error updating cart item quantity', error);
     }
   };
-  
-  const decreaseQuantity = async (productId) => {
+
+  const decreaseQuantity = async productId => {
     try {
       const userId = await getUserId();
-      const response = await AxiosIntance().post(`cart/${userId}/updatecartitem`, {
-        productId: productId,
-        quantity: -1, // To decrease, use a negative value (e.g., -1, -5, etc.)
-      });
+      const response = await AxiosIntance().post(
+        `cart/${userId}/updatecartitem`,
+        {
+          productId: productId,
+          quantity: -1, // To decrease, use a negative value (e.g., -1, -5, etc.)
+        },
+      );
       // Refresh the cart after updating the quantity
       fetchShowCart();
     } catch (error) {
       console.error('Error updating cart item quantity', error);
     }
   };
- 
 
   const calculateTotalPrice = () => {
     let totalPrice = 0;
@@ -138,61 +145,63 @@ const ScreenCart = ({navigation}) => {
     return totalPrice;
   };
 
-  
+  const handlePay = () => {
+    navigation.navigate('ScreenOrder1');
+  };
+
   const renderItem = ({item}) => {
     const isSelected = selectedItems[item._id] || false;
-    const handleRemoveItem = (productId) => {
+
+    const handleRemoveItem = productId => {
       // Call the removeCartItem function with the product ID of the item to be removed
       removeCartItem(productId);
-      console.log("productsId: ",productId)
+      console.log('productsId: ', productId);
     };
     return (
       <View style={styles.boxItem}>
         <View style={styles.item}>
           <View
-            style={{backgroundColor: 'blue', width: 50, alignItems: 'center'}}>
+            style={{ width: 50, alignItems: 'center'}}>
             <CheckBox
               checked={isSelected}
               onPress={() => handleCheckbox(item._id)}
-            
             />
           </View>
-          <View style={{backgroundColor: 'green'}}>
-          <Image style={styles.imgItem} source={{uri: item.image}} />
-        </View>
-        <View>
-          <View style={styles.viewText}>
-            <Text style={styles.textTitle}>
-            {item.name.length > 50
-              ? item.name.substring(0, 60) + '...'
-              : item.name}
-            </Text>
-            <Text style={styles.textPrice}>{item.price}</Text>
+          <View style={{backgroundColor: 'white',width:140,alignItems:"center",justifyContent:"center"}}>
+            <Image style={styles.imgItem} source={{uri: item.image}} />
           </View>
-          <View style={styles.viewGroupQuantity}>
-            <View style={styles.viewQuantity}>
-            <TouchableOpacity style={styles.btnMinus} onPress={() => decreaseQuantity(item.productId)} >
-           
-           <IconEntypo name="minus" size={25} color="black" />
-
-          </TouchableOpacity>
-          <View style={styles.textQuantity}>
-            <TextInput style={styles.textip}>{item.quantity}</TextInput>
-          </View>
-          <TouchableOpacity style={styles.btnPlus} onPress={() => increaseQuantity(item.productId)}>
-           <IconEntypo name="plus" size={25} color="black" />
-            
-          </TouchableOpacity>
+          <View>
+            <View style={styles.viewText}>
+              <Text style={styles.textTitle}>
+                {item.name.length > 50
+                  ? item.name.substring(0, 60) + '...'
+                  : item.name}
+              </Text>
+              <Text style={styles.textPrice}>{item.price}</Text>
             </View>
-           
-            <View>
-            <TouchableOpacity style={styles.btnRemove} onPress={() => handleRemoveItem(item.productId)} >
-                <IconAntDesign name="delete" size={25} color="black" />
-
-            </TouchableOpacity>
+            <View style={styles.viewGroupQuantity}>
+              <View style={styles.viewQuantity}>
+                <TouchableOpacity
+                  style={styles.btnMinus}
+                  onPress={() => decreaseQuantity(item.productId)}>
+                  <IconEntypo name="minus" size={25} color="black" />
+                </TouchableOpacity>
+                <View style={styles.textQuantity}>
+                  <TextInput style={styles.textip}>{item.quantity}</TextInput>
+                </View>
+                <TouchableOpacity
+                  style={styles.btnPlus}
+                  onPress={() => increaseQuantity(item.productId)}>
+                  <IconEntypo name="plus" size={25} color="black" />
+                </TouchableOpacity>
+              </View>
+                <TouchableOpacity
+                  style={styles.btnRemove}
+                  onPress={() => handleRemoveItem(item.productId)}>
+                  <IconAntDesign name="delete" size={30} color="black" />
+                </TouchableOpacity>
             </View>
           </View>
-        </View>
         </View>
       </View>
     );
@@ -204,28 +213,22 @@ const ScreenCart = ({navigation}) => {
       </View>
       <View style={styles.body}>
         <ScrollView
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={onRefresh}
-          />
-        }>
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }>
           <View style={styles.groupBody}>
             <View style={styles.viewGroupCheckBox}>
               <View style={styles.viewCheckBox}>
-              <CheckBox checked={checkAll} onPress={handleSelectAll} />
-              <Text>Chọn tất cả sản phẩm</Text>
+                <CheckBox checked={checkAll} onPress={handleSelectAll} />
+                <Text>Chọn tất cả sản phẩm</Text>
               </View>
-             <View>
-              <TouchableOpacity onPress={removeAllItem}>
-                <IconAntDesign name="delete" size={25} color="black" />
-
-              </TouchableOpacity>
-
-             </View>
-
+              <View>
+                <TouchableOpacity onPress={removeAllItem}>
+                  <IconAntDesign name="delete" size={25} color="black" />
+                </TouchableOpacity>
+              </View>
             </View>
-            <View style={{}}>
+            <View style={{marginStart:10,marginEnd:10,}}>
               <FlatList
                 data={data}
                 renderItem={renderItem}
@@ -241,7 +244,7 @@ const ScreenCart = ({navigation}) => {
           <Text style={styles.sumPrice}> {calculateTotalPrice()}đ</Text>
         </View>
         <View>
-          <TouchableOpacity style={styles.btnThanhToan}>
+          <TouchableOpacity style={styles.btnThanhToan} onPress={handlePay}>
             <Text style={styles.textThanhToan}>Thanh toán</Text>
           </TouchableOpacity>
         </View>

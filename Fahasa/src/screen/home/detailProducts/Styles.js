@@ -38,6 +38,16 @@ imageProducts:{
   width:"90%",
   height:"90%"
 },
+viewDrawer:{
+  position:"absolute",
+  backgroundColor:Constants.COLOR.BLUE,
+  width:100,
+  top:20,
+  },
+textDrawer:{
+  fontSize:16,
+  fontWeight:"600",
+},
 viewNameProducts:{
   paddingStart:20,
   width:"100%",

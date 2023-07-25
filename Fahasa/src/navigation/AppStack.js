@@ -9,6 +9,10 @@ import ListProducts from "../screen/home/listProducts/ListProducts";
 import DetailProducts from "../screen/home/detailProducts/DetailProducts";
 import SearchScreen from "../screen/home/search/SearchScreen";
 import ScreenCart from "../screen/cart/screenCart/ScreenCart";
+import ScreenOrder1 from "../screen/order/order1/ScreenOrder1";
+import ScreenOrder2 from "../screen/order/order2/ScreenOrder2";
+import ScreenOrder3 from "../screen/order/order3/ScreenOrder3";
+
 const Stack = createNativeStackNavigator();
 
 const AppStack = () => {
@@ -53,6 +57,21 @@ const AppStack = () => {
           <Stack.Screen
         name="ScreenCart"
         component={ScreenCart}
+        options={{ headerShown: false }}
+      />
+         <Stack.Screen
+        name="ScreenOrder1"
+        component={ScreenOrder1}
+        options={{ headerShown: false }}
+      />    
+      <Stack.Screen
+        name="ScreenOrder2"
+        component={ScreenOrder2}
+        options={{ headerShown: false }}
+      />    
+      <Stack.Screen
+        name="ScreenOrder3"
+        component={ScreenOrder3}
         options={{ headerShown: false }}
       />
      

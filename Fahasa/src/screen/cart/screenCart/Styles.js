@@ -31,36 +31,34 @@ const Styles = StyleSheet.create({
     flexDirection:"row",
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginEnd:10,
+    backgroundColor:Constants.COLOR.WHITE,
+    paddingEnd:10
   },
   viewCheckBox: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'blue',
   },
   boxItem: {
     borderRadius: 4,
     backgroundColor: 'white',
     width:"100%",
-    marginStart:10,
-    marginBottom:10,    
+    marginBottom:10, 
 
   },
   item: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-
   },
   btnRemove:{
-    backgroundColor:"blue"
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   viewText: {
-    width:"75%",
+    width:"70%",
     paddingStart:10,
   },
   imgItem: {
-    width: 110,
-    height: 120,
+    width: 120,
+    height: 130,
   },
   textTitle: {
     fontSize: 16,
@@ -81,20 +79,20 @@ const Styles = StyleSheet.create({
   },
   viewGroupQuantity:{
     flexDirection:"row",
-    backgroundColor:"green",
-    justifyContent:"space-between",
-    paddingEnd:75,
-    paddingStart:10,
+    height:60,
   },
   viewQuantity: {
     flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent:"center",
+    marginEnd:50,
   },
   btnMinus: {
     backgroundColor: '#DDDDDD',
     alignItems: 'center',
     justifyContent: 'center',
     width:40,
-    height:40
+    height:50
   },
   imgTru: {
     width: 20,
@@ -102,18 +100,21 @@ const Styles = StyleSheet.create({
   },
   textip: {
     fontSize: 16,
+    fontWeight: 'bold',
+  
   },
   textQuantity: {
-    backgroundColor: 'white',
+    width:50,
     alignItems: 'center',
-    justifyContent: 'center',
+    height:40,
+
   },
   btnPlus: {
     backgroundColor: '#DDDDDD',
     alignItems: 'center',
     justifyContent: 'center',
     width:40,
-    height:40
+    height:50
   },
   imgCong: {
     width: 20,
@@ -126,12 +127,13 @@ const Styles = StyleSheet.create({
 
   // footer
   footer: {
-    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     backgroundColor: 'white',
     width: '100%',
     alignItems: 'center',
+    paddingStart:20,
+    paddingEnd:20,
   },
   viewThanhTien: {
     flexDirection: 'column',

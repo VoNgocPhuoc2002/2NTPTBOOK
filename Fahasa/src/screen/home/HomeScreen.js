@@ -6,7 +6,8 @@ import {
   TouchableOpacity,
   TextInput,
   ScrollView,
-  RefreshControl
+  RefreshControl,
+  ToastAndroid
 } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import styles from './Styles';
@@ -48,6 +49,8 @@ const HomeScreen = ({ navigation }) => {
   useEffect(() => {
     fetchProductsData(); // Call the fetchUserData function
   }, []);
+
+
   const search = () => {
     navigation.navigate("SearchScreen")
   }
@@ -65,8 +68,11 @@ const HomeScreen = ({ navigation }) => {
           />
         </View>
         <View style={styles.groupSearch}>
-          <View>
+          <TouchableOpacity>
             <IconFeather name="grid" size={25} color="white" />
+
+          </TouchableOpacity>
+          <View>
           </View>
           <TouchableOpacity style={styles.inputSearch} onPress={search}>
 

@@ -10,7 +10,18 @@ const Styles = StyleSheet.create({
     color: Constants.COLOR.BLACK,
     margin: 10
   },
-  
+  titleScreen:{
+    backgroundColor:Constants.COLOR.DARKRED,
+    width:"100%",
+    height:50,
+    alignItems: "center",
+    justifyContent:"center",
+},
+textTitleScreen:{
+    fontSize:20,
+    fontWeight:"bold",
+    color:Constants.COLOR.WHITE,
+},
   listContainer: {
     padding: 16,
   },

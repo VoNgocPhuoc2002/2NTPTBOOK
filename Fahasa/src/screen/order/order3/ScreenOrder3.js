@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, SafeAreaView, ScrollView, FlatList, Image, Touc
 import React from 'react'
 import styles from './Styles';
 import { FlashList } from '@shopify/flash-list';
+import MenuOrder from '../MenuOrder';
 
 const ScreenOrder3 = () => {
   const data = [
@@ -23,6 +24,7 @@ const ScreenOrder3 = () => {
   ];
   const renderItem = ({ item }) => (
     <View style={styles.itemContainer}>
+     
       <View style={styles.item_flex}>
         <Image source={item.image} style={styles.image} />
         <View>
@@ -37,9 +39,14 @@ const ScreenOrder3 = () => {
     <SafeAreaView>
       <ScrollView>
         <View style={styles.container}>
+        <View style={styles.titleScreen}>
+          <Text style={styles.textTitleScreen}>
+              Kiểm tra lại đơn hàng
+          </Text>
+      </View>
           <View>
-            <Text style={styles.PT}>KIỂM TRA LẠI ĐƠN HÀNG</Text>
-          </View>
+        <MenuOrder selectedType={3}/>
+      </View>
 
           <View style={styles.DT}>
             {data.map((item) => (
