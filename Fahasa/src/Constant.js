@@ -10,7 +10,7 @@ export const Constants = {
        ORANGE:"#f19f31",
        BLUE:"#2980e9",
        GREEN:"#27ba2b",
-
+       GRAY: "#DDDDDD"
     },
    };
    

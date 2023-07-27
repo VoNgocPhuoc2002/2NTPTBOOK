@@ -4,7 +4,10 @@ import styles from './Styles';
 import { FlashList } from '@shopify/flash-list';
 import MenuOrder from '../MenuOrder';
 
-const ScreenOrder3 = () => {
+const ScreenOrder3 = ({navigation}) => {
+  const handlePayOrderDetail = () => {
+    navigation.navigate('ScreenOrderDetail',);
+  };
   const data = [
     {
       id: '1',
@@ -67,7 +70,7 @@ const ScreenOrder3 = () => {
           </View>
 
           <View style={styles.TT}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={handlePayOrderDetail}>
               <Text style={styles.TT_Text}>Thanh toán</Text>
             </TouchableOpacity>
           </View>
