@@ -58,6 +58,9 @@ const ProfileScreen = ({navigation}) => {
   const handleEditProfile = ()=>{
     navigation.navigate("EditProfile")
   }
+  const tab_history = () => {
+    navigation.navigate("HistoryScreen")
+  }
  
   return (
     <SafeAreaView style={styles.container}>
@@ -188,7 +191,7 @@ const ProfileScreen = ({navigation}) => {
         </TouchableOpacity>
         <View style={styles.lineFull}></View>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={tab_history}>
           <View style={styles.groupUpdateProfile}>
             <View style={styles.rightUpdateProfile}>
               <IconIonicons style={{marginEnd:10,}} name="person-outline" size={25} color="black" />
