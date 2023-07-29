@@ -3,6 +3,7 @@ import React, {useState} from 'react'
 import styles from './Styles'
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import { Constants } from '../../../Constant'
+import { FlashList } from '@shopify/flash-list';
 const ScreenOrderDetail = () => {
 
     const data = [
@@ -72,7 +73,7 @@ const ScreenOrderDetail = () => {
             </View>
             <View style={styles.listProduct}>
                 <Text style={styles.textProduct}>Sản Phẩm</Text>
-                <FlatList
+                <FlashList
                     data={data}
                     renderItem={renderItem}
                     keyExtractor={item => item._id}

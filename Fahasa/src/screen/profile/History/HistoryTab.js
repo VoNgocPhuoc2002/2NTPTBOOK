@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native'
 
 
 
-const NameList = ({ navigation }) => {
+const HistoryTab = ({ navigation }) => {
 
     const namesData = [
         // { id: '1', name: 'Alice' },
@@ -36,9 +36,9 @@ const NameList = ({ navigation }) => {
 
    
 
-    // const handleNavigate = () => {
-    //     navigation.navigate('DetailOrder'); // Mở màn hình 'DetailOrder' đang bị lỗi
-    //   };
+    const handleNavigate = () => {
+        navigation.navigate('DetailOrder'); // Mở màn hình 'DetailOrder' đang bị lỗi
+      };
 
     const renderTabItem = ({ item }) => {
         const isSelected = item.id === selectedTab;
@@ -46,10 +46,8 @@ const NameList = ({ navigation }) => {
         return (
             <TouchableOpacity
                 style={[styles.tabItem, isSelected && styles.tabItemSelected]}
-                onPress={() => setSelectedTab(item.id)}
-            >
-
-                <Text style={{ color: isSelected ? 'orange' : 'black', fontSize: 20, fontWeight: 'bold' }}>{item.title}</Text>
+                onPress={() => setSelectedTab(item.id)}>
+                <Text style={{ color: isSelected ? 'orange' : 'black', fontSize: 18, fontWeight: 'bold' }}>{item.title}</Text>
             </TouchableOpacity>
         );
     };
@@ -104,4 +102,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default NameList;
+export default HistoryTab;

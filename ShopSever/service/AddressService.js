@@ -1,5 +1,6 @@
 const AddressModel = require('../model/AddressModel');
 const mongoose = require('mongoose');
+const UserModel = require('../model/UserModel');
 
 // Thêm địa chỉ mới cho người dùng
 const addOrUpdateUserAddress = async (userId, addressId, addressLine1, addressLine2,addressLine3,addressLine4, isDefault) => {
@@ -16,20 +17,40 @@ const addOrUpdateUserAddress = async (userId, addressId, addressLine1, addressLi
       addressLine4,
       isDefault,
     });
-    return address;
+    const user = await UserModel.findById(userId, 'name mobile');
+
+    // Combine the user information with the address details and return it
+    const addressWithUser = {
+      user: {
+        name: user.name,
+        mobile: user.mobile,
+      },
+      address: address,
+    };
+
+    return addressWithUser;
   } catch (error) {
     
     throw new Error(error.message);
   }
 };
 
-
-
 // Lấy danh sách địa chỉ của người dùng
 const getUserAddresses = async (userId) => {
   try {
-    const addresses = await AddressModel.find({ userId });
-    return addresses;
+    const address = await AddressModel.find({ userId });
+
+    const user = await UserModel.findById(userId, 'name mobile');
+
+    const addressWithUser = {
+      user: {
+        name: user.name,
+        mobile: user.mobile,
+      },
+      address: address,
+    };
+
+    return addressWithUser;
   } catch (error) {
     throw new Error(error.message);
   }

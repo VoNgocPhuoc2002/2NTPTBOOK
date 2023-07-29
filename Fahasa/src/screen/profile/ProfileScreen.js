@@ -59,7 +59,7 @@ const ProfileScreen = ({navigation}) => {
     navigation.navigate("EditProfile")
   }
   const tab_history = () => {
-    navigation.navigate("HistoryScreen")
+    navigation.navigate("HistoryTab")
   }
  
   return (

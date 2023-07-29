@@ -18,7 +18,7 @@ const MenuOrder = ({selectedType}) => {
             <IconAntDesign
               name="check"
               size={20}
-              color={Constants.COLOR.BLACK}
+              color={Constants.COLOR.WHITE}
             />
           )}
         </View>
@@ -46,7 +46,7 @@ const MenuOrder = ({selectedType}) => {
             <IconAntDesign
               name="check"
               size={20}
-              color={Constants.COLOR.BLACK}
+              color={Constants.COLOR.WHITE}
             />
           )}
         </View>
@@ -76,10 +76,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     paddingTop: 15,
     paddingBottom: 15,
+    backgroundColor:Constants.COLOR.WHITE,
   },
   menuItem: {
     justifyContent: 'center',
     alignItems: 'center',
+
   },
   icon1: {},
   line: {
@@ -95,14 +97,14 @@ const styles = StyleSheet.create({
     backgroundColor: Constants.COLOR.GREEN,
     position: 'relative',
     marginTop: 15,
+
   },
   viewCricle: {
-    width: 30,
-    height: 30,
-    borderWidth: 1,
+    width: 35,
+    height: 35,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 15,
+    borderRadius: 35/2,
     marginBottom: 10,
   },
 

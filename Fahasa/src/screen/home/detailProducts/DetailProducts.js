@@ -9,12 +9,12 @@ import {
   ToastAndroid,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
-import AxiosIntance from '../../../ultil/AxiosIntance';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import IconEntypo from 'react-native-vector-icons/Entypo';
 import styles from './Styles';
 import {Constants} from '../../../Constant';
 import {getUserId} from '../../../ultil/GetUserId';
+import AxiosIntance from '../../../ultil/AxiosIntance';
 
 const DetailProducts = ({route, navigation}) => {
   const {id} = route.params;
@@ -62,7 +62,6 @@ const DetailProducts = ({route, navigation}) => {
         productId: productId,
         quantity: quantity,
       });
-      // const response = await AxiosIntance().get(`cart/:userId/addtocart`);
       console.log('User Respossnse:', response);
     }
   };

@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useCallback} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {
   View,
   Text,
@@ -16,13 +16,19 @@ import {CheckBox} from 'react-native-elements';
 import {useFocusEffect} from '@react-navigation/native';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import IconEntypo from 'react-native-vector-icons/Entypo';
+import { AppContext } from '../../../ultil/AppContext';
 
 const ScreenCart = ({navigation}) => {
   const [data, setData] = useState([]);
   const [selectedItems, setSelectedItems] = useState({});
   const [checkAll, setCheckAll] = useState(false);
   const [refreshing, setRefreshing] = useState();
+  const {setIsTotalPrice} = useContext(AppContext)
+  const {setSelectedProducts} = useContext(AppContext)
 
+
+  console.log("selectedItems",selectedItems)
+  console.log("data",data)
   // Function to fetch cart items
   const fetchShowCart = async () => {
     const fetchedUserId = await getUserId();
@@ -33,6 +39,7 @@ const ScreenCart = ({navigation}) => {
       setData(response.products);
     }
   };
+
   // Hàm xử lý khi kéo xuống để refresh
   const onRefresh = () => {
     setRefreshing(true);
@@ -67,6 +74,7 @@ const ScreenCart = ({navigation}) => {
         acc[item._id] = true;
         return acc;
       }, {});
+      console.log("allSelected",allSelected)
       setSelectedItems(allSelected);
     } else {
       // If "Select All" is unchecked, clear all selected items
@@ -142,16 +150,37 @@ const ScreenCart = ({navigation}) => {
         totalPrice += item.price * item.quantity;
       }
     }
+    setIsTotalPrice(totalPrice);
+
     return totalPrice;
   };
 
   const handlePay = () => {
-    navigation.navigate('ScreenOrder1');
+    // Tạo một object mới để lưu thông tin các sản phẩm được chọn
+    const selectedProducts = {};
+
+    // Lặp qua các sản phẩm trong data để kiểm tra và lưu thông tin sản phẩm được chọn
+    for (const item of data) {
+      if (selectedItems[item._id]) {
+        selectedProducts[item._id] = {
+          productId: item.productId,
+          name: item.name,
+          price: item.price,
+          quantity: item.quantity,
+        };
+      setSelectedProducts(selectedProducts)
+
+      }
+    }
+    console.log("selectedProducts",selectedProducts)
+
+    // Tiến hành navigation đến ScreenOrder1 và truyền thông tin các sản phẩm được chọn
+    navigation.navigate('ScreenOrder1', { selectedProducts });
   };
 
   const renderItem = ({item}) => {
     const isSelected = selectedItems[item._id] || false;
-
+    console.log("isSelected",isSelected)
     const handleRemoveItem = productId => {
       // Call the removeCartItem function with the product ID of the item to be removed
       removeCartItem(productId);

@@ -94,7 +94,7 @@ const forgotPasswordSMS = async (mobile) => {
     return null;
 };
 
-const get = async (id,   name, dateofbirth, country, mobile, gender) => {
+const get = async (id,name, dateofbirth, country, mobile, gender) => {
     try {
         const user = await UserModel.findById(id,  name, dateofbirth, country, mobile, gender);
         return user;

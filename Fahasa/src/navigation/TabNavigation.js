@@ -88,51 +88,6 @@ const TabNavigation = () => {
         }}
       />
       <Tab.Screen
-        name="Thông báo"
-        component={Notification}
-        options={{
-          headerShown: false,
-          tabBarIcon: ({ focused }) => (
-            <View style={{ alignItems: "center", justifyContent: "center" }}>
-              <Image
-                source={require("../assets/IconSearch.png")}
-                resizeMode="contain"
-                style={{
-                  width: 20,
-                  height: 20,
-                  tintColor: focused
-                    ? Constants.COLOR.DARKRED
-                    : Constants.COLOR.BLACK,
-                }}
-              />
-            </View>
-          ),
-        }}
-      />
-
-<Tab.Screen
-        name="lịch sử"
-        component={HistoryScreen}
-        options={{
-          headerShown: false,
-          tabBarIcon: ({ focused }) => (
-            <View style={{ alignItems: "center", justifyContent: "center" }}>
-              <Image
-                source={require("../assets/IconSearch.png")}
-                resizeMode="contain"
-                style={{
-                  width: 20,
-                  height: 20,
-                  tintColor: focused
-                    ? Constants.COLOR.DARKRED
-                    : Constants.COLOR.BLACK,
-                }}
-              />
-            </View>
-          ),
-        }}
-      />
-      <Tab.Screen
         name="ádasd"
         component={DetailOrder}
         options={{

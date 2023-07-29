@@ -1,92 +1,38 @@
 import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity} from 'react-native'
-import React, {useState} from 'react'
+import React, {useState,useContext} from 'react'
 import styles from "./Styles"
-import { SelectCountry } from 'react-native-element-dropdown';
-import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import IconOcticons from 'react-native-vector-icons/Octicons';
-import IconFeather from 'react-native-vector-icons/Feather';
 import MenuOrder from '../MenuOrder';
-const local_data = [
-  {
-    value: '1',
-    lable: 'Việt Nam',
-    image: {
-      uri: 'https://www.vigcenter.com/public/all/images/default-image.jpg',
-    },
-  },
-  {
-    value: '2',
-    lable: 'Nhật Bản',
-    image: {
-      uri: 'https://www.vigcenter.com/public/all/images/default-image.jpg',
-    },
-  },
-  {
-    value: '3',
-    lable: 'Mỹ',
-    image: {
-      uri: 'https://www.vigcenter.com/public/all/images/default-image.jpg',
-    },
-  },
-  {
-    value: '4',
-    lable: 'Úc',
-    image: {
-      uri: 'https://www.vigcenter.com/public/all/images/default-image.jpg',
-    },
-  },
-  {
-    value: '5',
-    lable: 'Trung Quốc',
-    image: {
-      uri: 'https://www.vigcenter.com/public/all/images/default-image.jpg',
-    },
-  },
-];
+import AxiosIntance from '../../../ultil/AxiosIntance';
+import { AppContext } from '../../../ultil/AppContext';
 
-const city_data = [
-  {
-    value: '1',
-    lable: 'Hồ Chí Minh',
-    image: {
-      uri: 'https://www.vigcenter.com/public/all/images/default-image.jpg',
-    },
-  },
-  {
-    value: '2',
-    lable: 'Hà Nội',
-    image: {
-      uri: 'https://www.vigcenter.com/public/all/images/default-image.jpg',
-    },
-  },
-  {
-    value: '3',
-    lable: 'Bình Định',
-    image: {
-      uri: 'https://www.vigcenter.com/public/all/images/default-image.jpg',
-    },
-  },
-  {
-    value: '4',
-    lable: 'Đà Nẵng',
-    image: {
-      uri: 'https://www.vigcenter.com/public/all/images/default-image.jpg',
-    },
-  },
-  {
-    value: '5',
-    lable: 'Cà Mau',
-    image: {
-      uri: 'https://www.vigcenter.com/public/all/images/default-image.jpg',
-    },
-  },
-];
 
 const ScreenOrder1 = ({navigation}) => {
   const [country, setCountry] = useState('1');
-  const handlePay2 =()=>{
-    navigation.navigate("ScreenOrder2")
-  }
+  const [addressLine1, setAddressLine1] = useState('');
+  const [addressLine2, setAddressLine2] = useState('');
+  const [addressLine3, setAddressLine3] = useState('');
+  const [addressLine4, setAddressLine4] = useState('');
+  const {setIsAddressId} = useContext(AppContext)
+
+
+
+  const handleCreaateAddress = async () => {
+    try {
+      const response = await AxiosIntance().post('address/64a460e8b173f5c31d4f16f1/addUserAddress', {
+        addressLine1: addressLine1,
+        addressLine2: addressLine2,
+        addressLine3: addressLine3,
+        addressLine4: addressLine4,
+    });
+      setIsAddressId(response.address.address.addressId)
+      navigation.navigate("ScreenOrder2")
+
+      console.log(response);
+    } catch (error) {
+      console.log('Error:', error);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.titleScreen}>
@@ -102,76 +48,20 @@ const ScreenOrder1 = ({navigation}) => {
         <Text style={styles.textTitle}>Địa chỉ giao Hàng</Text>
       </View>
       <View style={styles.viewAllTextIp}>
-        <View style={styles.viewName}>
-          <Text style={styles.textName}> Họ và tên người nhận</Text>
+      <View style={styles.viewName}>
+          <Text style={styles.textName}></Text>
           <TextInput
              style={styles.textipName}  
-             placeholder="Nhập họ và tên người nhận"
+             placeholder="Nhập tỉnh /thành phố"
+             onChangeText={setAddressLine1}
           />
         </View>
-
-        <View style={styles.viewName}>
-          <Text style={styles.textName}> Số điện thoại</Text>
-          <TextInput
-             style={styles.textipName}  
-             placeholder="Ví dụ: 0978123xxx (10 ký tự số)"
-          />
-        </View>
-
-        <View style={styles.viewName}>
-          <Text style={styles.textName}> Quốc gia</Text>
-          <SelectCountry
-            style={styles.dropdown}
-            selectedTextStyle={styles.selectedTextStyle}
-            placeholderStyle={styles.placeholderStyle}
-            imageStyle={styles.imageStyle}
-            inputSearchStyle={styles.inputSearchStyle}
-            iconStyle={styles.iconStyle}
-            search
-            maxHeight={200}
-            value={country}
-            data={local_data}
-            valueField="value"
-            labelField="lable"
-            imageField="image"
-            placeholder="Chọn Quốc gia"
-            searchPlaceholder="Search..."
-            onChange={e => {
-              setCountry(e.value);
-            }}
-          />
-        
-        </View>
-
-        <View style={styles.viewName}>
-          <Text style={styles.textName}> Tỉnh / Thành phố</Text>
-          <SelectCountry
-            style={styles.dropdown}
-            selectedTextStyle={styles.selectedTextStyle}
-            placeholderStyle={styles.placeholderStyle}
-            imageStyle={styles.imageStyle}
-            inputSearchStyle={styles.inputSearchStyle}
-            iconStyle={styles.iconStyle}
-            search
-            maxHeight={200}
-            value={country}
-            data={city_data}
-            valueField="value"
-            labelField="lable"
-            imageField="image"
-            placeholder="Chọn tỉnh/thành phố"
-            searchPlaceholder="Search..."
-            onChange={e => {
-              setCountry(e.value);
-            }}
-          />
-        </View>
-
         <View style={styles.viewName}>
           <Text style={styles.textName}> Quận / Huyện</Text>
           <TextInput
              style={styles.textipName}  
              placeholder="Nhập quận / huyện"
+             onChangeText={setAddressLine2}
           />
         </View>
 
@@ -180,6 +70,7 @@ const ScreenOrder1 = ({navigation}) => {
           <TextInput
              style={styles.textipName}  
              placeholder="Nhập phường / xã"
+             onChangeText={setAddressLine3}
           />
         </View>
 
@@ -188,11 +79,12 @@ const ScreenOrder1 = ({navigation}) => {
           <TextInput
              style={styles.textipName}  
              placeholder="Nhập địa chỉ"
+             onChangeText={setAddressLine4}
           />
         </View>
       </View>
       <View>
-        <TouchableOpacity style={styles.btn} onPress={handlePay2}>
+        <TouchableOpacity style={styles.btn} onPress={handleCreaateAddress}>
           <Text style={styles.textBtn}>Giao đến địa chỉ này</Text>
         </TouchableOpacity>
       </View>

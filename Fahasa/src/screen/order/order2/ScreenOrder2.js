@@ -6,17 +6,21 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useState,useContext} from 'react';
 import styles from './Styles';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import CheckBox from '@react-native-community/checkbox';
 import MenuOrder from '../MenuOrder';
+import { AppContext } from '../../../ultil/AppContext';
 
 const ScreenOrder2 = ({navigation}) => {
+  const {isTotalPrice,setIsTotalPrice} = useContext(AppContext)
   const handlePay2 = () => {
     navigation.navigate('ScreenOrder3',);
   };
+  let priceShip = 19000
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
+  const [pay, setPay] = useState(false);
   return (
     <SafeAreaView style={{flex:1}}>
       <View style={styles.titleScreen}>
@@ -201,8 +205,8 @@ const ScreenOrder2 = ({navigation}) => {
             <View style={styles.checkbox}>
               <CheckBox
                 disabled={false}
-                value={toggleCheckBox}
-                onValueChange={newValue => setToggleCheckBox(newValue)}
+                value={pay}
+                onValueChange={newValue => setPay(newValue)}
               />
               <Image
                 style={{
@@ -264,15 +268,15 @@ const ScreenOrder2 = ({navigation}) => {
           <View style={styles.GTDHbox}>
             <View style={styles.GTDH}>
               <Text style={styles.GTDH_Text1}>Thành Tiền :</Text>
-              <Text style={styles.GTDH_Text1}>99999999999999999 đ</Text>
+              <Text style={styles.GTDH_Text1}>{isTotalPrice} đ</Text>
             </View>
             <View style={styles.GTDH}>
               <Text style={styles.GTDH_Text1}>Phí Vận chuyển :</Text>
-              <Text style={styles.GTDH_Text1}>00000000 đ</Text>
+              <Text style={styles.GTDH_Text1}>{priceShip} đ</Text>
             </View>
             <View style={styles.GTDH}>
               <Text style={styles.GTDH_Text1}>Tổng số tiền :</Text>
-              <Text style={styles.GTDH_Text2}>99999999999 đ</Text>
+              <Text style={styles.GTDH_Text2}>{isTotalPrice+priceShip} đ</Text>
             </View>
           </View>
         </View>

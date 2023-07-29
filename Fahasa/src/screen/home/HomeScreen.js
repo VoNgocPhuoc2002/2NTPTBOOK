@@ -28,16 +28,16 @@ const HomeScreen = ({ navigation }) => {
   // Hàm xử lý khi kéo xuống để refresh
   const onRefresh = () => {
     setRefreshing(true);
-
     // Thực hiện các tác vụ refresh cần thiết ở đây
     // Ví dụ: tải dữ liệu mới, đặt lại trạng thái, vv.
+    fetchProductsData(); // Call the fetchUserData function
 
     // Giả lập tác vụ refresh trong 2 giây
     setTimeout(() => {
       setRefreshing(false);
     }, 2000);
   };
-  fetchProductsData = async () => {
+   const fetchProductsData = async () => {
     try {
       const response = await AxiosIntance().get(`product`);
       console.log('Product Response:', response);

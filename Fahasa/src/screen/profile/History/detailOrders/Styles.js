@@ -49,7 +49,6 @@ const Styles = StyleSheet.create({
     flexDirection: 'row',
   },
   part1_grtext2: {
-
     backgroundColor: '#FFB266',
     borderRadius: 15,
     alignItems: 'center',
