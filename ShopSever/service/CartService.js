@@ -1,21 +1,75 @@
 const cartModel = require('../model/CartModel');
 const productModel = require('../model/ProductModel');
 const mongoose = require('mongoose');
-const { Types } = mongoose;
+const { ObjectId } = mongoose.Types; 
+// const addToCart = async (userId, productId, quantity) => {
+//   try {
+//     // Step 1: Find the product with the given productId
+//     const product = await productModel.findById(productId);
+//     if (!product) {
+//       throw new Error('Product not found');
+//     }
+
+//     // Step 2: Find the cart associated with the given userId
+//     const cart = await cartModel.findOne({ userId });
+
+//     if (cart) {
+//       // Step 3: If the cart exists, check if the product is already in the cart
+//       const existingProduct = cart.products.find(
+//         (p) => p.productId.toString() === productId
+//       );
+
+//       if (existingProduct) {
+//         // Step 4: If the product exists in the cart, update its quantity
+//         existingProduct.quantity += quantity;
+//       } else {
+//         // Step 5: If the product doesn't exist in the cart, add it as a new item
+//         cart.products.push({
+//           productId: productId,
+//           quantity: quantity,
+//           name: product.name,
+//           price: product.price,
+//           image: product.image,
+//         });
+//       }
+
+//       // Step 6: Save the cart with updated or new product information
+//       await cart.save();
+//       return cart; // Return the cart
+//     } else {
+//       // Step 7: If no cart exists for the user, create a new cart
+//       const newCart = new cartModel({
+//         userId: userId,
+//         products: [
+//           {
+//             productId: productId,
+//             quantity: quantity,
+//             name: product.name,
+//             price: product.price,
+//             image: product.image,
+//           },
+//         ],
+//       });
+
+//       // Step 8: Save the new cart
+//       await newCart.save();
+//       return newCart; // Return the newly created cart
+//     }
+//   } catch (error) {
+//     console.log(error);
+//     throw new Error('Error adding to cart: ');
+//   }
+// };
 const addToCart = async (userId, productId, quantity) => {
   try {
     const product = await productModel.findById(productId);
     if (!product) {
       throw new Error('Product not found');
     }
-
     const cart = await cartModel.findOne({ userId });
-
     if (cart) {
-      const existingProduct = cart.products.find(
-        (p) => p.productId.toString() === productId
-      );
-
+      // Kiểm tra xem sản phẩm đã có trong giỏ hàng hay chưa
+      const existingProduct = cart.products.find(p => p.productId.toString() === productId);
       if (existingProduct) {
         existingProduct.quantity += quantity;
       } else {
@@ -27,7 +81,6 @@ const addToCart = async (userId, productId, quantity) => {
           image: product.image,
         });
       }
-
       await cart.save();
       return cart;
     } else {
@@ -43,33 +96,38 @@ const addToCart = async (userId, productId, quantity) => {
           },
         ],
       });
-
       await newCart.save();
       return newCart;
     }
   } catch (error) {
     console.log(error);
-    throw new Error('Error adding to cart: ');
+    throw new Error('Error adding to cart');
   }
 };
 
+
 // const addToCart = async (userId, productId, quantity) => {
 //   try {
+//     // Find the product with the given productId
 //     const product = await productModel.findById(productId);
 //     if (!product) {
 //       throw new Error('Product not found');
 //     }
 
-//     const cart = await cartModel.findOne({ userId });
+//     // Find the cart associated with the given userId
+//     let cart = await cartModel.findOne({ userId });
 
 //     if (cart) {
+//       // If the cart exists, check if the product is already in the cart
 //       const existingProduct = cart.products.find(
 //         (p) => p.productId.toString() === productId
 //       );
 
 //       if (existingProduct) {
+//         // If the product exists in the cart, update its quantity
 //         existingProduct.quantity += quantity;
 //       } else {
+//         // If the product doesn't exist in the cart, add it as a new item
 //         cart.products.push({
 //           productId: productId,
 //           quantity: quantity,
@@ -78,11 +136,9 @@ const addToCart = async (userId, productId, quantity) => {
 //           image: product.image,
 //         });
 //       }
-
-//       await cart.save();
-//       return cart;
 //     } else {
-//       const newCart = new cartModel({
+//       // If no cart exists for the user, create a new cart
+//       cart = new cartModel({
 //         userId: userId,
 //         products: [
 //           {
@@ -94,17 +150,16 @@ const addToCart = async (userId, productId, quantity) => {
 //           },
 //         ],
 //       });
-
-//       await newCart.save();
-//       return newCart;
 //     }
+
+//     // Save the cart with updated or new product information
+//     await cart.save();
+//     return cart; // Return the cart
 //   } catch (error) {
 //     console.log(error);
-//     throw new Error('Error adding to cart: ');
+//     throw new Error('Error adding to cart: ' + error.message);
 //   }
 // };
-
-
 
 
 const updateCartItem = async (userId, productId, quantity) => {

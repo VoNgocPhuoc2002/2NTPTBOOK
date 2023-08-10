@@ -160,5 +160,35 @@ const Styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+
+
+  // CartNoItem
+  titleScreen:{
+    width:"100%",
+    alignItems: "center",
+    justifyContent:"center",
+},
+textTitleScreen:{
+    fontSize:20,
+    fontWeight:"bold",
+    color:Constants.COLOR.WHITE,
+},
+
+
+viewBTN:{
+    width:"60%",
+    height:45,
+    backgroundColor:Constants.COLOR.ORANGE,
+    alignItems:"center",
+    justifyContent:"center",
+    borderRadius:20,
+    marginTop:20,
+},
+  btn:{
+    color:Constants.COLOR.WHITE,
+    fontSize:18,
+    fontWeight:"bold",
+  },
+
 });
 export default Styles;

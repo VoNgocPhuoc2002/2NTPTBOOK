@@ -37,46 +37,60 @@ const FlashSale = ({productData,navigation}) => {
     navigation.navigate('DetailProducts', {id: id});
   };
 
-  const RenderItem = ({item}) => (
-    <TouchableOpacity onPress={() => handleItemPress(item._id)}>
-      
-    <View style={styles.viewItem}>
-      <Image
-        style={{width: 110, height: 120, borderRadius: 10}}
-        source={{uri: item.image}}
-      />
-      <View style={styles.viewItemName}>
-        <Text style={styles.nameItem}>
-          {item.name.length > 30
-            ? item.name.substring(0, 35) + '...'
-            : item.name}
-        </Text>
-      </View>
-      <View style={styles.viewItemNewPrice}>
-        <Text style={styles.newPriceItem}>{item.price}</Text>
-        <View style={styles.viewDiscountItem}>
-          <Text style={styles.discountItem}>{item.discount} %</Text>
+  const RenderItem = ({item}) => {
+    const amount = item.price
+
+    const discount = item.price + (item.price * item.discount / 100);
+
+    function formatCurrency(amount) {
+      // Sử dụng hàm toLocaleString để định dạng số thành chuỗi có dấu phân cách hàng nghìn
+      // Ví dụ: 1000000 => "1,000,000"
+      const formattedAmount = amount.toLocaleString('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+      });
+    
+      // Trả về kết quả
+      return formattedAmount;
+    }
+    const newPrice = formatCurrency(amount);
+    const oldPrice = formatCurrency(discount);
+    return(
+      <TouchableOpacity onPress={() => handleItemPress(item._id)}>
+        
+      <View style={styles.viewItem}>
+        <Image
+          style={{width: 110, height: 120, borderRadius: 10}}
+          source={{uri: item.image}}
+        />
+        <View style={styles.viewItemName}>
+          <Text style={styles.nameItem}>
+            {item.name.length > 30
+              ? item.name.substring(0, 35) + '...'
+              : item.name}
+          </Text>
+        </View>
+        <View style={styles.viewItemNewPrice}>
+          <Text style={styles.newPriceItem}>{newPrice}</Text>
+          <View style={styles.viewDiscountItem}>
+            <Text style={styles.discountItem}>{item.discount} %</Text>
+          </View>
+        </View>
+        <View style={styles.viewItemOldPrice}>
+          <Text>
+            <Text>
+           {oldPrice}
+            </Text>
+          </Text>
+  
+          <View style={styles.line}></View>
         </View>
       </View>
-      <View style={styles.viewItemOldPrice}>
-        <Text>
-          <Text>
-            {item.discount == 1
-              ? item.price
-              : (item.oldPrice = (
-                  Math.round(
-                    ((parseFloat(item.price) * 100) / item.discount) * 10,
-                  ) / 10
-                ).toFixed(3))}
-          </Text>
-        </Text>
+      
+      </TouchableOpacity>
+    );
 
-        <View style={styles.line}></View>
-      </View>
-    </View>
-    
-    </TouchableOpacity>
-  );
+  }
 
   return (
     <View style={{flex: 1, alignItems: 'center'}}>

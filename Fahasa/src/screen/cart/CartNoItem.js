@@ -6,11 +6,11 @@ import { Constants } from '../../Constant';
 const CartNoItem = ({navigation}) => {
  
     const MoveToHome = ()=>{
-        navigation.navigate("ScreenCart")
+        navigation.navigate("HomeScreen")
 
     }
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.aaaa}>
       <View style={styles.header}>
         <View style={styles.titleScreen}>
           <Text style={styles.textTitleScreen}>Giỏ hàng</Text>
@@ -40,7 +40,7 @@ const CartNoItem = ({navigation}) => {
             </TouchableOpacity>
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

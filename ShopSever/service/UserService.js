@@ -34,17 +34,6 @@ const register = async ( email, password) => {
     return user;
 }
 
-const uploadAvatar = async (userId, file) => {
-    //1. Tìm user theo id
-    //2. Upload file lên cloudinary
-    //3. Cập nhật lại avatar cho user
-    //4. Trả về user
-    const user = await UserModel.findById(userId);
-    const result = await uploadToCloudinary(file.path);
-    user.avatar = result.url;
-    await user.save();
-    return user;
-};
 
     const update = async (id,  name, dateofbirth, country, mobile, gender) => {
         // const user = await UserModel.findById(id);
@@ -138,7 +127,7 @@ const resetPassword = async (token, password) => {
 module.exports =
 {
     login, register,
-    uploadAvatar, deleteByUser,
+     deleteByUser,
     update, forgotPassword,
     get, resetPassword, checkOTP, forgotPasswordSMS
 };

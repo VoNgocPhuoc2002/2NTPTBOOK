@@ -6,7 +6,32 @@ const Styles = StyleSheet.create({
         flex: 1,
         backgroundColor: Constants.COLOR.WHITE
     },
+    item:{
+    },
+    description:{
+        fontSize:14,
+        color:Constants.COLOR.BLACK
+    },
+    viewAddAddress:{
+        flexDirection:"row",
+        paddingStart:10,
+        alignItems:"center",
+        marginTop:10,
+    },
+    textAddAddress:{
+        fontSize:16,
+        fontWeight:"bold",
+        color:Constants.COLOR.ORANGE
+    },
+    viewTextAddAddress:{
+        paddingStart:20,
+    },
+    viewText:{
+        flexDirection:"row",
 
+    },
+    boxItem:{
+    },
     titleScreen:{
         backgroundColor:Constants.COLOR.DARKRED,
         width:"100%",

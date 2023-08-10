@@ -40,7 +40,6 @@ const HomeScreen = ({ navigation }) => {
    const fetchProductsData = async () => {
     try {
       const response = await AxiosIntance().get(`product`);
-      console.log('Product Response:', response);
       setProductData(response);
     } catch (error) {
       console.error('Error:', error);
@@ -114,7 +113,7 @@ const HomeScreen = ({ navigation }) => {
               width: '100%',
               backgroundColor: Constants.COLOR.PINKRED,
             }}>
-            <FlashSale navigation={navigation} productData={productData} />
+            <FlashSale style={{flex:1}} navigation={navigation} productData={productData} />
           </View>
           <View
             style={{
@@ -123,7 +122,7 @@ const HomeScreen = ({ navigation }) => {
               width: '100%',
               backgroundColor: 'green',
             }}>
-            <ListProducts navigation={navigation} productData={productData} />
+            <ListProducts style={{flex:1}}  navigation={navigation} productData={productData} />
           </View>
         </ScrollView>
       </View>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Statistics</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      background-color: #ffffff;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 500px;
+      margin: 50px auto;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .statistics-container {
+      margin-top: 20px;
+    }
+
+    .statistics-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .statistics-label {
+      font-weight: bold;
+    }
+
+  </style>
+  <style>
+    /* Same CSS styles as before */
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Statistics</h1>
+    <div class="statistics-container">
+      <div class="statistics-item">
+        <span class="statistics-label">Total Orders:</span>
+        <span id="totalOrders">0</span>
+      </div>
+      <div class="statistics-item">
+        <span class="statistics-label">Total Revenue:</span>
+        <span id="totalRevenue">$0</span>
+      </div>
+      <div class="statistics-item">
+        <span class="statistics-label">Average Order Value:</span>
+        <span id="averageOrderValue">$0</span>
+      </div>
+      <div class="statistics-item">
+        <span class="statistics-label">New Customers:</span>
+        <span id="newCustomers">0</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Sample data for demonstration
+    const orders = [
+      { date: '2023-08-01', revenue: 100 },
+      { date: '2023-08-02', revenue: 200 },
+      { date: '2023-08-03', revenue: 150 },
+      // Add more orders for different dates
+    ];
+
+    // Calculate total orders, total revenue, and average order value
+    const totalOrders = orders.length;
+    const totalRevenue = orders.reduce((acc, order) => acc + order.revenue, 0);
+    const averageOrderValue = totalRevenue / totalOrders;
+
+    // Calculate new customers (for demonstration purposes, we assume all orders are from new customers)
+    const newCustomers = totalOrders;
+
+    // Update the DOM with calculated statistics
+    document.getElementById('totalOrders').textContent = totalOrders;
+    document.getElementById('totalRevenue').textContent = `$${totalRevenue}`;
+    document.getElementById('averageOrderValue').textContent = `$${averageOrderValue.toFixed(2)}`;
+    document.getElementById('newCustomers').textContent = newCustomers;
+  </script>
+</body>
+</html>

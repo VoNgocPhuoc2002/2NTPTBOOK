@@ -1,56 +1,71 @@
 const AddressModel = require('../model/AddressModel');
 const mongoose = require('mongoose');
-const UserModel = require('../model/UserModel');
 
 // Thêm địa chỉ mới cho người dùng
-const addOrUpdateUserAddress = async (userId, addressId, addressLine1, addressLine2,addressLine3,addressLine4, isDefault) => {
+const addOrUpdateUserAddress = async (userId, fullName, phoneNumber, addressLine1, addressLine2, addressLine3, addressLine4) => {
   try {
-    // Bước 1: Cập nhật các địa chỉ hiện có có isDefault: true thành isDefault: false
-    await AddressModel.updateMany({ userId, isDefault: true }, { isDefault: false });
-    // Bước 2: Thêm địa chỉ mới
-    let address = await AddressModel.create({
-      userId,
-      addressId: new mongoose.Types.ObjectId(),
-      addressLine1,
-      addressLine2,
-      addressLine3,
-      addressLine4,
-      isDefault,
-    });
-    const user = await UserModel.findById(userId, 'name mobile');
+    let addresses = await AddressModel.findOne({ userId });
 
-    // Combine the user information with the address details and return it
-    const addressWithUser = {
-      user: {
-        name: user.name,
-        mobile: user.mobile,
-      },
-      address: address,
-    };
+    if (addresses) {
+      // Update existing address
+      addresses.address.push({
+        addressId: new mongoose.Types.ObjectId(),
+        fullName: fullName,
+        phoneNumber: phoneNumber,
+        addressLine1: addressLine1,
+        addressLine2: addressLine2,
+        addressLine3: addressLine3,
+        addressLine4: addressLine4,
+      });
 
-    return addressWithUser;
+      await addresses.save();
+      return addresses;
+    } else {
+      // Create new address
+      const newAddresses = new AddressModel({
+        userId: userId,
+        address: [
+          {
+            addressId: new mongoose.Types.ObjectId(),
+            fullName: fullName,
+            phoneNumber: phoneNumber,
+            addressLine1: addressLine1,
+            addressLine2: addressLine2,
+            addressLine3: addressLine3,
+            addressLine4: addressLine4,
+          },
+        ],
+      });
+
+      await newAddresses.save();
+      return newAddresses;
+    }
   } catch (error) {
-    
     throw new Error(error.message);
   }
 };
 
+
 // Lấy danh sách địa chỉ của người dùng
 const getUserAddresses = async (userId) => {
   try {
-    const address = await AddressModel.find({ userId });
+    const address = await AddressModel.find({ userId });    
+    return address;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+// Hàm truy vấn đối tượng địa chỉ từ cơ sở dữ liệu
+const getAddressByAddressId = async (addressId) => {
+  try {
+    const userWithAddress = await AddressModel.findOne({ "address.addressId": addressId });
 
-    const user = await UserModel.findById(userId, 'name mobile');
+    if (userWithAddress) {
+      const targetAddress = userWithAddress.address.find(addr => addr.addressId.toString() === addressId);
+      return targetAddress;
+    }
 
-    const addressWithUser = {
-      user: {
-        name: user.name,
-        mobile: user.mobile,
-      },
-      address: address,
-    };
-
-    return addressWithUser;
+    return null;
   } catch (error) {
     throw new Error(error.message);
   }
@@ -99,4 +114,5 @@ module.exports = {
   getUserAddresses,
   updateDefaultAddress,
   deleteAddress,
+  getAddressByAddressId
 };

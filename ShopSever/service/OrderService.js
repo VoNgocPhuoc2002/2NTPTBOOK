@@ -30,6 +30,16 @@ const getOrderById = async (userId) => {
         throw new Error('Lỗi khi lấy thông tin đơn hàng');
     }
 };
+const getOrderByOrderId = async (_id) => {
+    try {
+      const order = await OrderModel.findById(_id);
+  
+      return order;
+    } catch (error) {
+      console.log(error);
+      throw new Error('Lỗi khi lấy thông tin đơn hàng');
+    }
+  };
 
 // // Cập nhật thông tin đơn hàng trạng thái đơn hàng
 // const updateOrder = async (userId, status, paymentStatus) => {
@@ -82,6 +92,7 @@ const getOrderById = async (userId) => {
 module.exports =
 {
     createOrder, getOrderById,
+    getOrderByOrderId
     // updateOrder, deleteOrder,
     // createPaypalPayment, executePaypalPayment,
     // payWithPaypal,

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Confirmation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      background-color: #ffffff;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 400px;
+      margin: 50px auto;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    p {
+      text-align: center;
+      font-size: 18px;
+    }
+
+    .order-details {
+      margin-top: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+    }
+
+    .order-details div {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .total {
+      font-weight: bold;
+    }
+
+    .thank-you {
+      text-align: center;
+      font-size: 20px;
+      margin-top: 30px;
+    }
+    .button-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .button {
+      background-color: #4CAF50;
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 48%;
+    }
+
+    .button.cancel {
+      background-color: #f44336;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Order Confirmation</h1>
+    <p>Thank you for your order!</p>
+    <div class="order-details">
+      <div>
+        <span>Order ID:</span>
+        <span>#123456</span>
+      </div>
+      <div>
+        <span>Date:</span>
+        <span>August 1, 2023</span>
+      </div>
+      <div>
+        <span>Payment Method:</span>
+        <span>Credit Card</span>
+      </div>
+      <div>
+        <span>Shipping Address:</span>
+        <span>123 Main St, City, Country</span>
+      </div>
+    </div>
+    <div class="order-details">
+      <div>
+        <span>Product:</span>
+        <span>Product Name</span>
+      </div>
+      <div>
+        <span>Quantity:</span>
+        <span>2</span>
+      </div>
+      <div>
+        <span>Price:</span>
+        <span>$20.00</span>
+      </div>
+    </div>
+    <div class="order-details total">
+      <div>
+        <span>Total:</span>
+        <span>$40.00</span>
+      </div>
+    </div>
+    <div class="button-container">
+        <button class="button">Confirm</button>
+        <button class="button cancel">Cancel</button>
+      </div>
+    <p class="thank-you">Thank you for shopping with us!</p>
+  </div>
+</body>
+</html>

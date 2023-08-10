@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@vonage/server-sdk": "^3.6.0",
-    "barcode": "^0.1.0",
+    "barcode": "^0.0.4",
     "bcryptjs": "^2.4.3",
     "braintree": "^3.16.0",
     "bwip-js": "^3.4.3",
@@ -31,7 +31,7 @@
     "morgan": "~1.9.1",
     "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.9.3",
-    "nodemon": "^2.0.22",
+    "nodemon": "^3.0.1",
     "otp-generator": "^4.0.1",
     "passport": "^0.6.0",
     "passport-facebook": "^3.0.0",

@@ -29,6 +29,19 @@ const getOrderById = async (req, res) => {
         res.status(500).json({ error: 'Lỗi khi lấy thông tin đơn hàng' });
     }
 };
+const getOrderByOrderId = async (req, res) => {
+    try {
+        const { _id } = req.params;
+        // Call the service function with the correct parameter name _id
+        const order = await orderService.getOrderByOrderId(_id);
+        res.status(200).json(order);
+        console.log('Thông tin đơn hàng:', order);
+      } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: 'Lỗi khi lấy thông tin đơn hàng' });
+      }
+};
+
 
 // // Cập nhật thông tin đơn hàng
 // const updateOrder = async (req, res) => {
@@ -58,20 +71,7 @@ const getOrderById = async (req, res) => {
 //     }
 // };
 
-// // Xác nhận thanh toán PayPal
-// const confirmPaypalPayment = async (req, res) => {
-//     try {
-//         const { paymentId, PayerID } = req.query;
-//         const encodedPaymentId = encodeURIComponent(paymentId);
-//         const encodedPayerID = encodeURIComponent(PayerID);
-//         // Gọi service để xác nhận thanh toán PayPal
-//         const order = await orderService.executePaypalPayment(encodedPaymentId, encodedPayerID);
-//         res.status(200).json({ message: 'Thanh toán thành công', order });
-//     } catch (error) {
-//         console.log(error);
-//         res.status(500).json({ error: 'Lỗi khi xác nhận thanh toán PayPal' });
-//     }
-// };
+
 
 
 // //lịch sử thanh toán
@@ -87,38 +87,15 @@ const getOrderById = async (req, res) => {
 //     }
 // };
 
-// //tao mã vạch
-// const createBarcode = async (req, res) => {
-//     try {
-//         const { userId } = req.params;
-//         // Gọi service để tạo mã vạch và lưu vào đơn hàng
-//         await orderService.createBarcode(userId);
-//         // Phản hồi thành công
-//         res.status(200).json({ message: 'Tạo mã vạch thành công' });
-//     } catch (error) {
-//         console.log(error);
-//         res.status(500).json({ error: 'Lỗi khi tạo mã vạch' });
-//     }
-// };
 
-// //trả mã vạch
-// const getBarcode = async (req, res) => {
-//     try {
-//         const { userId } = req.params;
-//         // Gọi service để lấy thông tin đơn hàng và mã vạch
-//         const order = await orderService.getBarcode(userId);
-//         // Phản hồi với mã vạch
-//         res.status(200).json({ barcode: order.barcode });
-//     } catch (error) {
-//         console.log(error);
-//         res.status(500).json({ error: 'Lỗi khi lấy mã vạch' });
-//     }
-// };
+
+
 
 module.exports =
 {
     createOrder
     , getOrderById,
+    getOrderByOrderId
     // updateOrder, deleteOrder,
     // payWithPaypal, confirmPaypalPayment, getOrderHistory,
     // createBarcode, getBarcode

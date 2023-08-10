@@ -5,12 +5,18 @@ const ObjectId = Schema.ObjectId;
 const AddressSchema = new Schema(
     {
         userId: { type: ObjectId, ref: 'user' },
-        addressId: { type: ObjectId, ref: 'address' },
-        addressLine1: { type: String, required: true },
-        addressLine2: { type: String, required: true },
-        addressLine3: { type: String, required: true },
-        addressLine4: { type: String, required: true },
-        isDefault: { type: Boolean, default: false },
+        address: [
+            {  
+                addressId: { type: ObjectId, ref: 'address' },
+                fullName: { type: String, required: true },
+                phoneNumber: { type: String, required: true },
+                addressLine1: { type: String, required: true },
+                addressLine2: { type: String, required: true },
+                addressLine3: { type: String, required: true },
+                addressLine4: { type: String, required: true },
+            },
+          ],
+
     },
     {
         timestamps: true,

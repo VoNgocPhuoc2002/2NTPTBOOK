@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Statistics Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: #ffffff;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 300px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .button-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .button {
+      background-color: #4CAF50;
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      width: 48%;
+    }
+
+    .button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Statistics Dashboard</h1>
+    <div class="button-container">
+      <button class="button" onclick="showDailyStatistics()">Daily</button>
+      <button class="button" onclick="showWeeklyStatistics()">Weekly</button>
+      <button class="button" onclick="showMonthlyStatistics()">Monthly</button>
+      <button class="button" onclick="showYearlyStatistics()">Yearly</button>
+    </div>
+  </div>
+
+  <script>
+    function showDailyStatistics() {
+      // Replace this function with your logic to display daily statistics
+      alert('Daily Statistics');
+    }
+
+    function showWeeklyStatistics() {
+      // Replace this function with your logic to display weekly statistics
+      alert('Weekly Statistics');
+    }
+
+    function showMonthlyStatistics() {
+      // Replace this function with your logic to display monthly statistics
+      alert('Monthly Statistics');
+    }
+
+    function showYearlyStatistics() {
+      // Replace this function with your logic to display yearly statistics
+      alert('Yearly Statistics');
+    }
+  </script>
+</body>
+</html>

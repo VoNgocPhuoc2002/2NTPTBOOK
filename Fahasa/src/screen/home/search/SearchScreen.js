@@ -12,14 +12,18 @@ import axios from 'axios';
 import styles from './Styles';
 import { FlashList } from '@shopify/flash-list';
 
-const SearchScreen = () => {
+const SearchScreen = ({navigation}) => {
   const [keyword, setKeyword] = useState('');
   const [results, setResults] = useState([]);
-
+  
+  const handleItemPress = id => {
+    // Navigate to the detail screen with the item ID
+    navigation.navigate('DetailProducts', {id: id});
+  };
   const searchProducts = async () => {
     try {
       const response = await axios.get(
-        `http://192.168.102.7:3000/product/search?keyword=${keyword}`,
+        `http://192.168.1.42:3000/product/search?keyword=${keyword}`,
       );
       const products = response.data;
       setResults(products);
@@ -113,6 +117,7 @@ const SearchScreen = () => {
           estimatedItemSize={200}
           numColumns={2}
           renderItem={({ item }) => (
+            <TouchableOpacity onPress={() => handleItemPress(item._id)}>
             <View style={styles.viewItem}>
               <Image
                 style={{ width: 110, height: 120, borderRadius: 10 }}
@@ -138,6 +143,7 @@ const SearchScreen = () => {
                 <View style={styles.line}></View>
               </View>
             </View>
+            </TouchableOpacity>
           )}
         />
       </View>

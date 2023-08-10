@@ -1,26 +1,26 @@
 const addressService = require('../service/addressService');
 
 // Thêm địa chỉ mới cho người dùng
-const addOrUpdateUserAddress = async (req, res) => {
-    const { addressId, addressLine1, addressLine2,addressLine3,addressLine4, isDefault } = req.body;
+// Update the route handler to have a unique name, e.g., 'addOrUpdateUserAddressHandler'
+const addOrUpdateUserAddressHandler = async (req, res) => {
     const { userId } = req.params;
+    const { fullName, phoneNumber, addressLine1, addressLine2, addressLine3, addressLine4 } = req.body;
+
     try {
-        const address = await addressService.addOrUpdateUserAddress(
-            userId,
-            addressId,
-            addressLine1,
-            addressLine2,
-            addressLine3,
-            addressLine4,
-            isDefault
-        );
-        res.status(200).json({ message: 'Address added or updated successfully', address });
-        console.log(address);
+      const address = await addressService.addOrUpdateUserAddress(userId, fullName, phoneNumber, addressLine1, addressLine2, addressLine3, addressLine4);
+    //   res.status(200).json({ message: 'Address added or updated successfully', address });
+        res.status(200).json({ address });
+
+      console.log(address);
     } catch (error) {
-        res.status(500).json({ message: 'Failed to add or update address', error: error.message });
-        console.log(error);
+      res.status(500).json({ message: 'Failed to add or update address', error: error.message });
+      console.log(error);
     }
-};
+
+
+ 
+  };
+  
 
 // Lấy danh sách địa chỉ của người dùng
 const getUserAddresses = async (req, res) => {
@@ -34,6 +34,26 @@ const getUserAddresses = async (req, res) => {
         console.log(error);
     }
 };
+
+// Controller function
+const getAddress = async (req, res) => {
+  try {
+    const { addressId } = req.params;
+    const address = await addressService.getAddressByAddressId(addressId);
+
+    if (address) {
+      res.status(200).json({ addresses: [address] }); // Lưu ý việc sử dụng mảng ở đây
+      console.log('Thông tin địa chỉ:', address);
+    } else {
+      res.status(200).json({ addresses: [] }); // Trả về mảng rỗng nếu không tìm thấy
+      console.log('Không tìm thấy địa chỉ');
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to get address', error: error.message });
+    console.log("Error:", error);
+  }
+};
+
 
 // Cập nhật địa chỉ mặc định của người dùng
 const updateDefaultAddress = async (req, res) => {
@@ -72,8 +92,9 @@ const deleteAddress = async (req, res) => {
 };
 
 module.exports = {
-    addOrUpdateUserAddress,
+    addOrUpdateUserAddressHandler,
     getUserAddresses,
     updateDefaultAddress,
     deleteAddress,
+    getAddress
 };

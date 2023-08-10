@@ -1,31 +1,39 @@
-import {KeyboardAvoidingView,Image, Text, TextInput, View, TouchableOpacity, ScrollView} from 'react-native';
+import {KeyboardAvoidingView,Image, Text, TextInput, View, TouchableOpacity, ScrollView, ToastAndroid} from 'react-native';
 import React,{useState,useContext,useEffect} from 'react';
 import styles from './Styles';
 import { AppContext } from '../../../../ultil/AppContext';
 import AxiosIntance from '../../../../ultil/AxiosIntance';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-const Login = () => {
+const Login = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const {setIsLogin} = useContext(AppContext)
 // Define a state variable to track the login status
 
 const handleLogin = async () => {
-  try {
-    const response = await AxiosIntance().post('api/users/login', {
-      email: email,
-      password: password
-    });
-    if (response.user) {
-      await AsyncStorage.setItem("userId", response.user._id);
-      console.log(response.user._id);
-      setIsLogin(true)
+  
+  if(email.length > 0 && password.length>0) {
+    try {
+      const response = await AxiosIntance().post('api/users/login', {
+        email: email,
+        password: password
+      });
+        setIsLogin(true);
+        await AsyncStorage.setItem("userId", response.data.user._id);
+        await AsyncStorage.setItem('isLoggedIn', 'true');
+        console.log("Login successful. User data:", response.data.user);
+        if (response.data === null) {
+        ToastAndroid.show("Mật khẩu hoặc tài khoản không trùng khớp ", ToastAndroid.SHORT);
+      }
+    } catch (error) {
+      console.log('Error:', error);
     }
-    console.log(response.user);
-  } catch (error) {
-    console.log('Error:', error);
+  }else{
+  ToastAndroid.show("Bạn chưa nhập tài khoản và mật khẩu!", ToastAndroid.SHORT);
+
   }
+ 
 };
 
   

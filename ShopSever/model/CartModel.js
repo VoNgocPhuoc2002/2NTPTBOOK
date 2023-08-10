@@ -7,7 +7,7 @@ const CartSchema = new Schema(
     userId: { type: ObjectId, required: true },
     products: [
       {
-        productId: { type: ObjectId, ref: 'Product', required: true },
+        productId: { type: ObjectId, ref: 'product', required: true },
         quantity: { type: Number, default: 1 },
         name: { type: String },
         price: { type: Number },

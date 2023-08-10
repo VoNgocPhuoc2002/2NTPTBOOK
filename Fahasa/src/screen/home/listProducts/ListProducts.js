@@ -11,23 +11,47 @@ import {FlashList} from '@shopify/flash-list';
 import styles from './Styles';
 import {useFocusEffect} from '@react-navigation/native';
 
+
 const ListProducts = ({productData, navigation}) => {
+  console.log('Product Data:', productData);
   const [activeTabHot, setActiveTabHot] = useState('Tab 1');
   const handleTabPressHot = activeTabHot => {
+    console.log('Active Tab Hot:', activeTabHot);
     setActiveTabHot(activeTabHot);
   };
+  // const handleTabPressHot = tabName => {
+  //   console.log('Active Tab Hot:', tabName);
+  //   setActiveTabHot(tabName);
+  // };
   const [activeTabSchool, setActiveTabSchool] = useState('Tab 4');
   const handleTabPressSChool = activeTabSchool => {
     setActiveTabSchool(activeTabSchool);
   };
+  const [activeTabBalo, setActiveTabBalo] = useState('Tab 8');
+  const handleTabPressBalo = activeTabBalo => {
+    setActiveTabBalo(activeTabBalo);
+  };
+  useEffect(() => {
+    handleTabPressHot("Tab 1")
+    handleTabPressSChool("Tab 4")
+    handleTabPressBalo("Tab  8")
+  }, []);
 
   const handleItemPress = id => {
     // Navigate to the detail screen with the item ID
     navigation.navigate('DetailProducts', {id: id});
   };
-  console.log('Product Data sssssss:', productData);
 
-  const RenderItem = ({item}) => (
+ 
+  const RenderItem = ({item}) => {
+    console.log('Item:', item);
+    console.log('Active Tab Hot:', activeTabHot);
+    console.log('Filtered Data for "Xu hướng theo ngày":', productData.filter(item => item.categoryId.name === 'TrendByDay'));
+    console.log('Active Tab Hot:', activeTabHot);
+
+    console.log('Product Data:', productData);
+
+  return(
     <TouchableOpacity onPress={() => handleItemPress(item._id)}>
       <View style={styles.viewItem}>
         <Image
@@ -56,6 +80,7 @@ const ListProducts = ({productData, navigation}) => {
       </View>
     </TouchableOpacity>
     )
+            }
   return (
     <View>
       <View style={{ height: 400, alignItems: 'center',backgroundColor:"white"}}>
@@ -272,6 +297,133 @@ const ListProducts = ({productData, navigation}) => {
                 <FlashList
                   data={productData.filter(
                     item => item.categoryId.name === 'SchoolBook3',
+                  )}
+                  renderItem={({item}) => <RenderItem item={item} />}
+                  horizontal
+                  initialNumToRender={3}
+                  estimatedItemSize={200}
+                />
+              ) : null}
+            </ScrollView>
+          </View>
+        </View>
+        <View style={styles.btnShow}>
+          <Text style={styles.textShow}>Xem Thêm</Text>
+        </View>
+      </View>
+      <View style={{ height: 450, alignItems: 'center',backgroundColor:"white"}}>
+        <View style={styles.groupWorkspaces}>
+          <View>
+            <Text style={styles.title}>Kho Balo</Text>
+          </View>
+          <View style={{flexDirection: 'row'}}>
+            <ScrollView horizontal>
+            <TouchableOpacity
+              style={[
+                styles.tabContent,
+                activeTabBalo === 'Tab 8' ? styles.activeTab : null,
+              ]}
+              onPress={() => handleTabPressBalo('Tab 8')}>
+              <Text
+                style={
+                  activeTabBalo === 'Tab 8' ? styles.isTextTitle : styles.textTitle
+                }>
+                  Balo Hot
+              </Text>
+              {activeTabBalo === 'Tab 8' ? (
+                <View style={styles.lineTitle}></View>
+              ) : null}
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[
+                styles.tabContent,
+                activeTabBalo === 'Tab 9' ? styles.activeTab : null,
+              ]}
+              onPress={() => handleTabPressBalo('Tab 9')}>
+              <Text
+                style={
+                  activeTabBalo === 'Tab 9' ? styles.isTextTitle : styles.textTitle
+                }>
+                  Balo mới
+              </Text>
+              {activeTabBalo === 'Tab 9' ? (
+                <View style={styles.lineTitle}></View>
+              ) : null}
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[
+                styles.tabContent,
+                activeTabBalo === 'Tab 10' ? styles.activeTab : null,
+              ]}
+              onPress={() => handleTabPressBalo('Tab 10')}>
+              <Text
+                style={
+                  activeTabBalo === 'Tab 10' ? styles.isTextTitle : styles.textTitle
+                }>
+                  Balo
+              </Text>
+              {activeTabBalo === 'Tab 10' ? (
+                <View style={styles.lineTitle}></View>
+              ) : null}
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[
+                styles.tabContent,
+                activeTabBalo === 'Tab 11' ? styles.activeTab : null,
+              ]}
+              onPress={() => handleTabPressBalo('Tab 11')}>
+              <Text
+                style={
+                  activeTabBalo === 'Tab 11' ? styles.isTextTitle : styles.textTitle
+                }>
+                  Hộp bút
+              </Text>
+              {activeTabBalo === 'Tab 11' ? (
+                <View style={styles.lineTitle}></View>
+              ) : null}
+            </TouchableOpacity>
+            </ScrollView>
+
+          </View>
+          <View style={styles.groupItem}>
+            <ScrollView style={{width: '100%'}}>
+              {activeTabBalo === 'Tab 8' ? (
+                <FlashList
+                  data={productData.filter(
+                    item => item.categoryId.name === 'BaloHot',
+                  )}
+                  renderItem={({item}) => <RenderItem item={item} />}
+                  horizontal
+                  initialNumToRender={3}
+                  estimatedItemSize={200}
+                />
+              ) : null}
+              {activeTabBalo === 'Tab 9' ? (
+                <FlashList
+                  data={productData.filter(
+                    item => item.categoryId.name === 'BaloNew',
+                  )}
+                  renderItem={({item}) => <RenderItem item={item} />}
+                  horizontal
+                  initialNumToRender={3}
+                  estimatedItemSize={200}
+                />
+              ) : null}
+              {activeTabBalo === 'Tab 10' ? (
+                <FlashList
+                  data={productData.filter(
+                    item => item.categoryId.name === 'BaloNew',
+                  )}
+                  renderItem={({item}) => <RenderItem item={item} />}
+                  horizontal
+                  initialNumToRender={3}
+                  estimatedItemSize={200}
+                />
+              ) : null}
+              {activeTabBalo === 'Tab 11' ? (
+                <FlashList
+                  data={productData.filter(
+                    item => item.categoryId.name === 'Crayola',
                   )}
                   renderItem={({item}) => <RenderItem item={item} />}
                   horizontal

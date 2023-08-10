@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ScrollView,
   ToastAndroid,
+  Alert,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
@@ -15,14 +16,28 @@ import styles from './Styles';
 import {Constants} from '../../../Constant';
 import {getUserId} from '../../../ultil/GetUserId';
 import AxiosIntance from '../../../ultil/AxiosIntance';
+import CustomAlert from '../../../ultil/CustomAlert';
 
 const DetailProducts = ({route, navigation}) => {
   const {id} = route.params;
   const [data, setdata] = useState('');
   const [quantity, setQuantity] = useState(1);
-  const [productId, setProductId] = useState('');
+  const [productId, setProductId] = useState([]);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const [isAlertVisible, setAlertVisible] = useState(false);
   // const [cartId, setCartId] = useState('');
+  const showAlert = () => {
+    setAlertVisible(true);
+  };
+
+  const hideAlert = () => {
+    setAlertVisible(false);
+  };
+  const onOK = () => {
+    setAlertVisible(false);
+    navigation.navigate("LoginScreen");
+  };
   console.log('====================================');
   console.log('itesmId**s****ssssss****', id);
   console.log('====================================');
@@ -56,13 +71,22 @@ const DetailProducts = ({route, navigation}) => {
 
   const fetchAddToCart = async () => {
     const userId = await getUserId();
-    if (userId) {
-      const response = await AxiosIntance().post(`cart/${userId}/addtocart`, {
-        userId: userId,
-        productId: productId,
-        quantity: quantity,
-      });
-      console.log('User Respossnse:', response);
+    if (!userId) {
+      showAlert();
+    } else {
+      try {
+        const response = await AxiosIntance().post(`cart/${userId}/addtocart`, {
+          productId: productId,
+          quantity: quantity,
+        });
+        console.log('User Response:', response);
+        console.log('User userId:', userId);
+        console.log('User productId:', productId);
+        console.log('User quantity:', quantity);
+      } catch (error) {
+        console.log('Error adding to cart:', error.message);
+        // Handle the error appropriately, e.g., show an error message to the user
+      }
     }
   };
   console.log('====================================', data);
@@ -74,8 +98,26 @@ const DetailProducts = ({route, navigation}) => {
     navigation.navigate('SearchScreen');
   };
   const ToastAndroid = () => {
-    ToastAndroid.show("Tính năng đang phát triển", ToastAndroid.SHORT)
+    ToastAndroid.show('Tính năng đang phát triển', ToastAndroid.SHORT);
   };
+  const amount = data.price;
+  const discount = data.price + (data.price * data.discount) / 100;
+
+  function formatCurrency(amount) {
+    if (!data) {
+      return '';
+    }
+
+    const formattedAmount = amount.toLocaleString('vi-VN', {
+      style: 'currency',
+      currency: 'VND',
+    });
+
+    // Trả về kết quả
+    return formattedAmount;
+  }
+  const newPrice = formatCurrency(amount);
+  const oldPrice = formatCurrency(discount);
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -100,7 +142,11 @@ const DetailProducts = ({route, navigation}) => {
       <View style={styles.body}>
         <ScrollView>
           <View style={styles.viewImageProducts}>
-            <Image style={styles.imageProducts} source={{uri: data.image}} />
+            {data.image ? (
+              <Image style={styles.imageProducts} source={{uri: data.image}} />
+            ) : (
+              <Text>Load</Text>
+            )}
           </View>
           <View style={styles.viewNameProducts}>
             <Text style={styles.nameProducts}>{data.name}</Text>
@@ -110,18 +156,10 @@ const DetailProducts = ({route, navigation}) => {
           </View>
           <View style={styles.groupPrice}>
             <View style={styles.viewNewPrice}>
-              <Text style={styles.newPriceItem}>{data.price} đ</Text>
+              <Text style={styles.newPriceItem}>{newPrice}</Text>
             </View>
             <View style={styles.viewOldPrice}>
-              <Text style={styles.oldPriceItem}>
-                {
-                  (data.oldPrice =
-                    data.discount === 0
-                      ? data.price
-                      : data.price +
-                        parseFloat(data.price * (data.discount / 100)))
-                }
-              </Text>
+              <Text style={styles.oldPriceItem}>{oldPrice}</Text>
             </View>
             <View style={styles.viewDiscountItem}>
               <Text style={styles.discountItem}>{data.discount}%</Text>
@@ -210,6 +248,12 @@ const DetailProducts = ({route, navigation}) => {
               <Text style={styles.textbtnBuy}>Mua ngay</Text>
             </View>
           </View>
+          <CustomAlert
+            visible={isAlertVisible}
+            message="Bạn phải đăng nhập trước khi thêm sản phẩm vào giỏ hàng"
+            onClose={hideAlert}
+            onOk={onOK}
+          />
         </ScrollView>
       </View>
     </View>

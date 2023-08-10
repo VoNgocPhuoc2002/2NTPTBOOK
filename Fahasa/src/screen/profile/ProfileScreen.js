@@ -1,6 +1,6 @@
 import {StyleSheet, Text, View, Image, TouchableOpacity, ScrollView,RefreshControl} from 'react-native';
 
-import React,{useCallback, useEffect,useState} from 'react';
+import React,{useCallback, useContext,useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import styles from './Styles';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
@@ -8,6 +8,9 @@ import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import AxiosIntance from '../../ultil/AxiosIntance';
 import { getUserId } from '../../ultil/GetUserId';
 import { useFocusEffect } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { AppContext } from '../../ultil/AppContext';
+
 const ProfileScreen = ({navigation}) => {
   const[name,setName] =useState("")
   const[country,setCountry] =useState("")
@@ -18,6 +21,8 @@ const ProfileScreen = ({navigation}) => {
 
   const [refreshing, setRefreshing] = useState(false);
 
+
+  const {setIsLogin} = useContext(AppContext)
   // Hàm xử lý khi kéo xuống để refresh
   const onRefresh = () => {
     setRefreshing(true);
@@ -61,6 +66,13 @@ const ProfileScreen = ({navigation}) => {
   const tab_history = () => {
     navigation.navigate("HistoryTab")
   }
+  const handleLogout = async () => {
+    await AsyncStorage.removeItem('userId');
+    setIsLogin(false)
+    const userId = await getUserId();
+    console.log('UserId after logout:', userId);
+
+  };
  
   return (
     <SafeAreaView style={styles.container}>
@@ -302,7 +314,7 @@ const ProfileScreen = ({navigation}) => {
           </View>
         </TouchableOpacity>
         <View style={{height:80,alignItems:"center",justifyContent:"center"}}>
-            <TouchableOpacity style={styles.viewBTN} >
+            <TouchableOpacity style={styles.viewBTN} onPress={handleLogout} >
             <View >
             <Text style={styles.btn}>
                 Đăng xuất

@@ -6,6 +6,7 @@ const orderController = require('../controller/OrderController');
 //http://localhost:3000/order/:userId/addorder
 router.post('/:userId/addorder', orderController.createOrder);
 router.get('/:userId/getorder', orderController.getOrderById);
+router.get('/:_id/getorderDetail', orderController.getOrderByOrderId);
 
 
 

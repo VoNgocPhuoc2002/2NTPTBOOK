@@ -18,10 +18,7 @@ const register = async (email, password) => {
 
 
 
-const uploadAvatar = async (userId, file) => {
-    const result = await UserService.uploadAvatar(userId, file);
-    return result;
-};
+
 
 const login = async (email, password) => {
     const user = await UserService.login(email, password);
@@ -115,7 +112,7 @@ const resetPassword = async (token, password, confirm_password) => {
 module.exports =
 {
     register, login,
-    uploadAvatar, update, get,
+     update, get,
     forgotPassword, deleteByUser,
     checkOTP, resetPassword, forgotPasswordSMS
 };

@@ -1,10 +1,23 @@
 import { StyleSheet, Text, View, ScrollView, SafeAreaView, TouchableOpacity } from 'react-native'
 import React from 'react'
 import styles from '../detailOrders/Styles';
-        
+import AxiosIntance from '../../../../ultil/AxiosIntance';
 
-const DetailOrder = () => {
-  
+const DetailOrder = ({route} ) => {
+  // const { orderId } = route.params;
+  // console.log("responsdsae", orderId)
+
+  const fetchShowDetailOrder = async () => {
+    // if(orderId){
+      const response = await AxiosIntance().get(`order/64c3955422bf5302a1d179ce/getorderDetail`);
+      console.log("repose", response)
+    // }
+     
+  };
+ 
+
+
+
   return (
     
 
@@ -93,7 +106,7 @@ const DetailOrder = () => {
 
       </ScrollView>
 
-      <TouchableOpacity>
+      <TouchableOpacity onPress={fetchShowDetailOrder}>
         <View style={styles.bot}>
           <View style={styles.bottom}>
             <Text style={styles.bottom_Text}>Thanh toán</Text>

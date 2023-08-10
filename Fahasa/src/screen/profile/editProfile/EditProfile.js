@@ -48,7 +48,7 @@ const EditProfile = () => {
         </View>
       </View>
       <View style={styles.groupInput}>
-        <Text style={styles.titleInput}>Ngày sinh</Text>
+        <Text style={styles.titleInput}>Quê quán</Text>
         <View style={styles.viewInput}>
           <TextInput placeholder="Nhập địa chỉ" onChangeText={setCountry} />
           <TouchableOpacity>

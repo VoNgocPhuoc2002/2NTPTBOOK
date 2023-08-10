@@ -14,7 +14,10 @@ import HistoryTab from "../screen/profile/History/HistoryTab";
 import ScreenOrder1 from "../screen/order/order1/ScreenOrder1";
 import ScreenOrder2 from "../screen/order/order2/ScreenOrder2";
 import ScreenOrder3 from "../screen/order/order3/ScreenOrder3";
-
+import AddAddressScreen from "../screen/address/AddAddressScreen";
+import LoginScreen from "../screen/Login/LoginScreen";
+import Login from "../screen/Login/component/login/Login";
+import Signup from "../screen/Login/component/signup/Signup";
 const Stack = createNativeStackNavigator();
 
 const AppStack = () => {
@@ -25,7 +28,7 @@ const AppStack = () => {
         name="TabNavigation"
         component={TabNavigation}
         options={{ headerShown: false }}
-      />
+      /> 
       <Stack.Screen
         name="HomeScreen"
         component={HomeScreen}
@@ -35,6 +38,21 @@ const AppStack = () => {
         name="ProfileScreen"
         component={ProfileScreen}
         options={{ headerShown: false }}
+      /> 
+      <Stack.Screen
+        name="LoginScreen"
+        component={LoginScreen}
+        options={{ headerShown: false }}
+      />
+         <Stack.Screen
+        name="Login"
+        component={Login}
+        options={{headerShown: false}}
+      />
+         <Stack.Screen
+        name="Signup"
+        component={Signup}
+        options={{headerShown: false}}
       />
       <Stack.Screen
         name="EditProfile"
@@ -61,6 +79,7 @@ const AppStack = () => {
         component={ScreenCart}
         options={{ headerShown: false }}
       />
+
       <Stack.Screen
         name="HistoryTab"
         component={HistoryTab}
@@ -84,6 +103,11 @@ const AppStack = () => {
       <Stack.Screen
         name="ScreenOrder3"
         component={ScreenOrder3}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="AddAddressScreen"
+        component={AddAddressScreen}
         options={{ headerShown: false }}
       />
      

@@ -1,12 +1,25 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import DetailOrder from './detailOrders/DetailOrder';
 import { useNavigation } from '@react-navigation/native'
-
-
+import { getUserId } from '../../../ultil/GetUserId';
+import AxiosIntance from '../../../ultil/AxiosIntance';
 
 const HistoryTab = ({ navigation }) => {
 
+    const fetchOrder = async () => {
+        const userId = await getUserId();
+        try {
+          const response = await AxiosIntance().get(`order/${userId}/getorder`);
+          console.log(response)
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      };
+      useEffect(() => {
+        fetchOrder(); // Call the fetchUserData function
+      }, []);
+    
     const namesData = [
         // { id: '1', name: 'Alice' },
         // { id: '2', name: 'Bob' },

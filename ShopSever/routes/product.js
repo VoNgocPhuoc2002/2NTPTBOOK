@@ -13,7 +13,7 @@ const { upload, uploadToCloudinary } = require('../middleware/CloudinaryUpload')
 router.get('/', async function (req, res, next) {
     let products = await ProductController.get();
     products = products.map((p, index) => {
-        const price = p.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+       
         return {
             _id: p._id,
             code: p.code,
@@ -26,7 +26,7 @@ router.get('/', async function (req, res, next) {
             size: p.size,
             weight: p.weight,
             image: p.image,
-            price: price,
+            price: p.price,
             discount: p.discount,
             quantity: p.quantity,
             favorite: p.favorite,
@@ -42,6 +42,52 @@ router.get('/', async function (req, res, next) {
     res.status(200).json(products);
     console.log("🚀 ~ file: product.js:32 ~ products=products.map ~ products:", products)
 });
+
+async function getProductsForTemplate() {
+    try {
+        let products = await ProductController.get();
+        products = products.map((p, index) => {
+            return {
+                _id: p._id,
+                code: p.code,
+                name: p.name,
+                author: p.author,
+                titledescription: p.titledescription,
+                description: p.description,
+                countryside: p.countryside,
+                processingplace: p.processingplace,
+                size: p.size,
+                weight: p.weight,
+                image: p.image,
+                price: p.price,
+                discount: p.discount,
+                quantity: p.quantity,
+                favorite: p.favorite,
+                isFutured: p.isFutured,
+                dateCreated: p.dateCreated,
+                categoryId: p.categoryId,
+                color: p.color,
+                index: index + 1,
+            };
+        });
+        return products;
+    } catch (error) {
+        console.error("Error fetching products:", error);
+        return []; // Trả về một mảng rỗng nếu có lỗi
+    }
+}
+
+
+router.get('/cpanel/products', async function (req, res, next) {
+    try {
+        const productsForTemplate = await getProductsForTemplate();
+        res.render('admin/ListProducts',{ sp: JSON.stringify(productsForTemplate) });
+    } catch (error) {
+        console.error("Error rendering hbs template:", error);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
 
 //thêm sản phẩm yêu thích
 //http://localhost:3000/product/favorite

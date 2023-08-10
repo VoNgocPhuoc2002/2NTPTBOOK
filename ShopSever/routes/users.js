@@ -31,11 +31,36 @@ router.post('/users/login', async function (req, res, next) {
       res.status(200).json({ token, user });
       console.log("🚀 ~ file: users.js:31 ~ user:", user)
     } else {
-      res.status(401).json({ error: 'Sai email hoặc mật khẩu' });
+      res.status(200).json({ error: 'Sai email hoặc mật khẩu' });
+      console.log("Tài khoản hoặc mật khẩu không trùng khớp")
+
     }
   } catch (error) {
     res.status(401).json({ error: error.message });
   }
+});
+
+
+
+
+/*  http://localhost:3000/users/cpanel/login  */
+router.get("/cpanel/login", async function (req, res, next) {
+  res.render("admin/login");
+});
+
+
+router.post("/cpanel/login", async function (req, res, next) {
+try {
+  const { email, password } = req.body;
+  if (email == 'admin' && password == '123') {
+    res.render('admin/Menu');
+  } else {
+    throw new Error("Sai email hoặc mật khẩu");
+  } 
+} catch (error) {
+  console.log(error);
+  next(error);
+}
 });
 
 
@@ -92,6 +117,7 @@ router.get("/users/token", [authen], function (req, res, next) {
   console.log(req.user);
   res.json({ message: "ok" });
 });
+
 
 
 /* http://localhost:3000/api/users/refresh-token */
