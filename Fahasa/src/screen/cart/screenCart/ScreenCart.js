@@ -20,6 +20,7 @@ import IconEntypo from 'react-native-vector-icons/Entypo';
 import {AppContext} from '../../../ultil/AppContext';
 import {FlashList} from '@shopify/flash-list';
 import { Constants } from '../../../Constant';
+
 const ScreenCart = ({navigation}) => {
   const [data, setData] = useState([]);
   const [selectedItems, setSelectedItems] = useState({});
@@ -120,7 +121,7 @@ const ScreenCart = ({navigation}) => {
           quantity: 1, // You can adjust the quantity increment as needed (e.g., 1, 5, etc.)
         },
       );
-      // Refresh the cart after updating the quantity
+      // Refresh the cart after updating the quantityfl
       fetchShowCart();
     } catch (error) {
       console.error('Error updating cart item quantity', error);
@@ -257,10 +258,6 @@ const ScreenCart = ({navigation}) => {
             <Text style={styles.title}>Giỏ hàng</Text>
           </View>
           <View style={styles.body}>
-            <ScrollView
-              refreshControl={
-                <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-              }>
               <View style={styles.groupBody}>
                 <View style={styles.viewGroupCheckBox}>
                   <View style={styles.viewCheckBox}>
@@ -273,17 +270,18 @@ const ScreenCart = ({navigation}) => {
                     </TouchableOpacity>
                   </View>
                 </View>
-                <View style={{flex: 1, marginStart: 10, marginEnd: 10}}>
-                  <FlashList
+                <FlatList
+                   refreshControl={
+                    <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+                  }
                     data={data}
                     renderItem={renderItem}
                     keyExtractor={item => item._id}
                     initialNumToRender={3}
                     estimatedItemSize={200}
                   />
-                </View>
+                 
               </View>
-            </ScrollView>
           </View>
           <View style={styles.footer}>
             <View style={styles.viewThanhTien}>

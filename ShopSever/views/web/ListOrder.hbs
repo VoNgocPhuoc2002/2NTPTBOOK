@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recent Sales</title>
+    <!-- Include your CSS links here -->
+</head>
+
+<body>
+    <div class="container-fluid pt-4 px-4">
+        <div class="bg-secondary text-center rounded p-4">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <h6 class="mb-0">Recent Sales</h6>
+                <a href="#">Show All</a>
+            </div>
+            <div class="table-responsive">
+                <table class="table text-start align-middle table-bordered table-hover mb-0">
+                    <thead>
+                        <tr class="text-white">
+                            <th scope="col">Date</th>
+                            <th scope="col">Customer</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="salesDataBody">
+                        <!-- Sales data will be inserted here using JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+
+        async function handelAccept(userId, orderId) {
+            try {
+                const response = await fetch(`http://localhost:3000/order/${userId}/${orderId}/updateStatus`, {
+                    method: 'POST'
+                });
+            } catch (error) {
+                console.error('An error occurred while updating status:', error);
+            }
+        }
+        async function handelCancel(userId, orderId) {
+            try {
+                const response = await fetch(`http://localhost:3000/order/${userId}/${orderId}/cancelOrder`, {
+                    method: 'POST'
+                });
+            } catch (error) {
+                console.error('An error occurred while updating status:', error);
+            }
+        }
+        async function fetchData() {
+            try {
+                const response = await fetch('http://localhost:3000/order/getAllOrder');
+                const salesData = await response.json();
+
+                const salesDataBody = document.getElementById('salesDataBody');
+
+                // Sort the sales data by timeBuy in descending order (newest first)
+                salesData.sort((a, b) => new Date(b.timeBuy) - new Date(a.timeBuy));
+
+                // Loop through the sorted data and create rows for the table
+                salesData.forEach(sale => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${sale.timeBuy}</td>
+                        <td>${sale.userId}</td>
+                        <td>$${(sale.total)}</td>
+                        <td>${sale.status}</td>
+                      <td>
+                        ${sale.status === 'success' || sale.status === 'fail'
+                            ? `<button class="btn btn-sm btn-primary" style="display: none;">Xác nhận</button>
+                                <button class="btn btn-sm btn-secondary" style="display: none;">Hủy</button>`
+                            : `<button class="btn btn-sm btn-primary" onclick="handelAccept('${sale.userId}', '${sale._id}')">Xác nhận</button>
+                                <button class="btn btn-sm btn-secondary" onclick="handelCancel('${sale.userId}', '${sale._id}')">Hủy</button>`}
+                        </td>
+                    `;
+
+                    salesDataBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('An error occurred while fetching data:', error);
+            }
+        }
+
+        fetchData();
+    </script>
+
+    <!-- Include your JavaScript and CSS links here if needed -->
+</body>
+
+</html>

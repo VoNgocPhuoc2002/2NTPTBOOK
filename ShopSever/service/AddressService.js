@@ -56,9 +56,12 @@ const getUserAddresses = async (userId) => {
   }
 };
 // Hàm truy vấn đối tượng địa chỉ từ cơ sở dữ liệu
-const getAddressByAddressId = async (addressId) => {
+const getAddressByAddressId = async (userId, addressId) => {
   try {
-    const userWithAddress = await AddressModel.findOne({ "address.addressId": addressId });
+    const userWithAddress = await AddressModel.findOne({
+      userId,
+      "address.addressId": addressId
+    });
 
     if (userWithAddress) {
       const targetAddress = userWithAddress.address.find(addr => addr.addressId.toString() === addressId);
@@ -70,6 +73,10 @@ const getAddressByAddressId = async (addressId) => {
     throw new Error(error.message);
   }
 };
+
+
+
+
 
 // Cập nhật địa chỉ mặc định của người dùng
 const updateDefaultAddress = async (userId, addressId, addressLine1, addressLine2,addressLine3,addressLine4, isDefault) => {

@@ -18,6 +18,6 @@ router.post('/:userId/updateAddress', addressController.updateDefaultAddress);
 //http://localhost:3000/address/:userId/:addressId/deleteAddress
 router.delete('/:userId/deleteAddress', addressController.deleteAddress);
 
-router.get('/:addressId/getaddress', addressController.getAddress);
+router.get('/:userId/:addressId/getaddressdetail', addressController.getAddress);
 
 module.exports = router;

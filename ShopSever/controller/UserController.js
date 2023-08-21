@@ -49,6 +49,14 @@ const get = async (id,  name, dateofbirth, country, mobile, gender) => {
         console.log(error);
     }
 };
+const getAllUser = async () => {
+    try {
+        const user = await UserService.getAllUser();
+        return user;
+    } catch (error) {
+        console.log(error);
+    }
+};
 
 // Gửi mail
 const transporter = mailer.createTransport({
@@ -114,7 +122,7 @@ module.exports =
     register, login,
      update, get,
     forgotPassword, deleteByUser,
-    checkOTP, resetPassword, forgotPasswordSMS
+    checkOTP, resetPassword, forgotPasswordSMS,getAllUser
 };
 
 

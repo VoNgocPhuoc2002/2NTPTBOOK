@@ -36,7 +36,6 @@ const FlashSale = ({productData,navigation}) => {
     // Navigate to the detail screen with the item ID
     navigation.navigate('DetailProducts', {id: id});
   };
-
   const RenderItem = ({item}) => {
     const amount = item.price
 

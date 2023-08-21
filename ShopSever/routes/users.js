@@ -65,22 +65,7 @@ try {
 
 
 
-/* http://localhost:3000/api/users/login-google */
-router.post('/users/login-google', async function (req, res, next) {
-  try {
-    const { id, email, name, photo, idToken } = req.body;
-    const user = await UserController.loginGoogle(id, email, name, photo, idToken);
-    if (user) {
-      const token = jwt.sign({ user }, 'shhhhh', { expiresIn: 60 * 60 });
-      res.status(200).json({ token, user });
-      console.log("🚀 ~ file: users.js:31 ~ user:", user)
-    } else {
-      res.status(401).json({ error: 'Sai email hoặc mật khẩu' });
-    }
-  } catch (error) {
-    console.log(error);
-  }
-});
+
 
 //lấy thông tin user ra để làm quên mật khẩu
 /* http://localhost:3000/api/users/:userId */
@@ -134,19 +119,19 @@ router.post("/users/refresh-token", async function (req, res, next) {
   }
 });
 
-/*  http://localhost:3000/api/cpanel/login  */
-router.get("/cpanel/login", async function (req, res, next) {
-  res.render("login");
+/*  http://localhost:3000/api/cpanel/signin  */
+router.get("/cpanel/signin", async function (req, res, next) {
+  res.render("web/signin");
 });
 
-/* http://localhost:3000/api/cpanel/login */
-router.post("/cpanel/login", async function (req, res, next) {
+/* http://localhost:3000/api/cpanel/signin */
+router.post("/cpanel/signin", async function (req, res, next) {
   try {
     const { email, password } = req.body;
-    if (email == 'admin@gmail.com' && password == '123') {
-      res.render('index');
+    if (email == 'admin' && password == '123') {
+      //  res.render("http://localhost:3000/product/cpanel/index");
     } else {
-      throw new Error("Sai email hoặc mật khẩu");
+    console.log("Đăng nhập thất bbaij");
     }
   } catch (error) {
     console.log(error);
@@ -169,6 +154,23 @@ router.get("/users/:id/updateProfile", async function (req, res, next) {
     next(error);
   }
 });
+router.get('/users/getAllUser', UserController.getAllUser);
+
+
+router.get("/users/:id/updateProfile", async function (req, res, next) {
+  try {
+    const { id } = req.params;
+    const users = await UserController.get(id);
+    console.log("🚀 ~ file: users.js:87 ~ users:", users)
+    res.status(200).json({ users });
+    console.log(users);
+  } catch (error) {
+    res.status(414).json({ error: error.message });
+    console.log(error);
+    next(error);
+  }
+});
+
 
 //http://localhost:3000/api/users/:userId/updateEditProfile
 router.post("/users/:id/updateEditProfile", async function (req, res, next) {

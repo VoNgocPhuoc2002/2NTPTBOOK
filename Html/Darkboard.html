@@ -1,87 +1,97 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Statistics Dashboard</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f2f2f2;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+    <link rel="stylesheet" href="../css/products.css">
+    <link rel="stylesheet" href="../../public/stylesheets/addProducts.css">
 
-    .container {
-      background-color: #ffffff;
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-      width: 300px;
-    }
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
 
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+        }
 
-    .button-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-    }
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 20px 25px;
+            text-decoration: none;
+            transition: background-color 0.3s, color 0.3s;
+        }
 
-    .button {
-      background-color: #4CAF50;
-      color: #ffffff;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      margin-bottom: 10px;
-      cursor: pointer;
-      width: 48%;
-    }
+        .navbar a:hover {
+            background-color: #555;
+            color: #fff;
+        }
 
-    .button:hover {
-      background-color: #45a049;
-    }
-  </style>
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+        .content {
+            display: none;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Statistics Dashboard</h1>
-    <div class="button-container">
-      <button class="button" onclick="showDailyStatistics()">Daily</button>
-      <button class="button" onclick="showWeeklyStatistics()">Weekly</button>
-      <button class="button" onclick="showMonthlyStatistics()">Monthly</button>
-      <button class="button" onclick="showYearlyStatistics()">Yearly</button>
+  <div class="navbar">
+    <a href="#home" onclick="showSection('home')">Trang Chủ</a>
+    <a href="#add-product" onclick="showSection('add-product')">Sản Phẩm</a>
+    <a href="#statistics" onclick="showSection('statistics')">Thống Kê</a>
+    <a href="#confirm-orders" onclick="showSection('confirm-orders')">Xác Nhận Đơn Hàng</a>
+</div>
+<div class="container">
+    <div id="home" class="content">
+        <!-- Home content here -->
+        <h1>Trang Chủ</h1>
     </div>
-  </div>
-
-  <script>
-    function showDailyStatistics() {
-      // Replace this function with your logic to display daily statistics
-      alert('Daily Statistics');
+    <div id="add-product" class="content">
+      <a href="addproduct.html">Thêm Sản Phẩm</a>
+      <div id="add-product-content"></div>
+    </div>
+    <div id="statistics" class="content">
+        <!-- Statistics content here -->
+        <h1>Thống Kê</h1>
+    </div>
+   
+</div>
+<script>
+    function showSection(sectionId) {
+        const sections = document.querySelectorAll('.content');
+        sections.forEach(section => {
+            if (section.id === sectionId) {
+                section.style.display = 'block';
+            } else {
+                section.style.display = 'none';
+            }
+        });
     }
-
-    function showWeeklyStatistics() {
-      // Replace this function with your logic to display weekly statistics
-      alert('Weekly Statistics');
-    }
-
-    function showMonthlyStatistics() {
-      // Replace this function with your logic to display monthly statistics
-      alert('Monthly Statistics');
-    }
-
-    function showYearlyStatistics() {
-      // Replace this function with your logic to display yearly statistics
-      alert('Yearly Statistics');
-    }
-  </script>
+</script>
+<script>
+    const loadFile = function (event) {
+        const reader = new FileReader();
+        reader.onload = function () {
+            var output = document.getElementById('img-display');
+            output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    };
+</script>
 </body>
 </html>

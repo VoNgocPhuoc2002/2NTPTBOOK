@@ -4,7 +4,7 @@ const Styles = StyleSheet.create({
     groupWorkspaces: {
       marginStart: 20,
       height:300,
-      width:"100%"
+      width:"100%",
     },
       viewItemName:{
         width:"80%",
@@ -116,7 +116,7 @@ const Styles = StyleSheet.create({
         justifyContent: 'center',
       },
       groupItem:{
-        height:350,
+        flex:1
       },
       
 })

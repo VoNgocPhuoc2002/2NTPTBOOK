@@ -105,7 +105,7 @@ const ScreenOrder1 = ({navigation}) => {
     const addresses = item.address;
 
     return (
-      <View style={{backgroundColor: 'blue'}}>
+      <View style={{}}>
         {addresses.map(address => (
           <View key={address._id} style={styles.viewText}>
             <View style={{width: 50, alignItems: 'center'}}>

@@ -18,6 +18,9 @@ import AddAddressScreen from "../screen/address/AddAddressScreen";
 import LoginScreen from "../screen/Login/LoginScreen";
 import Login from "../screen/Login/component/login/Login";
 import Signup from "../screen/Login/component/signup/Signup";
+import OrderFinal from "../screen/profile/History/detailOrders/orderFinal/OrderFinal";
+import ScreenOrderDetail from "../screen/order/orderDetails/ScreenOrderDetail";
+import FavouriteScreen from "../screen/favourite/FavouriteScreen";
 const Stack = createNativeStackNavigator();
 
 const AppStack = () => {
@@ -108,6 +111,21 @@ const AppStack = () => {
       <Stack.Screen
         name="AddAddressScreen"
         component={AddAddressScreen}
+        options={{ headerShown: false }}
+      /> 
+      <Stack.Screen
+        name="OrderFinal"
+        component={OrderFinal}
+        options={{ headerShown: false }}
+      />
+     <Stack.Screen
+        name="ScreenOrderDetail"
+        component={ScreenOrderDetail}
+        options={{ headerShown: false }}
+      /> 
+      <Stack.Screen
+        name="FavouriteScreen"
+        component={FavouriteScreen}
         options={{ headerShown: false }}
       />
      

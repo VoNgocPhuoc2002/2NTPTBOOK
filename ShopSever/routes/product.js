@@ -81,7 +81,7 @@ async function getProductsForTemplate() {
 router.get('/cpanel/products', async function (req, res, next) {
     try {
         const productsForTemplate = await getProductsForTemplate();
-        res.render('admin/ListProducts',{ sp: JSON.stringify(productsForTemplate) });
+       
     } catch (error) {
         console.error("Error rendering hbs template:", error);
         res.status(500).send("Internal Server Error");
@@ -231,6 +231,14 @@ router.post('/:id/detail', upload.single('image'), async function (req, res, nex
 
 router.get('/cancel', function (req, res, next) {
     res.send('cancel');
+    console.log("🚀 ~ file: product.js:210 ~ req", req)
+});
+router.get('/cpanel/index', function (req, res, next) {
+    res.render('web/index',{layout:'layout/main.hbs'});
+    console.log("🚀 ~ file: product.js:210 ~ req", req)
+});
+router.get('/cpanel/table', function (req, res, next) {
+    res.render('web/ListOrder',{layout:'layout/main.hbs'});
     console.log("🚀 ~ file: product.js:210 ~ req", req)
 });
 

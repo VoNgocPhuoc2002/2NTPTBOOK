@@ -1,8 +1,10 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View,ToastAndroid,Image,TouchableOpacity} from 'react-native';
 import React from 'react';
-import {Image} from '@rneui/themed/dist/Image';
 
 const Menu = () => {
+  const erro = ()=>{
+    ToastAndroid.show("Tính năng đang phát triển", ToastAndroid.SHORT)
+  }
   return (
     <View
       style={{
@@ -14,15 +16,21 @@ const Menu = () => {
         paddingEnd:10,
       }}>
       <View style={{alignItems: 'center'}}>
+        <TouchableOpacity onPress={erro}>
         <View>
           <Image
             style={{width: 50, height: 50}}
             source={require('../../assets/BackToSchool.png')}
           />
         </View>
+        </TouchableOpacity>
+        
+        <TouchableOpacity onPress={erro}>
         <View style={{width: 70,alignItems:"center"}}>
         <Text>Back To School</Text>
         </View>
+        </TouchableOpacity>
+       
 
       </View>
 

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tạo Mới Sản Phẩm</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      padding: 30px;
+      width: 350px;
+      max-width: 90%;
+    }
+
+    h1 {
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #555;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    img#img-display {
+      width: 100%;
+      height: auto;
+      max-height: 300px;
+      border-radius: 5px;
+      margin-bottom: 15px;
+    }
+
+    button[type="submit"] {
+      background-color: #4CAF50;
+      color: #ffffff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      width: 100%;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Tạo Mới Sản Phẩm</h1>
+    <form method="post" action="/product/tao-moi" enctype="multipart/form-data">
+      <!-- Các trường nhập liệu ở đây -->
+      <button type="submit">Tạo mới</button>
+    </form>
+
+    <table>
+     
+      <tbody>
+        <div id="add-product" class="content">
+            <!-- Add Product content here -->
+            <h1>Tạo Mới Sản Phẩm</h1>
+           <form method="post" action="/product/tao-moi" enctype="multipart/form-data">
+        <input type="text" name="name" id="name" placeholder="Nhập sản phẩm" /> <br />
+        <input type="text" name="author" id="author" placeholder="Tác giả" /> <br />
+        <input type="text" name="titledescription" id="titledescription" placeholder="Tên mô tả" /> <br />
+        <input type="text" name="description" id="description" placeholder="Mô tả" /> <br />
+        <input type="text" name="countryside" id="countryside" placeholder="Xuất sứ" /> <br />
+        <input type="text" name="processingplace" id="processingplace" placeholder="Sản xuất tại" /> <br />
+        <input type="text" name="size" id="size" placeholder="Kích thước" /> <br />
+        <input type="text" name="weight" id="weight" placeholder="Khối lượng" /> <br />
+        <input type="file" name="image" id="image" onchange="loadFile(event);" /> <br />
+        <img width="300" height="300" id="img-display" alt="Image" src="{{product.image}}"><br />
+        <input type="text" name="price" id="price" placeholder="Giá" /> <br />
+        <input type="number" name="discount" id="discount" placeholder="Giảm giá" /> <br />
+        
+        <input type="number" name="quantity" id="quantity" placeholder="Số lượng" /> <br />
+        
+        <input type="checkbox" name="isFutured" id="isFutured" placeholder="Nổi bật" /> <br />
+        <input type="date" name="dateCreated" id="dateCreated" placeholder="Năm sản xuất" /> <br />
+        <select name="categoryId">
+        </select> <br />
+        
+        <input type="submit" value="Tạo mới" /> <br />
+            </form> 
+        </div>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
+
+
+
+
+
+

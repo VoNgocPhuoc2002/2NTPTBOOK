@@ -11,7 +11,6 @@ const Styles = StyleSheet.create({
     // header
     header: {
         flex: 2,
-       
     },
     // body
     body: {
@@ -28,17 +27,13 @@ const Styles = StyleSheet.create({
         backgroundColor: "green",
         width: "70%",
     },
-    viewItem: {
-        backgroundColor: "blue",
-        borderRadius: 10,
-        flexDirection: "row",
-
-    },
+  
     imageItem: {
         width: 80,
         height: 80,
     },
     viewItemName: {
+      width:150,
     },
     nameItem: {
         fontSize: 16,
@@ -90,14 +85,10 @@ const Styles = StyleSheet.create({
    viewItem: {
     width: "100%",
     alignItems: 'center',
-    backgroundColor:"#F4F5F7",
-    borderWidth:1,
     height:240,
     justifyContent: 'center',
   },
-  viewItemName:{
-    width:"80%",
-  },
+
   nameItem: {
     fontSize: 14,
     color: 'black',

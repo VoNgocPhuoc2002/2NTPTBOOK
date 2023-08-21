@@ -19,6 +19,43 @@ const createOrder = async (userId, cart, total, addressId) => {
     }
 };
 
+const updateStatus = async (userId, _id) => {
+    try {
+        const order = await OrderModel.findOne({ userId, _id });
+        if (!order) {
+            throw new Error('Order not found');
+        }
+        if (order.status ==="pending"){
+            order.status = 'success'; // Cập nhật trạng thái thành công
+            await order.save(); // Lưu lại đơn hàng    
+        }
+        return order;
+    } catch (error) {
+        console.log(error);
+        throw new Error('Error updating status');
+    }
+};
+const cancelOrder = async (userId, _id) => {
+    try {
+        const order = await OrderModel.findOne({userId, _id});
+        if (!order) {
+            throw new Error('Order not found');
+        }
+        if (order.status ==="pending"){
+            order.status = 'fail'; // Cập nhật trạng thái thành công
+            await order.save(); // Lưu lại đơn hàng    
+        }
+        return order;
+    } catch (error) {
+        console.log(error);
+        throw new Error('Error updating status');
+    }
+};
+
+
+
+
+
 // Lấy thông tin tất cả đơn hàng theo ID
 const getOrderById = async (userId) => {
     try {
@@ -40,6 +77,16 @@ const getOrderByOrderId = async (_id) => {
       throw new Error('Lỗi khi lấy thông tin đơn hàng');
     }
   };
+  const getAllOrder = async () => {
+    try {
+      const orders = await OrderModel.find();
+      return orders;
+    } catch (error) {
+      console.log(error);
+      throw new Error('Lỗi khi lấy thông tin đơn hàng');
+    }
+  };
+  
 
 // // Cập nhật thông tin đơn hàng trạng thái đơn hàng
 // const updateOrder = async (userId, status, paymentStatus) => {
@@ -92,7 +139,9 @@ const getOrderByOrderId = async (_id) => {
 module.exports =
 {
     createOrder, getOrderById,
-    getOrderByOrderId
+    getOrderByOrderId,
+    updateStatus,cancelOrder,
+    getAllOrder
     // updateOrder, deleteOrder,
     // createPaypalPayment, executePaypalPayment,
     // payWithPaypal,

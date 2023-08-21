@@ -1,22 +1,65 @@
 import { StyleSheet, Text, View, ScrollView, SafeAreaView, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useState,useEffect } from 'react'
 import styles from '../detailOrders/Styles';
 import AxiosIntance from '../../../../ultil/AxiosIntance';
+import moment from 'moment';
+import { getUserId } from '../../../../ultil/GetUserId';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const DetailOrder = ({route} ) => {
-  // const { orderId } = route.params;
-  // console.log("responsdsae", orderId)
+const DetailOrder = ({route,navigation}) => {
+  const {id} = route.params;
+
+  const[inforCart,setInforCart] = useState("")
+  const[data,setData] = useState("")
+  const[addressId,setAddressId] = useState("")
+  const[address,setAddress] = useState("")
+
+  const formattedDate = moment(data.timeBuy, "MMM D, YYYY").format("MM/DD/YYYY");
+
+
 
   const fetchShowDetailOrder = async () => {
     // if(orderId){
-      const response = await AxiosIntance().get(`order/64c3955422bf5302a1d179ce/getorderDetail`);
+      const response = await AxiosIntance().get(`order/${id}/getorderDetail`);
       console.log("repose", response)
-    // }
-     
-  };
- 
+      setAddressId(response.addressId)
+      setData(response)
+   };
+   const fetchShowDetailAdress = async () => {
+    // if(orderId){
+      const userId = await getUserId();
+      const response = await AxiosIntance().get(`address/${userId}/${addressId}/getaddressdetail`);
+      console.log("address", response)
+      setAddress(response.address)
+      console.log("userId", userId)
 
+   };
+   useEffect(() => {
 
+    fetchShowDetailOrder(); // Call the fetchUserData function
+    fetchShowDetailAdress();
+  }, []);
+  let statusText = '';
+  let statusColor = '';
+  let statusBackgroundColor = '';
+
+  if (data.status === 'pending') {
+    statusText = 'Chờ xác nhận';
+    statusColor = '#ff5733';
+    statusBackgroundColor = '#FFCC80'; // Màu cam nhạt
+  } else if (data.status === 'success') {
+    statusText = 'Hoàn thành';
+    statusColor = '#4caf50';
+    statusBackgroundColor = '#A5D6A7'; // Màu xanh lá nhạt
+  } else if (data.status === 'fail') {
+    statusText = 'Bị huỷ';
+    statusColor = '#f44336';
+    statusBackgroundColor = '#EF9A9A'; // Màu đỏ nhạt
+  }
+
+  const handleDetailOrder = ()=>{
+    navigation.navigate("ScreenOrderDetail",{data,address})
+  }
 
   return (
     
@@ -31,22 +74,34 @@ const DetailOrder = ({route} ) => {
 
           <View style={styles.part1_grtext}>
             <Text style={styles.part1_text}>Mã đơn hàng : </Text>
-            <Text style={styles.part1_textB}>402934785</Text>
+            <Text style={styles.part1_textB}>{data._id}</Text>
           </View>
           <View style={styles.part1_grtext}>
             <Text style={styles.part1_text}>Ngày mua : </Text>
-            <Text style={styles.part1_textB}>24/07/2023</Text>
+            <Text style={styles.part1_textB}>{formattedDate}</Text>
           </View>
           <View style={styles.part1_grtext}>
             <Text style={styles.part1_text}>Tổng tiền : </Text>
-            <Text style={styles.part1_textB}>26.000 đ</Text>
+            <Text style={styles.part1_textB}>{data.total}</Text>
           </View>
 
-          <View style={styles.part1_grtext2}>
-            <Text style={styles.part1_text2}>Đơn hàng chờ xác nhận</Text>
-          </View>
+          <View
+              style={{
+                backgroundColor: statusBackgroundColor,
+                padding: 5,
+                borderRadius: 10,
+                marginStart: 10,
+                height:40,
+                width:120,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Text style={{fontWeight: 'bold', color: statusColor}}>
+                {statusText}
+              </Text>
+            </View>
 
-          <Text style={styles.part1_text}>Thông tin hóa đơn : (Không có)</Text>
+          <Text style={styles.part1_text}>Thông tin xuất hóa đơn : (Không có)</Text>
           <Text style={styles.part1_text}>Ghi chú : (Không có)</Text>
 
         </View>
@@ -56,9 +111,9 @@ const DetailOrder = ({route} ) => {
         </View>
 
         <View style={styles.part1}>
-          <Text style={styles.part1_text}>Võ Ngọc Phước</Text>
-          <Text style={styles.part1_text}>562/39h Nguyễn Kiệm, Phường 4 Quận Phú Nhuận, TP.Hồ Chí Minh, Việt Nam</Text>
-          <Text style={styles.part1_text}>0391234567</Text>
+          <Text style={styles.part1_text}>{address.fullName}</Text>
+          <Text style={styles.part1_text}>{address.addressLine4}, {address.addressLine3}, {address.addressLine2}, {address.addressLine1}</Text>
+          <Text style={styles.part1_text}>{address.phoneNumber}</Text>
         </View>
 
         <View style={styles.title}>
@@ -81,41 +136,44 @@ const DetailOrder = ({route} ) => {
           <Text style={styles.title_Text}></Text>
         </View>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={()=>handleDetailOrder()}>
           <View style={styles.part1}>
 
             <View style={styles.part1_grtext}>
               <Text style={styles.part1_text}>Mã đơn hàng : </Text>
-              <Text style={styles.part1_textB}>402934785</Text>
+              <Text style={styles.part1_textB}>{data._id}</Text>
             </View>
             <View style={styles.part1_grtext}>
               <Text style={styles.part1_text}>Ngày mua : </Text>
-              <Text style={styles.part1_textB}>24/07/2023</Text>
+              <Text style={styles.part1_textB}>{formattedDate}</Text>
             </View>
             <View style={styles.part1_grtext}>
               <Text style={styles.part1_text}>Tổng tiền : </Text>
-              <Text style={styles.part1_textB}>26.000 đ</Text>
+              <Text style={styles.part1_textB}>{data.total}</Text>
             </View>
 
-            <View style={styles.part1_grtext2}>
-              <Text style={styles.part1_text2}>Đơn hàng chờ xác nhận</Text>
+            <View
+              style={{
+                backgroundColor: statusBackgroundColor,
+                padding: 5,
+                borderRadius: 10,
+                marginStart: 10,
+                height:40,
+                width:120,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Text style={{fontWeight: 'bold', color: statusColor}}>
+                {statusText}
+              </Text>
             </View>
 
           </View>
         </TouchableOpacity>
-
+              <TouchableOpacity onPress={fetchShowDetailAdress}>
+                <Text>jksadghjsagjdhgsajg</Text>
+              </TouchableOpacity>
       </ScrollView>
-
-      <TouchableOpacity onPress={fetchShowDetailOrder}>
-        <View style={styles.bot}>
-          <View style={styles.bottom}>
-            <Text style={styles.bottom_Text}>Thanh toán</Text>
-          </View>
-        </View>
-
-
-      </TouchableOpacity>
-
     </View>
 
   )

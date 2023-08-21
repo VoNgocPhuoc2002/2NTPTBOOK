@@ -19,9 +19,10 @@ const handleLogin = async () => {
         email: email,
         password: password
       });
+      await AsyncStorage.setItem("userId", response.user._id);
+
         setIsLogin(true);
-        await AsyncStorage.setItem("userId", response.data.user._id);
-        await AsyncStorage.setItem('isLoggedIn', 'true');
+        // navigation.navigate("")
         console.log("Login successful. User data:", response.data.user);
         if (response.data === null) {
         ToastAndroid.show("Mật khẩu hoặc tài khoản không trùng khớp ", ToastAndroid.SHORT);

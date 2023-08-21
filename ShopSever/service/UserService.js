@@ -93,6 +93,17 @@ const get = async (id,name, dateofbirth, country, mobile, gender) => {
     }
 };
 
+
+
+const getAllUser = async () => {
+    try {
+      const user = await UserModel.find();
+      return user;
+    } catch (error) {
+      console.log(error);
+      throw new Error('Lỗi khi lấy thông tin đơn hàng');
+    }
+  };
 // Kiểm tra mã OTP
 const checkOTP = async (token, otp) => {
     // 1. Tìm user theo token
@@ -129,5 +140,5 @@ module.exports =
     login, register,
      deleteByUser,
     update, forgotPassword,
-    get, resetPassword, checkOTP, forgotPasswordSMS
+    get, resetPassword, checkOTP, forgotPasswordSMS,getAllUser
 };

@@ -14,9 +14,13 @@ const addToFavourite = async (userId, productId) => {
         // Nếu mảng productId chưa được khởi tạo, tạo mới và thêm sản phẩm vào
         favourite.productId = [productId];
       } else {
-        // Nếu mảng productId đã tồn tại, thêm sản phẩm mới vào mảng
-        favourite.productId.push(productId);
+        // Nếu mảng productId đã tồn tại, kiểm tra xem sản phẩm đã tồn tại trong danh sách chưa
+        if (!favourite.productId.includes(productId)) {
+          // Thêm sản phẩm mới vào mảng nếu chưa tồn tại
+          favourite.productId.push(productId);
+        }
       }
+      // Lưu thay đổi vào cơ sở dữ liệu
       await favourite.save();
     }
     
@@ -25,6 +29,7 @@ const addToFavourite = async (userId, productId) => {
     throw error;
   }
 };
+
 
 
 // Lấy danh sách yêu thích của người dùng với thông tin name, price và image của sản phẩm
@@ -52,9 +57,13 @@ const removeFromFavourite = async (userId, productId) => {
     const favourite = await favouriteModel.findOne({ userId });
     
     if (favourite) {
-      // Nếu tồn tại danh sách yêu thích, xóa sản phẩm khỏi mảng productIds
-      favourite.productId = favourite.productId.filter(id => id.toString() !== productId);
-      await favourite.save();
+      // Kiểm tra xem sản phẩm có tồn tại trong danh sách yêu thích không
+      const productIndex = favourite.productId.findIndex(id => id.toString() === productId);
+      if (productIndex !== -1) {
+        // Xoá sản phẩm khỏi mảng productIds
+        favourite.productId.splice(productIndex, 1);
+        await favourite.save();
+      }
     }
     
     return { message: 'Product removed from favourites' };

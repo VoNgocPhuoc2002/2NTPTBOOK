@@ -6,7 +6,6 @@ import {updateProfile} from '../../../ultil/ApiUser/UserApi';
 
 const EditProfile = () => {
   const [gender, setCheckNam] = useState('nam');
-  const [checkNu, setCheckNu] = useState(false);
   const [name, setName] = useState('');
   const [dateofbirth, setBirthday] = useState('');
   const [mobile, setMobile] = useState('');
@@ -16,7 +15,13 @@ const EditProfile = () => {
   const handleUpdateProfile = () => {
     updateProfile(name, dateofbirth, country, mobile, gender);
   };
+  const handleMaleChange = () => {
+    setCheckNam('nam');
+  };
 
+  const handleFemaleChange = () => {
+    setCheckNam('nu');
+  };
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -68,28 +73,22 @@ const EditProfile = () => {
       <View style={styles.groupInput}>
         <Text style={styles.titleInput}>Giới tính</Text>
         <View style={styles.viewCheckBox}>
-          <CheckBox
-            center
-            title="Nam"
-            checkedIcon="dot-circle-o"
-            uncheckedIcon="circle-o"
-            checked={gender}
-            onPress={() => {
-              setCheckNam(!gender);
-              setCheckNu(false);
-            }}
-          />
-          <CheckBox
-            center
-            title="Nữ"
-            checkedIcon="dot-circle-o"
-            uncheckedIcon="circle-o"
-            checked={checkNu}
-            onPress={() => {
-              setCheckNu(!checkNu);
-              setCheckNam(false);
-            }}
-          />
+        <CheckBox
+        center
+        title="Nam"
+        checkedIcon="dot-circle-o"
+        uncheckedIcon="circle-o"
+        checked={gender === 'nam'}
+        onPress={handleMaleChange}
+      />
+      <CheckBox
+        center
+        title="Nữ"
+        checkedIcon="dot-circle-o"
+        uncheckedIcon="circle-o"
+        checked={gender === 'nu'}
+        onPress={handleFemaleChange}
+      />
         </View>
       </View>
       <TouchableOpacity

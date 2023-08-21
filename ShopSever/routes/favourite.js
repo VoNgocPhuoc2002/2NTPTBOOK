@@ -13,7 +13,7 @@ router.get('/:userId/GetFavourites', favouriteController.getFavouritesByUserId);
 
 // Route để xóa sản phẩm khỏi danh sách yêu thích
 //http://localhost:3000/heart/:userId/RemoveFavourites
-router.delete('/:userId/RemoveFavourites', favouriteController.removeFromFavourite);
+router.post('/:userId/RemoveFavourites', favouriteController.removeFromFavourite);
 
 //Route để ra sản phẩm yêu thích chi tiết
 //http://localhost:3000/heart/:userId/GetFavourites/:productId

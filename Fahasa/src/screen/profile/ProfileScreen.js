@@ -66,6 +66,10 @@ const ProfileScreen = ({navigation}) => {
   const tab_history = () => {
     navigation.navigate("HistoryTab")
   }
+  const handleMoveFavourite = ()=>{
+    navigation.navigate("FavouriteScreen")
+
+  }
   const handleLogout = async () => {
     await AsyncStorage.removeItem('userId');
     setIsLogin(false)
@@ -217,7 +221,7 @@ const ProfileScreen = ({navigation}) => {
         </TouchableOpacity>
         <View style={styles.lineFull}></View>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handleMoveFavourite}>
           <View style={styles.groupUpdateProfile}>
             <View style={styles.rightUpdateProfile}>
               <IconIonicons style={{marginEnd:10,}} name="person-outline" size={25} color="black" />

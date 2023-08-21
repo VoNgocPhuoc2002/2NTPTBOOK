@@ -46,8 +46,7 @@ const ScreenOrder3 = ({navigation}) => {
         `order/${fetchedUserId}/addorder`,requestData
       );
       setOrderId(response._id);
-      navigation.navigate("DetailOrder",{orderId})
-
+      navigation.navigate("TabNavigation");
       console.log("createOrder",response)
       for (const product of cart) {
         removeCartItem(product.productId);

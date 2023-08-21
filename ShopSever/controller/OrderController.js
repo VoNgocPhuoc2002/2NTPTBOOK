@@ -15,6 +15,37 @@ const createOrder = async (req, res) => {
     }
 };
 
+const updateStatus = async (req, res) => {
+    try {
+        const { userId,_id } = req.params;
+        // const { _id } = req.body;
+
+        // Gọi service để cập nhật trạng thái đơn hàng
+        const order = await orderService.updateStatus(userId, _id);
+
+        res.status(200).json(order);
+        console.log('Đơn hàng mới:', order);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: 'Lỗi khi cập nhật trạng thái đơn hàng' });
+    }
+};
+const cancelOrder = async (req, res) => {
+    try {
+        const { userId,_id } = req.params;
+        // const { _id } = req.body;
+
+        // Gọi service để cập nhật trạng thái đơn hàng
+        const order = await orderService.cancelOrder(userId, _id);
+
+        res.status(200).json(order);
+        console.log('Đơn hàng mới:', order);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: 'Lỗi khi cập nhật trạng thái đơn hàng' });
+    }
+};
+
 
 // Lấy thông tin đơn hàng theo ID
 const getOrderById = async (req, res) => {
@@ -40,6 +71,18 @@ const getOrderByOrderId = async (req, res) => {
         console.log(error);
         res.status(500).json({ error: 'Lỗi khi lấy thông tin đơn hàng' });
       }
+};
+
+const getAllOrder = async (req, res) => {
+    try {
+        // Gọi service để lấy thông tin đơn 
+        const order = await orderService.getAllOrder();
+        res.status(200).json(order);
+        console.log('Thông tin đơn hàng:', order);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: 'Lỗi khi lấy thông tin đơn hàng' });
+    }
 };
 
 
@@ -95,7 +138,8 @@ module.exports =
 {
     createOrder
     , getOrderById,
-    getOrderByOrderId
+    getOrderByOrderId,
+    updateStatus,cancelOrder,getAllOrder
     // updateOrder, deleteOrder,
     // payWithPaypal, confirmPaypalPayment, getOrderHistory,
     // createBarcode, getBarcode

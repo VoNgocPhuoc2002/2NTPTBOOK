@@ -1,52 +1,79 @@
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, FlatList, Image} from 'react-native'
-import React, {useState} from 'react'
+import React, {useState,useEffect} from 'react'
 import styles from './Styles'
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import { Constants } from '../../../Constant'
 import { FlashList } from '@shopify/flash-list';
-const ScreenOrderDetail = () => {
+const ScreenOrderDetail = ({route}) => {
+  const {address,data} = route.params;
+  const [cart,setCart] = useState("")
+  const fetchData = ()=>{
+    setCart(data.cart)
 
-    const data = [
-        {
-          id: '1',
-          image: require('../../../assets/sach1.png'),
-          name: 'Bí quyết Học Bài Mau Thuộc',
-          price: "7.000 đ",
-          quantity: 1,
-          sumPrice: "7.000 đ"
-        },
-        {
-          id: '2',
-          image: require('../../../assets/sach2.png'),
-          name: 'Quà Tặng Lịch TÚi Hương Trang Ngẫu Nhiên',
-          price: "0 đ",
-          quantity: 1,
-          sumPrice: "0 đ"
-        },
-        // {
-        //     id: '3',
-        //     image: require('../../../assets/sach2.png'),
-        //     name: 'Quà Tặng Lịch TÚi Hương Trang Ngẫu Nhiên',
-        //     price: "0 đ",
-        //     quantity: 1,
-        //     sumPrice: "0 đ"
-        //   },
-      ];
+  }
+  console.log("cart",cart)
+  useEffect(() => {
+    fetchData(); 
+  }, []);
+let count = 0;
+for (const item of cart) {
+  if (item._id != null) {
+    count++;
+  }
+}
+if (data.status === 'pending') {
+  statusText = 'Chờ xác nhận';
+  statusColor = '#ff5733';
+  statusBackgroundColor = '#FFCC80'; // Màu cam nhạt
+} else if (data.status === 'success') {
+  statusText = 'Hoàn thành';
+  statusColor = '#4caf50';
+  statusBackgroundColor = '#A5D6A7'; // Màu xanh lá nhạt
+} else if (data.status === 'fail') {
+  statusText = 'Bị huỷ';
+  statusColor = '#f44336';
+  statusBackgroundColor = '#EF9A9A'; // Màu đỏ nhạt
+}
 
+function formatCurrency(amount) {
+  const formattedAmount = amount.toLocaleString('vi-VN', {
+    style: 'currency',
+    currency: 'VND',
+  });
+  return formattedAmount;
+}
+const Total = formatCurrency(data.total);
+console.log("count",count)
 
-    const renderItem = ({ item }) => (
+  console.log("data",data)
+    const RenderItem = ({ item }) => {
+      console.log("item:sss ",item)
+      const price = item.price
+      const total = item.price *= item.quantity
+      function formatCurrency(amount) {
+        const formattedAmount = amount.toLocaleString('vi-VN', {
+          style: 'currency',
+          currency: 'VND',
+        });
+        return formattedAmount;
+      }
+      const newPrice = formatCurrency(price);
+      const newTotal = formatCurrency(total);
+      return(
         <View style={styles.itemContainer}>
           <View style={styles.item_flex}>
-            <Image source={item.image} style={styles.image} />
+            <Image  source={{uri: item.image}} style={styles.image} />
             <View  style={styles.allText}>
-              <Text style={styles.name}>{item.name}</Text>
-              <Text style={styles.name}>Giá: {item.price}</Text>
+              <Text style={styles.name}>{item.name} </Text>
+              <Text style={styles.name}>Giá: {newPrice}</Text>
               <Text style={styles.name}>Số lượng: {item.quantity}</Text>
-              <Text style={styles.name}>Tổng tiền: {item.sumPrice}</Text>
+              <Text style={styles.name}>Tổng tiên: {newTotal}</Text>
             </View>
           </View>
         </View>
     );
+  }
+
 
     return (
         <View style={styles.container}>
@@ -64,28 +91,36 @@ const ScreenOrderDetail = () => {
                     
                 </Text>
             </View>
-            <ScrollView>
             <View style={styles.viewOrder}>
-                <Text style={styles.textCode} >Mã đơn hàng: <Text style={styles.textCode1}>402152529</Text></Text>
-                <Text style={styles.btnWait}>Đơn hàng Chờ xác nhận</Text>
-                <Text style={styles.textCode} >Số lượng: <Text style={styles.textCode1}>2 sản phẩm</Text></Text>
-                <Text style={styles.textCode} >Tổng tiền: <Text style={styles.textCode1}>26.000 đ</Text></Text>
+                <Text style={styles.textCode} >Mã đơn hàng: <Text style={styles.textCode1}>{data._id}</Text></Text>
+                <View
+              style={{
+                backgroundColor: statusBackgroundColor,
+                padding: 5,
+                borderRadius: 10,
+                marginStart: 10,
+                height:40,
+                width:120,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Text style={{fontWeight: 'bold', color: statusColor}}>
+                {statusText}
+              </Text>
+            </View>
+                <Text style={styles.textCode} >Số lượng: <Text style={styles.textCode1}>{count} sản phẩm</Text></Text>
+                <Text style={styles.textCode} >Tổng tiền: <Text style={styles.textCode1}>{Total}</Text></Text>
             </View>
             <View style={styles.listProduct}>
                 <Text style={styles.textProduct}>Sản Phẩm</Text>
                 <FlashList
-                    data={data}
-                    renderItem={renderItem}
+                    data={cart}
+                    renderItem={RenderItem}
                     keyExtractor={item => item._id}
                 />
             </View>
-            <View style={styles.viewPayment}>
-                <Text style={styles.textCode} >Thành tiền: <Text style={styles.textCode1}>7.000 đ</Text></Text>
-                <Text style={styles.textCode} >Phí Vận chuyển: <Text style={styles.textCode1}>19.000 đ</Text></Text>
-                <Text style={styles.textCode} >Thành tiền (Đã bao gồm VAT): <Text style={styles.textCode1}>26.000 đ</Text></Text>
-            </View>
-            </ScrollView>
         </View>
+       
     )
 }
  

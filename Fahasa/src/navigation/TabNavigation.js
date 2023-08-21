@@ -88,14 +88,14 @@ const TabNavigation = () => {
         }}
       />
       <Tab.Screen
-        name="ádasd"
-        component={DetailOrder}
+        name="Notification"
+        component={Notification}
         options={{
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <View style={{ alignItems: "center", justifyContent: "center" }}>
               <Image
-                source={require("../assets/IconSearch.png")}
+                source={require("../assets/IconBell.png")}
                 resizeMode="contain"
                 style={{
                   width: 20,

@@ -43,7 +43,6 @@ const Styles = StyleSheet.create({
   part1: {
     backgroundColor: Constants.COLOR.WHITE,
     padding: 15,
-
   },
   part1_grtext: {
     flexDirection: 'row',

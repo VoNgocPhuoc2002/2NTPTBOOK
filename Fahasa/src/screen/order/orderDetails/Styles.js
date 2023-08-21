@@ -91,7 +91,6 @@ const Styles = StyleSheet.create({
     image: {
         width: 120,
         height: 120,
-        marginLeft: 12
     },
 
     allText: {
@@ -106,7 +105,7 @@ const Styles = StyleSheet.create({
 
 
     viewPayment: {
-        flex: 1,
+        flex: 0.3,
         backgroundColor: Constants.COLOR.WHITE,
         marginTop: 8,
         paddingVertical: 8

@@ -38,14 +38,14 @@ const getUserAddresses = async (req, res) => {
 // Controller function
 const getAddress = async (req, res) => {
   try {
-    const { addressId } = req.params;
-    const address = await addressService.getAddressByAddressId(addressId);
+    const { userId,addressId } = req.params;
+    const targetAddress = await addressService.getAddressByAddressId(userId,addressId);
 
-    if (address) {
-      res.status(200).json({ addresses: [address] }); // Lưu ý việc sử dụng mảng ở đây
-      console.log('Thông tin địa chỉ:', address);
+    if (targetAddress) {
+      res.status(200).json({ address: targetAddress });
+      console.log('Thông tin địa chỉ:', targetAddress);
     } else {
-      res.status(200).json({ addresses: [] }); // Trả về mảng rỗng nếu không tìm thấy
+      res.status(200).json({ address: null });
       console.log('Không tìm thấy địa chỉ');
     }
   } catch (error) {
@@ -53,6 +53,9 @@ const getAddress = async (req, res) => {
     console.log("Error:", error);
   }
 };
+
+
+
 
 
 // Cập nhật địa chỉ mặc định của người dùng

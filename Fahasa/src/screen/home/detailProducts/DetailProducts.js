@@ -17,14 +17,14 @@ import {Constants} from '../../../Constant';
 import {getUserId} from '../../../ultil/GetUserId';
 import AxiosIntance from '../../../ultil/AxiosIntance';
 import CustomAlert from '../../../ultil/CustomAlert';
-
 const DetailProducts = ({route, navigation}) => {
-  const {id} = route.params;
+  const {id,status} = route.params;
+  console.log("status");
   const [data, setdata] = useState('');
   const [quantity, setQuantity] = useState(1);
   const [productId, setProductId] = useState([]);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-
+  const [tinted, setTinted] = useState(false);
   const [isAlertVisible, setAlertVisible] = useState(false);
   // const [cartId, setCartId] = useState('');
   const showAlert = () => {
@@ -89,6 +89,65 @@ const DetailProducts = ({route, navigation}) => {
       }
     }
   };
+  const handlePress = async () => {
+    setTinted(!tinted);
+    if (tinted) {
+      handleDeleteHeartProduct();
+    } else {
+      await handleHeartProduct();
+    }
+  };
+  console.log('tinted', tinted);
+
+  const handleHeartProduct = async() => {
+    const userId = await getUserId();
+  
+    if (!userId) {
+      showAlert();
+    } else {
+      try {
+        const response = await AxiosIntance().post(`heart/${userId}/AddFavourites`, {
+          userId:userId,
+          productId: productId
+        });
+      } catch (error) {
+      
+      }
+    }
+  }
+  const handleDeleteHeartProduct = async() => {
+    const userId = await getUserId();
+  
+    if (!userId) {
+      showAlert();
+    } else {
+      try {
+        const response = await AxiosIntance().delete(`heart/${userId}/RemoveFavourites`, {
+          userId:userId,
+          productId: productId
+        });
+      } catch (error) {
+      
+      }
+    }
+  }
+  const fetchBuyNow = async () => {
+    const userId = await getUserId();
+    if (!userId) {
+      showAlert();
+    } else {
+      try {
+        const response = await AxiosIntance().post(`cart/${userId}/addtocart`, {
+          productId: productId,
+          quantity: quantity,
+        });
+        navigation.navigate("ScreenCart")
+      } catch (error) {
+        console.log('Error adding to cart:', error.message);
+        // Handle the error appropriately, e.g., show an error message to the user
+      }
+    }
+  };
   console.log('====================================', data);
 
   const moveToHome = () => {
@@ -100,6 +159,8 @@ const DetailProducts = ({route, navigation}) => {
   const ToastAndroid = () => {
     ToastAndroid.show('Tính năng đang phát triển', ToastAndroid.SHORT);
   };
+ 
+ 
   const amount = data.price;
   const discount = data.price + (data.price * data.discount) / 100;
 
@@ -118,6 +179,7 @@ const DetailProducts = ({route, navigation}) => {
   }
   const newPrice = formatCurrency(amount);
   const oldPrice = formatCurrency(discount);
+  
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -151,9 +213,12 @@ const DetailProducts = ({route, navigation}) => {
           <View style={styles.viewNameProducts}>
             <Text style={styles.nameProducts}>{data.name}</Text>
           </View>
-          <View style={styles.viewHeart}>
-            <IconAntDesign name="hearto" size={25} color="#f19f31" />
-          </View>
+          <TouchableOpacity onPress={handlePress}>
+            <View style={styles.viewHeart}>
+              <IconAntDesign name="hearto" size={25} color={tinted?"#f19f31":null} />
+            </View>
+          </TouchableOpacity>
+          
           <View style={styles.groupPrice}>
             <View style={styles.viewNewPrice}>
               <Text style={styles.newPriceItem}>{newPrice}</Text>
@@ -244,9 +309,12 @@ const DetailProducts = ({route, navigation}) => {
                 <Text style={styles.textbtnAddCart}>Thêm vào giỏ hàng</Text>
               </View>
             </TouchableOpacity>
-            <View style={styles.viewbtnBuy}>
+            <TouchableOpacity style={styles.viewbtnBuy} onPress={fetchBuyNow}>
+            <View >
               <Text style={styles.textbtnBuy}>Mua ngay</Text>
             </View>
+            </TouchableOpacity>
+           
           </View>
           <CustomAlert
             visible={isAlertVisible}
