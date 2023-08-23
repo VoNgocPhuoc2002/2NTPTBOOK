@@ -23,33 +23,15 @@ const SearchScreen = ({navigation}) => {
   const searchProducts = async () => {
     try {
       const response = await axios.get(
-        `http://192.168.1.4:3000/product/search?keyword=${keyword}`,
+        `http://192.168.1.191:3000/product/search?keyword=${keyword}`,
       );
+      console.log('response', response);
       const products = response.data;
       setResults(products);
     } catch (error) {
       console.error(error);
     }
   };
-
-  // const sortByName = () => {
-  //   const sortedData = [...results];
-
-  //   sortedData.sort((a, b) => {
-  //     return a.name.localeCompare(b.name);
-  //   });
-
-  //   setResults(sortedData);
-  // };
-  // const sortByNameZ = () => {
-  //   const sortedData = [...results];
-
-  //   sortedData.sort((a, b) => {
-  //     return b.name.localeCompare(a.name); // Thay đổi thứ tự so sánh để sắp xếp giảm dần từ Z đến A
-  //   });
-
-  //   setResults(sortedData);
-  // };
 
   const sortByPriceAscending = () => {
     const sortedData = [...results];
@@ -113,16 +95,35 @@ const SearchScreen = ({navigation}) => {
             <Button title="Search" onPress={searchProducts} />
           </View>
         </View>
-        <View style={{flex:1}}>
-
+        <View style={{flex: 1}}>
           <FlashList
             data={results}
             keyExtractor={item => item._id}
             initialNumToRender={3}
             estimatedItemSize={200}
             numColumns={2}
-            renderItem={({item}) => (
-                <TouchableOpacity style={{width:"100%",borderWidth:1,borderColor:"black"}} onPress={() => handleItemPress(item._id)}>
+            renderItem={({item}) => {
+              const amount = item.price;
+              const discount = item.price + (item.price * item.discount) / 100;
+
+              function formatCurrency(amount) {
+                if (!results) {
+                  return '';
+                }
+                const formattedAmount = amount.toLocaleString('vi-VN', {
+                  style: 'currency',
+                  currency: 'VND',
+                });
+
+                // Trả về kết quả
+                return formattedAmount;
+              }
+              const newPrice = formatCurrency(amount);
+              const oldPrice = formatCurrency(discount);
+              return (
+                <TouchableOpacity
+                  style={{width: '100%', borderWidth: 1, borderColor: 'black'}}
+                  onPress={() => handleItemPress(item._id)}>
                   <View style={styles.viewItem}>
                     <Image
                       style={{width: 100, height: 130, borderRadius: 10}}
@@ -136,7 +137,7 @@ const SearchScreen = ({navigation}) => {
                       </Text>
                     </View>
                     <View style={styles.viewItemNewPrice}>
-                      <Text style={styles.newPriceItem}>{item.price}</Text>
+                      <Text style={styles.newPriceItem}>{newPrice}</Text>
                       <View style={styles.viewDiscountItem}>
                         <Text style={styles.discountItem}>
                           {item.discount}%
@@ -145,22 +146,16 @@ const SearchScreen = ({navigation}) => {
                     </View>
                     <View style={styles.viewItemOldPrice}>
                       <Text>
-                        {
-                          (item.oldPrice =
-                            item.discount === 0
-                              ? item.price
-                              : item.price +
-                                parseFloat(item.price * (item.discount / 100)))
-                        }
+                        {oldPrice}
                       </Text>
                       <View style={styles.line}></View>
                     </View>
                   </View>
                 </TouchableOpacity>
-            )}
+              );
+            }}
           />
         </View>
-
       </View>
     </View>
   );

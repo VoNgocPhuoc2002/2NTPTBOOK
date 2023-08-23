@@ -21,6 +21,7 @@ import Signup from "../screen/Login/component/signup/Signup";
 import OrderFinal from "../screen/profile/History/detailOrders/orderFinal/OrderFinal";
 import ScreenOrderDetail from "../screen/order/orderDetails/ScreenOrderDetail";
 import FavouriteScreen from "../screen/favourite/FavouriteScreen";
+import LoadingScreen from "../screen/loading/LoadingScreen";
 const Stack = createNativeStackNavigator();
 
 const AppStack = () => {
@@ -28,6 +29,11 @@ const AppStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
+        name="LoadingScreen"
+        component={LoadingScreen}
+        options={{ headerShown: false }}
+      />     
+        <Stack.Screen
         name="TabNavigation"
         component={TabNavigation}
         options={{ headerShown: false }}

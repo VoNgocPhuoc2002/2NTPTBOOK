@@ -153,6 +153,7 @@ const ScreenCart = ({navigation}) => {
       }
     }
     setIsTotalPrice(totalPrice);
+    
 
     return totalPrice;
   };
@@ -166,10 +167,7 @@ const ScreenCart = ({navigation}) => {
       Alert.alert('Vui lòng chọn ít nhất một sản phẩm để thanh toán.');
       return;
     }
-    // Tạo một object mới để lưu thông tin các sản phẩm được chọn
     const selectedProducts = {};
-
-    // Lặp qua các sản phẩm trong data để kiểm tra và lưu thông tin sản phẩm được chọn
     for (const item of data) {
       if (selectedItems[item._id]) {
         selectedProducts[item._id] = {
@@ -196,6 +194,22 @@ const ScreenCart = ({navigation}) => {
       removeCartItem(productId);
       console.log('productsId: ', productId);
     };
+    const amount = item.price;
+
+    function formatCurrency(amount) {
+      if (!item) {
+        return '';
+      }
+  
+      const formattedAmount = amount.toLocaleString('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+      });
+  
+      // Trả về kết quả
+      return formattedAmount;
+    }
+    const newPrice = formatCurrency(amount);
     return (
       <View style={styles.boxItem}>
         <View style={styles.item}>
@@ -221,7 +235,7 @@ const ScreenCart = ({navigation}) => {
                   ? item.name.substring(0, 60) + '...'
                   : item.name}
               </Text>
-              <Text style={styles.textPrice}>{item.price}</Text>
+              <Text style={styles.textPrice}>{newPrice}</Text>
             </View>
             <View style={styles.viewGroupQuantity}>
               <View style={styles.viewQuantity}>
@@ -306,7 +320,7 @@ const ScreenCart = ({navigation}) => {
         <View style={{alignItems: 'center',marginTop:200,}}>
           <Image
             style={{width: 200, height: 150}}
-            source={require('../../../assets/IconLogo.jpg')}
+            source={require('../../../assets/LogoApp.png')}
           />
           <View style={{marginTop: 10, alignItems: 'center'}}>
             <Text

@@ -17,17 +17,20 @@ const LoadingScreen = () => {
   }, []);
 
   const handleLoadingFinished = () => {
-    navigation.navigate('LoginScreen');
+    navigation.navigate('TabNavigation');
   };
 
   return (
     <SafeAreaView  style={styles.container}>
       <View style={styles.body}>
-        {/* <Image source={require('../../../assets/IconLogo.png')} /> */}
         <View style={styles.loading}>
           <ActivityIndicator animating={true} color="black" size={'large'} />
           <Text style={styles.textLoading}>Loading</Text>
         </View>
+      </View>
+      <View style={{flex:2,alignItems:"center"}}>
+      <Image style={{width:280,height:220}} source={require("../../assets/LogoApp.png")}/>
+
       </View>
     </SafeAreaView>
   );

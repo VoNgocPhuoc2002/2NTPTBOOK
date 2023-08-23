@@ -6,6 +6,7 @@ import {
   FlatList,
   TouchableOpacity,
   StyleSheet,
+  RefreshControl
 } from 'react-native';
 import DetailOrder from './detailOrders/DetailOrder';
 import {useNavigation} from '@react-navigation/native';
@@ -19,6 +20,8 @@ import {color} from '@rneui/base';
 const HistoryTab = ({navigation}) => {
   const [tabContent, settabContent] = useState('Tab 1');
   const [data, setData] = useState('');
+  const [refreshing, setRefreshing] = useState();
+
   const handleTabPressHot = tabContent => {
     console.log('Active Tab Hot:', tabContent);
     settabContent(tabContent);
@@ -29,29 +32,40 @@ const HistoryTab = ({navigation}) => {
     const userId = await getUserId();
     try {
       const response = await AxiosIntance().get(`order/${userId}/getorder`);
-      console.log(response);
-      setData(response);
+      const sortedData = response.sort((a, b) => {
+        const dateA = moment(a.timeBuy, 'MMM D, YYYY').toDate();
+        const dateB = moment(b.timeBuy, 'MMM D, YYYY').toDate();
+        return dateB - dateA; // Sort in descending order
+      });
+      setData(sortedData);
     } catch (error) {
       console.error('Error:', error);
     }
   };
+ 
+
+
   useEffect(() => {
     fetchOrder(); // Call the fetchUserData function
   }, []);
+  const onRefresh = () => {
+    setRefreshing(true);
+    // Thực hiện các tác vụ refresh cần thiết ở đây
+    fetchOrder()
 
-  const namesData = [
-    {id: '1', name: 'Alice'},
-    {id: '2', name: 'Bob'},
-    {id: '3', name: 'Charlie'},
-    // Thêm các tên khác vào đây
-  ];
+    // Giả lập tác vụ refresh trong 2 giây
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  };
+  
   const handleDetail = (id) => {
     navigation.navigate("DetailOrder",{ id });
   };
   const RenderItem = ({item}) => {
-    const formattedDate = moment(item.timeBuy, 'MMM D, YYYY').format(
-      'MM/DD/YYYY',
-    );
+    const formattedDate = moment(item.timeBuy, 'MMM D, YYYY').format('DD/MM/YYYY');
+
+
 
     let statusText = '';
     let statusColor = '';
@@ -70,6 +84,7 @@ const HistoryTab = ({navigation}) => {
       statusColor = '#f44336';
       statusBackgroundColor = '#EF9A9A'; // Màu đỏ nhạt
     }
+
 
     return (
       <TouchableOpacity onPress={() => handleDetail(item._id)}>
@@ -109,7 +124,7 @@ const HistoryTab = ({navigation}) => {
             <TouchableOpacity
               style={[styles.tabItem]}
               onPress={() => handleTabPressHot('Tab 1')}>
-              <Text style={styles.titleContent}>Hoàn tất</Text>
+              <Text style={ tabContent==="Tab 1" ?styles.titleContent2:styles.titleContent}>Hoàn tất</Text>
               {tabContent === 'Tab 1' ? (
                 <View style={styles.lineTitle}></View>
               ) : null}
@@ -117,7 +132,7 @@ const HistoryTab = ({navigation}) => {
             <TouchableOpacity
               style={[styles.tabItem]}
               onPress={() => handleTabPressHot('Tab 2')}>
-              <Text style={styles.titleContent}>Chờ xác nhận</Text>
+              <Text style={ tabContent==="Tab 2" ?styles.titleContent2:styles.titleContent}>Chờ xác nhận</Text>
               {tabContent === 'Tab 2' ? (
                 <View style={styles.lineTitle}></View>
               ) : null}
@@ -125,7 +140,7 @@ const HistoryTab = ({navigation}) => {
             <TouchableOpacity
               style={[styles.tabItem]}
               onPress={() => handleTabPressHot('Tab 3')}>
-              <Text style={styles.titleContent}>Bị huỷ</Text>
+              <Text style={ tabContent==="Tab 3" ?styles.titleContent2:styles.titleContent}>Bị huỷ</Text>
               {tabContent === 'Tab 3' ? (
                 <View style={styles.lineTitle}></View>
               ) : null}
@@ -134,6 +149,9 @@ const HistoryTab = ({navigation}) => {
         </View>
         {tabContent === 'Tab 1' && data && data.length > 0 ? (
           <FlashList
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
             data={data.filter(item => item.status === 'success')}
             keyExtractor={item => item._id} // Sử dụng _id làm key
             renderItem={({item}) => <RenderItem item={item} />}
@@ -143,6 +161,9 @@ const HistoryTab = ({navigation}) => {
         ) : null}
         {tabContent === 'Tab 2' && data && data.length > 0 ? (
           <FlashList
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
             data={data.filter(item => item.status === 'pending')}
             keyExtractor={item => item._id} // Sử dụng _id làm key
             renderItem={({item}) => <RenderItem item={item} />}
@@ -152,6 +173,9 @@ const HistoryTab = ({navigation}) => {
         ) : null}
         {tabContent === 'Tab 3' && data && data.length > 0 ? (
           <FlashList
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
             data={data.filter(item => item.status === 'fail')}
             keyExtractor={item => item._id} // Sử dụng _id làm key
             renderItem={({item}) => <RenderItem item={item} />}
@@ -159,10 +183,6 @@ const HistoryTab = ({navigation}) => {
             estimatedItemSize={200}
           />
         ) : null}
-
-        <TouchableOpacity onPress={fetchOrder}>
-          <Text>btn</Text>
-        </TouchableOpacity>
       </View>
     </View>
   );

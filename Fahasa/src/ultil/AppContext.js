@@ -9,6 +9,7 @@ export const AppContextProvider =(props)=>{
     const [selectedProducts,setSelectedProducts] = useState({})
     const [isTotalPrice,setIsTotalPrice] = useState()
     const [isAddressId,setIsAddressId] = useState()
+    
     return (
         <AppContext.Provider value={{isLogin,setIsLogin,isInfoUser,setIsInfoUser,isTotalPrice,setIsTotalPrice,selectedProducts,isAddressId,setSelectedProducts,setIsAddressId}}>
             {children}

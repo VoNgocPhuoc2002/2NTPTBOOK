@@ -50,7 +50,22 @@ const FavouriteScreen = ({navigation}) => {
 
   const RenderItem = ({item}) => {
     console.log('item', item);
-
+    const amount = item.price;
+   
+  
+    function formatCurrency(amount) {
+      if (!data) {
+        return '';
+      }
+      const formattedAmount = amount.toLocaleString('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+      });
+  
+      // Trả về kết quả
+      return formattedAmount;
+    }
+    const Price = formatCurrency(amount);
     return (
       <View style={styles.boxItem}>
         <View style={styles.item}>
@@ -74,7 +89,7 @@ const FavouriteScreen = ({navigation}) => {
                   <Text style={styles.textTitle}>{item.name}</Text>
                 </View>
                 <View>
-                  <Text style={styles.textPrice}>{item.price}</Text>
+                  <Text style={styles.textPrice}>{Price}</Text>
                 </View>
               </View>
             </View>

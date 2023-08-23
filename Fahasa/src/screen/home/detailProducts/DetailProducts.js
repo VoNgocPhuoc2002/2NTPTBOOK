@@ -18,7 +18,9 @@ import {getUserId} from '../../../ultil/GetUserId';
 import AxiosIntance from '../../../ultil/AxiosIntance';
 import CustomAlert from '../../../ultil/CustomAlert';
 const DetailProducts = ({route, navigation}) => {
-  const {id,status} = route.params;
+
+  const {id} = route.params;
+
   console.log("status");
   const [data, setdata] = useState('');
   const [quantity, setQuantity] = useState(1);
@@ -38,9 +40,7 @@ const DetailProducts = ({route, navigation}) => {
     setAlertVisible(false);
     navigation.navigate("LoginScreen");
   };
-  console.log('====================================');
-  console.log('itesmId**s****ssssss****', id);
-  console.log('====================================');
+ 
   const handlePlus = () => {
     setQuantity(quantity + 1);
   };

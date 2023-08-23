@@ -31,12 +31,7 @@ const ListProducts = ({productData, navigation}) => {
   const handleTabPressBalo = activeTabBalo => {
     setActiveTabBalo(activeTabBalo);
   };
-  useEffect(() => {
-    handleTabPressHot("Tab 1")
-    handleTabPressSChool("Tab 4")
-    handleTabPressBalo("Tab  8")
-  }, []);
-
+ 
   const handleItemPress = id => {
     // Navigate to the detail screen with the item ID
     navigation.navigate('DetailProducts', {id: id});
@@ -44,13 +39,22 @@ const ListProducts = ({productData, navigation}) => {
 
  
   const RenderItem = ({item}) => {
-    console.log('Item:', item);
-    console.log('Active Tab Hot:', activeTabHot);
-    console.log('Filtered Data for "Xu hướng theo ngày":', productData.filter(item => item.categoryId.name === 'TrendByDay'));
-    console.log('Active Tab Hot:', activeTabHot);
+    const amount = item.price
 
-    console.log('Product Data:', productData);
+    const discount = item.price + (item.price * item.discount / 100);
 
+    function formatCurrency(amount) {
+  
+      const formattedAmount = amount.toLocaleString('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+      });
+    
+      // Trả về kết quả
+      return formattedAmount;
+    }
+    const newPrice = formatCurrency(amount);
+    const oldPrice = formatCurrency(discount);
   return(
     <TouchableOpacity onPress={() => handleItemPress(item._id)}>
       <View style={styles.viewItem}>
@@ -66,14 +70,14 @@ const ListProducts = ({productData, navigation}) => {
           </Text>
         </View>
         <View style={styles.viewItemNewPrice}>
-          <Text style={styles.newPriceItem}>{item.price}</Text>
+          <Text style={styles.newPriceItem}>{newPrice}</Text>
           <View style={styles.viewDiscountItem}>
             <Text style={styles.discountItem}>{item.discount}%</Text>
           </View>
         </View>
         <View style={styles.viewItemOldPrice}>
           <Text>
-            {item.oldPrice = item.discount === 0 ? item.price : item.price + parseFloat(item.price * (item.discount / 100))}
+            {oldPrice}
           </Text>
           <View style={styles.line}></View>
         </View>

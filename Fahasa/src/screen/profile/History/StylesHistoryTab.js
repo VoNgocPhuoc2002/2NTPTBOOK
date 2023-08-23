@@ -19,17 +19,21 @@ const Styles = StyleSheet.create({
         flex:12,
     },
     tabContent:{
-        backgroundColor:"green",
         
     },
     titleContent:{
         fontSize:16,
         color:Constants.COLOR.BLACK,
     },
+    titleContent2:{
+      fontSize:16,
+      color:Constants.COLOR.ORANGE,
+      fontWeight:"bold"
+    },
     lineTitle:{
-        width:150,
+        width:80,
         height:2,
-        backgroundColor:Constants.COLOR.DARKRED,
+        backgroundColor:Constants.COLOR.ORANGE,
       },
       code:{
         fontSize:16,
@@ -49,7 +53,6 @@ const Styles = StyleSheet.create({
         marginStart:10,
       },
   tabItem: {
-    backgroundColor: 'blue',
     height:40,
     marginStart:20,
     justifyContent:"space-between"

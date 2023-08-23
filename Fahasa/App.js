@@ -13,7 +13,6 @@ const App = () => {
           <AppStack/>
           </SafeAreaView>
       </NavigationContainer>
-   
     </AppContextProvider>
  
    

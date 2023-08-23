@@ -5,7 +5,7 @@ import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import {FlashList} from '@shopify/flash-list';
 
 const FlashSale = ({productData,navigation}) => {
-  const [countdown, setCountdown] = useState(3600); // Đếm ngược từ 6 phút (360 giây)
+  const [countdown, setCountdown] = useState(7200); // Đếm ngược từ 6 phút (360 giây)
 
   useEffect(() => {
     const interval = setInterval(() => {

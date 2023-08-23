@@ -113,7 +113,7 @@ console.log("count",count)
             </View>
             <View style={styles.listProduct}>
                 <Text style={styles.textProduct}>Sản Phẩm</Text>
-                <FlashList
+                <FlatList
                     data={cart}
                     renderItem={RenderItem}
                     keyExtractor={item => item._id}

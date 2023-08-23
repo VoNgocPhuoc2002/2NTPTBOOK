@@ -4,16 +4,16 @@ import {CheckBox} from '@rneui/themed';
 import styles from './Styles';
 import {updateProfile} from '../../../ultil/ApiUser/UserApi';
 
-const EditProfile = () => {
-  const [gender, setCheckNam] = useState('nam');
+const EditProfile = ({navigation}) => {
+  const [gender, setCheckNam] = useState();
   const [name, setName] = useState('');
   const [dateofbirth, setBirthday] = useState('');
   const [mobile, setMobile] = useState('');
   const [country, setCountry] = useState('');
-  const [email, setEmail] = useState('');
 
   const handleUpdateProfile = () => {
     updateProfile(name, dateofbirth, country, mobile, gender);
+    navigation.goBack()
   };
   const handleMaleChange = () => {
     setCheckNam('nam');
@@ -26,7 +26,7 @@ const EditProfile = () => {
     <View style={styles.container}>
       <View style={styles.header}>
       <View style={styles.titleScreen}>
-        <Text style={styles.textTitleScreen}>Đăng nhập</Text>
+        <Text style={styles.textTitleScreen}>Chỉnh sữa thông tin </Text>
       </View>
       </View>
       

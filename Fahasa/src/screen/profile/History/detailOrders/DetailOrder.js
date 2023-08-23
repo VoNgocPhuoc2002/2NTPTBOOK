@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView, SafeAreaView, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, ScrollView, SafeAreaView, TouchableOpacity,RefreshControl } from 'react-native'
 import React, { useState,useEffect } from 'react'
 import styles from '../detailOrders/Styles';
 import AxiosIntance from '../../../../ultil/AxiosIntance';
@@ -13,7 +13,19 @@ const DetailOrder = ({route,navigation}) => {
   const[data,setData] = useState("")
   const[addressId,setAddressId] = useState("")
   const[address,setAddress] = useState("")
+  const [refreshing, setRefreshing] = useState();
+  const onRefresh = () => {
+    setRefreshing(true);
+    // Thực hiện các tác vụ refresh cần thiết ở đây
+    fetchShowDetailOrder(); 
+    fetchShowDetailAdress();
 
+    // Giả lập tác vụ refresh trong 2 giây
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  };
+  
   const formattedDate = moment(data.timeBuy, "MMM D, YYYY").format("MM/DD/YYYY");
 
 
@@ -36,7 +48,7 @@ const DetailOrder = ({route,navigation}) => {
    };
    useEffect(() => {
 
-    fetchShowDetailOrder(); // Call the fetchUserData function
+    fetchShowDetailOrder(); 
     fetchShowDetailAdress();
   }, []);
   let statusText = '';
@@ -61,6 +73,20 @@ const DetailOrder = ({route,navigation}) => {
     navigation.navigate("ScreenOrderDetail",{data,address})
   }
 
+  const formatCurrency = amount => {
+  if (amount === undefined) {
+    return ''; // or some default value if necessary
+  }
+  const formattedAmount = amount.toLocaleString('vi-VN', {
+    style: 'currency',
+    currency: 'VND',
+  });
+  return formattedAmount;
+};
+
+const Total = formatCurrency(data.total);
+
+
   return (
     
 
@@ -68,7 +94,10 @@ const DetailOrder = ({route,navigation}) => {
       <View style={styles.header}>
         <Text style={styles.header_Text}>Chi tiết đơn hàng</Text>
       </View>
-      <ScrollView>
+      <ScrollView 
+       refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }>
 
         <View style={styles.part1}>
 
@@ -82,7 +111,7 @@ const DetailOrder = ({route,navigation}) => {
           </View>
           <View style={styles.part1_grtext}>
             <Text style={styles.part1_text}>Tổng tiền : </Text>
-            <Text style={styles.part1_textB}>{data.total}</Text>
+            <Text style={styles.part1_textB}>{Total}</Text>
           </View>
 
           <View
@@ -149,7 +178,7 @@ const DetailOrder = ({route,navigation}) => {
             </View>
             <View style={styles.part1_grtext}>
               <Text style={styles.part1_text}>Tổng tiền : </Text>
-              <Text style={styles.part1_textB}>{data.total}</Text>
+              <Text style={styles.part1_textB}>{Total}</Text>
             </View>
 
             <View
@@ -170,9 +199,7 @@ const DetailOrder = ({route,navigation}) => {
 
           </View>
         </TouchableOpacity>
-              <TouchableOpacity onPress={fetchShowDetailAdress}>
-                <Text>jksadghjsagjdhgsajg</Text>
-              </TouchableOpacity>
+            
       </ScrollView>
     </View>
 

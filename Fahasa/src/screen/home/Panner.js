@@ -18,9 +18,9 @@ const Panner = () => {
     }, 3000);
 
     return () => clearInterval(interval);
-
-    
   }, [imageIndex]);
+
+  
   return (
     <View style={styles.groupPanner}>
       <View style={styles.viewImagePanel}>

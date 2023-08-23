@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View, Image,FlatList} from 'react-native';
 import React from 'react';
 import {Constants} from '../../Constant';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -158,7 +158,7 @@ const Notification = () => {
       </View>
       <View style={styles.body}>
 
-       <FlashList
+       <FlatList
         data={data}
         renderItem={RenderItem}
         keyExtractor={item => item.id}

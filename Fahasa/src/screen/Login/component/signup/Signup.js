@@ -1,17 +1,22 @@
 import { Image, Text, TextInput, View, TouchableOpacity, ToastAndroid ,Alert} from 'react-native';
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import styles from './Styles';
-import { register, updateProfile } from '../../../../ultil/ApiUser/UserApi';
+import { register} from '../../../../ultil/ApiUser/UserApi';
 import { useNavigation } from '@react-navigation/native';
 import CustomAlert from '../../../../ultil/CustomAlert';
 import AxiosIntance from '../../../../ultil/AxiosIntance';
+import { AppContext } from '../../../../ultil/AppContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const Signup = () => {
   const navigation = useNavigation()
+const {setIsLogin} = useContext(AppContext)
   
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isAlertVisible, setAlertVisible] = useState(false);
+  
   const showAlert = () => {
     setAlertVisible(true);
   };
@@ -24,9 +29,8 @@ const Signup = () => {
 
   };
   const onOK = () => {
-    handleLogin(email, password)
-    setEmail("")
-    setPassword("")
+    handleLogin()
+    setIsLogin(true)
     setAlertVisible(false);
   };
   const handleLogin = async () => {
@@ -35,12 +39,7 @@ const Signup = () => {
         email: email,
         password: password
       });
-      if (response.user) {
-        await AsyncStorage.setItem("userId", response.user._id);
-      }
-      navigation.navigate("EditProfile")
-      setIsLogin(true)
-      console.log(response.user);
+      await AsyncStorage.setItem("userId", response.user._id);
     } catch (error) {
       console.log('Error:', error);
     }
