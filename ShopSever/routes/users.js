@@ -129,7 +129,7 @@ router.post("/cpanel/signin", async function (req, res, next) {
   try {
     const { email, password } = req.body;
     if (email == 'admin' && password == '123') {
-      //  res.render("http://localhost:3000/product/cpanel/index");
+       res.render("http://localhost:3000/product/cpanel/index");
     } else {
     console.log("Đăng nhập thất bbaij");
     }

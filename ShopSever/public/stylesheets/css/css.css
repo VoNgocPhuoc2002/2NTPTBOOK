@@ -1,0 +1,104 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.product-form {
+    max-width: 500px;
+    margin: 20px auto;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.checkbox-field {
+    margin: 5px 0;
+}
+
+.image-preview {
+    width: 100%;
+    height: auto;
+    margin: 10px 0;
+}
+
+.submit-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+}
+
+
+
+
+
+.san-pham {
+    margin: 20px;
+}
+
+.danh_sach {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.mau th, .mau td {
+    background-color: #f2f2f2;
+}
+
+.danh_sach th, .danh_sach td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.danh_sach th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+img {
+    max-width: 100px;
+    max-height: 100px;
+}
+
+.btn-delete {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.btn-delete:hover {
+    background-color: #d32f2f;
+}
+
+.btn-detail, .btn-card {
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.btn-detail:hover, .btn-card:hover {
+    background-color: #1976D2;
+}

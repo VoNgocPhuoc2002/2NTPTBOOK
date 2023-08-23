@@ -1,0 +1,37 @@
+<form method="post" action="/product/cpanel/tao-moi" enctype="multipart/form-data" class="product-form">
+        <input type="text" name="name" id="name" placeholder="Nhập sản phẩm" class="input-field" />
+        <input type="text" name="author" id="author" placeholder="Tác giả" class="input-field" />
+        <input type="text" name="titledescription" id="titledescription" placeholder="Tên mô tả" class="input-field" />
+        <input type="text" name="description" id="description" placeholder="Mô tả" class="input-field" />
+        <input type="text" name="countryside" id="countryside" placeholder="Xuất sứ" class="input-field" />
+        <input type="text" name="processingplace" id="processingplace" placeholder="Sản xuất tại" class="input-field" />
+        <input type="text" name="size" id="size" placeholder="Kích thước" class="input-field" />
+        <input type="text" name="weight" id="weight" placeholder="Khối lượng" class="input-field" />
+        <input type="file" name="image" id="image" onchange="loadFile(event);" class="input-field" />
+        <img width="300" height="300" id="img-display" alt="Image" src="{{product.image}}" class="image-preview">
+        <input type="text" name="price" id="price" placeholder="Giá" class="input-field" />
+        <input type="number" name="discount" id="discount" placeholder="Giảm giá" class="input-field" />
+
+        <input type="number" name="quantity" id="quantity" placeholder="Số lượng" class="input-field" />
+
+        <input type="checkbox" name="isFutured" id="isFutured" class="checkbox-field" />
+        <input type="date" name="dateCreated" id="dateCreated" class="input-field" />
+        <select name="categoryId" class="input-field">
+            {{#each categories}}
+            <option value="{{this._id}}">{{this.name}}</option>
+            {{/each}}
+        </select>
+
+        <input type="submit" value="Tạo mới" class="submit-button" />
+    </form>
+
+    <script>
+        const loadFile = function (event) {
+            const reader = new FileReader();
+            reader.onload = function () {
+                var output = document.getElementById('img-display');
+                output.src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        };
+    </script>

@@ -241,11 +241,44 @@ router.get('/cpanel/table', function (req, res, next) {
     res.render('web/ListOrder',{layout:'layout/main.hbs'});
     console.log("🚀 ~ file: product.js:210 ~ req", req)
 });
+router.get('/cpanel/widget', async function (req, res, next) {
+    let products = await ProductController.get();
+    products = products.map((p, index) => {
+       
+        return {
+            _id: p._id,
+            code: p.code,
+            name: p.name,
+            author: p.author,
+            titledescription: p.titledescription,
+            description: p.description,
+            countryside: p.countryside,
+            processingplace: p.processingplace,
+            size: p.size,
+            weight: p.weight,
+            image: p.image,
+            price: p.price,
+            discount: p.discount,
+            quantity: p.quantity,
+            favorite: p.favorite,
+            isFutured: p.isFutured,
+            dateCreated: p.dateCreated,
+            categoryId: p.categoryId,
+            color: p.color,
+            index: index + 1,
+        }
+    });
+    res.render('web/widget',{sp: products,layout:'layout/main.hbs'});
+    
+    // res.status(200).json(products);
+    // console.log("🚀 ~ file: product.js:32 ~ products=products.map ~ products:", products)
+});
+
 
 /* GET home page. */
 /*Hiển thị trang tạo mới sản phẩm*/
 //http://localhost:3000/product/tao-moi
-router.get('/tao-moi', async function (req, res, next) {
+router.get('/cpanel/tao-moi', async function (req, res, next) {
     let categories = await CategoryController.get();
     categories = categories.map((p, index) => {
         return {
@@ -254,14 +287,14 @@ router.get('/tao-moi', async function (req, res, next) {
         }
     });
     console.log("🚀 ~ file: product.js:32 ~ products=products.map ~ products:", categories)
-    res.render('products/tao-moi', { categories });
+    res.render('web/tao-moi', { categories, layout: 'layout/main.hbs' });
 });
 
 /**
  * Lưu tạo mới sản phẩm
  * http://localhost:3000/product/tao-moi
  */
-router.post('/tao-moi', upload.single('image'), async function (req, res, next) {
+router.post('/cpanel/tao-moi', upload.single('image'), async function (req, res, next) {
     try {
         let { file } = req;
         let {id,code, name,author,titledescription, description, countryside, processingplace, size, weight, image, price,discount, quantity, favorite,isFutured,dateCreated,categoryId} = req.body;
@@ -271,12 +304,18 @@ router.post('/tao-moi', upload.single('image'), async function (req, res, next) 
             image = imageUrl;
         }
         await ProductController.create(code, name,author,titledescription, description, countryside, processingplace, size, weight, image, price,discount, quantity, favorite,isFutured,dateCreated,categoryId);
-        res.redirect('/product');
-        console.log(req.body);
+        res.send("Form submitted successfully!");
     } catch (error) {
         console.log(error);
         next(error);
     }
+});
+
+
+router.get('/cpanel/allproducts', async function (req, res, next) {
+   
+    
+    res.render('web/tao-moi', { categories, layout: 'layout/main.hbs' });
 });
 
 
